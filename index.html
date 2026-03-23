@@ -34,7 +34,7 @@
         0.1,
         1000
     );
-    camera.position.set(0, 1, 5);
+    camera.position.set(0, 1, 8);
 
     // Renderer
     const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -44,8 +44,10 @@
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.enableZoom = true;
+    controls.enableZoom = false;
     controls.enablePan = false;
+    controls.minPolarAngle = 0;
+    controls.maxPolarAngle = 1.5;
 
     // Licht
     const light = new THREE.DirectionalLight(0xffffff, 3);
@@ -61,6 +63,7 @@
         "models/grapes.glb", // ← DEIN PFAD
         (gltf) => {
             const model = gltf.scene;
+            model.rotation.z = THREE.MathUtils.degToRad(-30);
             scene.add(model);
 
             console.log("Modell geladen!", model);

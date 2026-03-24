@@ -41,7 +41,7 @@
     const camera = new THREE.PerspectiveCamera(
         75,
         window.innerWidth / window.innerHeight,
-        0.1,
+        1,
         1000
     );
     camera.position.set(0, 1, 8);
@@ -54,7 +54,7 @@
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
-    controls.enableZoom = true;
+    controls.enableZoom = false;
     controls.enablePan = false;
 
     // Licht
@@ -85,6 +85,29 @@
         (gltf) => {
             const model = gltf.scene;
             model.rotation.z = THREE.MathUtils.degToRad(-30);
+            // 🔥 Bounding Box berechnen
+            const box = new THREE.Box3().setFromObject(model);
+            const center = box.getCenter(new THREE.Vector3());
+            const size = box.getSize(new THREE.Vector3());
+
+            // 🔥 Modell zentrieren
+            model.position.sub(center);
+
+            // 🔥 Größe bestimmen
+            const maxDim = Math.max(size.x, size.y, size.z);
+
+            // 🔥 Kamera Abstand berechnen
+            const fov = camera.fov * (Math.PI / 180);
+            let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
+
+            cameraZ *= 1.8;
+
+            // Abstand-Faktor (anpassen!)
+            camera.position.set(0, 0, cameraZ);
+
+            // Controls Target setzen (sehr wichtig!)
+            controls.target.set(0, 0, 0);
+            controls.update();
             scene.add(model);
 
             // Trauben finden

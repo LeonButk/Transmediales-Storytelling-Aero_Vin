@@ -1,0 +1,108 @@
+* { box-sizing: border-box; }
+
+body {
+    font-family: sans-serif;
+    text-align: center;
+    margin: 0;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 2rem 1rem 1.5rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.scene {
+    border: 1px solid #CCC;
+    position: relative;
+    width: min(90vw, 1200px);
+    height: min(78vh, 800px);
+    margin: 0 auto;
+    perspective: clamp(900px, 120vmin, 1800px);
+}
+
+.carousel {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform: translateZ(0);
+    transform-style: preserve-3d;
+    transition: transform 1s;
+}
+
+.carousel__cell {
+    position: absolute;
+    width: calc(100% - 4rem);
+    height: calc(100% - 4rem);
+    left: 2rem;
+    top: 2rem;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    font-size: clamp(3rem, 10vw, 8rem);
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    transition: transform 1s, opacity 1s;
+}
+
+.carousel__cell:nth-child(9n+1) { background: hsla(  0, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+2) { background: hsla( 40, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+3) { background: hsla( 80, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+4) { background: hsla(120, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+5) { background: hsla(160, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+6) { background: hsla(200, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+7) { background: hsla(240, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+8) { background: hsla(280, 100%, 50%, 0.8); }
+.carousel__cell:nth-child(9n+0) { background: hsla(320, 100%, 50%, 0.8); }
+
+.carousel__cell:nth-child(1) { transform: rotateY(  0deg) translateZ(288px); }
+.carousel__cell:nth-child(2) { transform: rotateY( 40deg) translateZ(288px); }
+.carousel__cell:nth-child(3) { transform: rotateY( 80deg) translateZ(288px); }
+.carousel__cell:nth-child(4) { transform: rotateY(120deg) translateZ(288px); }
+.carousel__cell:nth-child(5) { transform: rotateY(160deg) translateZ(288px); }
+.carousel__cell:nth-child(6) { transform: rotateY(200deg) translateZ(288px); }
+.carousel__cell:nth-child(7) { transform: rotateY(240deg) translateZ(288px); }
+.carousel__cell:nth-child(8) { transform: rotateY(280deg) translateZ(288px); }
+.carousel__cell:nth-child(9) { transform: rotateY(320deg) translateZ(288px); }
+
+
+
+.carousel-options {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    background: hsla(0, 0%, 100%, 0.8);
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    width: min(90vw, 1200px);
+}
+
+@media (max-width: 700px) {
+    body {
+        padding-top: 1rem;
+    }
+
+    .scene {
+        width: 94vw;
+        height: 62vh;
+    }
+
+    .carousel__cell {
+        width: calc(100% - 2.5rem);
+        height: calc(100% - 2.5rem);
+        left: 1.25rem;
+        top: 1.25rem;
+        font-size: clamp(2rem, 14vw, 4rem);
+    }
+
+    .carousel-options {
+        width: 94vw;
+    }
+}

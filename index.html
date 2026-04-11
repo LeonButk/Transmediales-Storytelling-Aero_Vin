@@ -1,188 +1,55 @@
 <!DOCTYPE html>
 
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Interaktive Trauben</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>AERO VIN - Momentum</title>
+        <link rel="stylesheet" href="STYLE/style.css">
+        <script src="JS/script.js" defer></script>
+    </head>
+    <body>
+        <div class="scene">
+            <div class="carousel">
+                <div class="carousel__cell">1</div>
+                <div class="carousel__cell">2</div>
+                <div class="carousel__cell">3</div>
+                <div class="carousel__cell">4</div>
+                <div class="carousel__cell">5</div>
+                <div class="carousel__cell">6</div>
+                <div class="carousel__cell">7</div>
+                <div class="carousel__cell">8</div>
+                <div class="carousel__cell">9</div>
+                <div class="carousel__cell">10</div>
+                <div class="carousel__cell">11</div>
+                <div class="carousel__cell">12</div>
+                <div class="carousel__cell">13</div>
+                <div class="carousel__cell">14</div>
+                <div class="carousel__cell">15</div>
+            </div>
+        </div>
 
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-    </style>
-
-    <!-- ✅ WICHTIG: Importmap -->
-
-    <script type="importmap">
-        {
-          "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.158/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.158/examples/jsm/"
-          }
-        }
-    </script>
-
-</head>
-
-<body>
-
-<script type="module">
-
-    import * as THREE from 'three';
-    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-
-    // Szene
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0xdddddd);
-
-    // Kamera
-    const camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / window.innerHeight,
-        1,
-        1000
-    );
-    camera.position.set(0, 1, 8);
-
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true });
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    // Controls
-    const controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.enableZoom = false;
-    controls.enablePan = false;
-
-    // Licht
-    const light = new THREE.DirectionalLight(0xffffff, 3);
-    light.position.set(1, 1, 1);
-    scene.add(light);
-
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-
-    // Raycasting
-    const raycaster = new THREE.Raycaster();
-    const mouse = new THREE.Vector2();
-
-    let grapes = [];
-    let currentIntersect = null;
-
-    // Maus bewegen
-    window.addEventListener("mousemove", (event) => {
-        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-        mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-    });
-
-    // Loader
-    const loader = new GLTFLoader();
-
-    loader.load(
-        "models/traube.glb",
-        (gltf) => {
-            const model = gltf.scene;
-            model.rotation.z = THREE.MathUtils.degToRad(-30);
-            // 🔥 Bounding Box berechnen
-            const box = new THREE.Box3().setFromObject(model);
-            const center = box.getCenter(new THREE.Vector3());
-            const size = box.getSize(new THREE.Vector3());
-
-            // 🔥 Modell zentrieren
-            model.position.sub(center);
-
-            // 🔥 Größe bestimmen
-            const maxDim = Math.max(size.x, size.y, size.z);
-
-            // 🔥 Kamera Abstand berechnen
-            const fov = camera.fov * (Math.PI / 180);
-            let cameraZ = Math.abs(maxDim / 2 / Math.tan(fov / 2));
-
-            cameraZ *= 1.8;
-
-            // Abstand-Faktor (anpassen!)
-            camera.position.set(0, 0, cameraZ);
-
-            // Controls Target setzen (sehr wichtig!)
-            controls.target.set(0, 0, 0);
-            controls.update();
-            scene.add(model);
-
-            // Trauben finden
-            model.traverse((child) => {
-                console.log("Objekt:", child.name);
-
-                if (
-                    child.isMesh &&
-                    (child.name === "Traube_01" ||
-                        child.name === "Traube_02" ||
-                        child.name === "Traube_03" ||
-                        child.name === "Traube_04")
-                ) {
-                    grapes.push(child);
-
-                    if (!child.material.emissive) {
-                        child.material.emissive = new THREE.Color(0x000000);
-                    }
-                }
-            });
-
-            console.log("Gefundene Trauben:", grapes);
-        },
-        undefined,
-        (error) => {
-            console.error("Fehler beim Laden:", error);
-        }
-    );
-
-    // Animation
-    function animate() {
-        requestAnimationFrame(animate);
-
-        raycaster.setFromCamera(mouse, camera);
-        const intersects = raycaster.intersectObjects(grapes);
-
-        if (intersects.length > 0) {
-
-            if (currentIntersect !== intersects[0].object) {
-
-                if (currentIntersect) {
-                    currentIntersect.scale.set(1,1,1);
-                    currentIntersect.material.emissive.set(0x000000);
-                }
-
-                currentIntersect = intersects[0].object;
-
-                currentIntersect.scale.set(1.3, 1.3, 1.3);
-                currentIntersect.material.emissive.set(0x550000);
-            }
-
-        } else {
-
-            if (currentIntersect) {
-                currentIntersect.scale.set(1,1,1);
-                currentIntersect.material.emissive.set(0x000000);
-            }
-
-            currentIntersect = null;
-        }
-
-        controls.update();
-        renderer.render(scene, camera);
-    }
-
-    animate();
-
-    // Resize
-    window.addEventListener("resize", () => {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    });
-
-</script>
-
-</body>
+        <div class="carousel-options">
+            <p>
+                <label>
+                    Cells
+                    <input class="cells-range" type="range" min="3" max="15" value="9" />
+                </label>
+            </p>
+            <p>
+                <button class="previous-button">Previous</button>
+                <button class="next-button">Next</button>
+            </p>
+            <p>
+                Orientation:
+                <label>
+                    <input type="radio" name="orientation" value="horizontal" checked />
+                    horizontal
+                </label>
+                <label>
+                    <input type="radio" name="orientation" value="vertical" />
+                    vertical
+                </label>
+            </p>
+        </div>
+    </body>
 </html>

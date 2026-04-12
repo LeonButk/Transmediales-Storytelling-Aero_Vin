@@ -8,7 +8,38 @@ var isHorizontal = true;
 var rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
 var radiusSpacingFactor = 1.08;
 var radius, theta;
+var lightbox = document.querySelector('.lightbox');
+var lightboxImage = document.querySelector('.lightbox__image');
+var lightboxClose = document.querySelector('.lightbox__close');
 // console.log( cellWidth, cellHeight );
+
+function getActiveCellIndex() {
+    if (!cellCount) {
+        return 0;
+    }
+
+    return ((selectedIndex % cellCount) + cellCount) % cellCount;
+}
+
+function openLightboxFromCell(cell) {
+    var image = cell.querySelector('img');
+
+    if (!image) {
+        return;
+    }
+
+    lightboxImage.src = image.currentSrc || image.src;
+    lightboxImage.alt = image.alt || '';
+    lightbox.classList.add('is-open');
+    lightbox.setAttribute('aria-hidden', 'false');
+}
+
+function closeLightbox() {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    lightboxImage.src = '';
+    lightboxImage.alt = '';
+}
 
 function updateDimensions() {
     cellWidth = cells[0].offsetWidth;
@@ -31,6 +62,21 @@ var nextButton = document.querySelector('.next-button');
 nextButton.addEventListener( 'click', function() {
     selectedIndex++;
     rotateCarousel();
+});
+
+carousel.addEventListener('click', function(event) {
+    var clickedCell = event.target.closest('.carousel__cell');
+
+    if (!clickedCell || !carousel.contains(clickedCell)) {
+        return;
+    }
+
+    var clickedIndex = Array.prototype.indexOf.call(cells, clickedCell);
+    if (clickedIndex !== getActiveCellIndex()) {
+        return;
+    }
+
+    openLightboxFromCell(clickedCell);
 });
 
 var cellsRange = document.querySelector('.cells-range');
@@ -84,6 +130,20 @@ function onOrientationChange() {
 
     changeCarousel();
 }
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightbox.addEventListener('click', function(event) {
+    if (event.target === lightbox) {
+        closeLightbox();
+    }
+});
+
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
+        closeLightbox();
+    }
+});
 
 // set initials
 onOrientationChange();

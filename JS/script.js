@@ -78,6 +78,10 @@ function onOrientationChange() {
     var checkedRadio = document.querySelector('input[name="orientation"]:checked');
     isHorizontal = checkedRadio.value === 'horizontal';
     rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
+
+    carousel.classList.toggle('is-horizontal', isHorizontal);
+    carousel.classList.toggle('is-vertical', !isHorizontal);
+
     changeCarousel();
 }
 

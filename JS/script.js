@@ -11,7 +11,6 @@ var radius, theta;
 var lightbox = document.querySelector('.lightbox');
 var lightboxImage = document.querySelector('.lightbox__image');
 var lightboxClose = document.querySelector('.lightbox__close');
-// console.log( cellWidth, cellHeight );
 
 function getActiveCellIndex() {
     if (!cellCount) {
@@ -19,6 +18,17 @@ function getActiveCellIndex() {
     }
 
     return ((selectedIndex % cellCount) + cellCount) % cellCount;
+}
+
+function updateActiveCellInteractivity() {
+    var activeIndex = getActiveCellIndex();
+
+    for ( var i=0; i < cells.length; i++ ) {
+        var isVisible = i < cellCount;
+        var isActive = i === activeIndex;
+
+        cells[i].style.pointerEvents = (isVisible && isActive) ? 'auto' : 'none';
+    }
 }
 
 function openLightboxFromCell(cell) {
@@ -50,6 +60,7 @@ function rotateCarousel() {
     var angle = theta * selectedIndex * -1;
     carousel.style.transform = 'translateZ(' + -radius + 'px) ' +
         rotateFn + '(' + angle + 'deg)';
+    updateActiveCellInteractivity();
 }
 
 var prevButton = document.querySelector('.previous-button');

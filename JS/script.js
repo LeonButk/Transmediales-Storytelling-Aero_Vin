@@ -69,6 +69,13 @@ prevButton.addEventListener( 'click', function() {
     rotateCarousel();
 });
 
+/*
+if(selectedIndex > 0){
+        selectedIndex--;
+        rotateCarousel();
+    }
+ */
+
 var nextButton = document.querySelector('.next-button');
 nextButton.addEventListener( 'click', function() {
     selectedIndex++;

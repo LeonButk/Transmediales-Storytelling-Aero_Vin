@@ -11,6 +11,8 @@ var radius, theta;
 var lightbox = document.querySelector('.lightbox');
 var lightboxVideo = document.querySelector('.lightbox__video');
 var lightboxClose = document.querySelector('.lightbox__close');
+var descriptionsContainer = document.querySelector('.descriptions');
+var descriptionCells = descriptionsContainer ? descriptionsContainer.querySelectorAll('.description_cell, .desciption_cell') : [];
 
 function getActiveCellIndex() {
     if (!cellCount) {
@@ -28,6 +30,19 @@ function updateActiveCellInteractivity() {
         var isActive = i === activeIndex;
 
         cells[i].style.pointerEvents = (isVisible && isActive) ? 'auto' : 'none';
+    }
+}
+
+function updateDescriptions() {
+    var activeIndex = getActiveCellIndex();
+    
+    for ( var i=0; i < descriptionCells.length; i++ ) {
+        var isActive = i === activeIndex;
+        if (isActive) {
+            descriptionCells[i].classList.add('is-active');
+        } else {
+            descriptionCells[i].classList.remove('is-active');
+        }
     }
 }
 
@@ -80,6 +95,7 @@ function rotateCarousel() {
     carousel.style.transform = 'translateZ(' + -radius + 'px) ' +
         rotateFn + '(' + angle + 'deg)';
     updateActiveCellInteractivity();
+    updateDescriptions();
 }
 
 var prevButton = document.querySelector('.previous-button');

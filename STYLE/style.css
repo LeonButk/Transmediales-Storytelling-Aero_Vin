@@ -4,7 +4,7 @@ body {
     font-family: sans-serif;
     text-align: center;
     margin: 0;
-    min-height: 100vh;
+    max-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -86,6 +86,26 @@ body {
     padding: 0.75rem 1rem;
     border-radius: 0.5rem;
     width: min(90vw, 1200px);
+}
+
+.descriptions {
+    width: min(90vw, 1200px);
+    position: relative;
+    z-index: 1;
+}
+
+.description_cell,
+.desciption_cell {
+    display: none;
+    padding: 1rem;
+    text-align: center;
+    background: #FEF5E8;
+    border-radius: 0.5rem;
+}
+
+.description_cell.is-active,
+.desciption_cell.is-active {
+    display: block;
 }
 
 .lightbox {

@@ -1,5 +1,5 @@
 var carousel = document.querySelector('.carousel');
-var cells = carousel.querySelectorAll('.carousel__cell');
+var cells = carousel.querySelectorAll('.carousel__cell, .first_carousel__cell');
 var cellCount; // cellCount set from cells-range input value
 var selectedIndex = 0;
 var cellWidth = 0;
@@ -102,7 +102,7 @@ nextButton.addEventListener( 'click', function() {
 });
 
 carousel.addEventListener('click', function(event) {
-    var clickedCell = event.target.closest('.carousel__cell');
+    var clickedCell = event.target.closest('.carousel__cell, .first_carousel__cell');
 
     if (!clickedCell || !carousel.contains(clickedCell)) {
         return;
@@ -116,15 +116,12 @@ carousel.addEventListener('click', function(event) {
     openLightboxFromCell(clickedCell);
 });
 
-var cellsRange = document.querySelector('.cells-range');
-cellsRange.addEventListener( 'change', changeCarousel );
-cellsRange.addEventListener( 'input', changeCarousel );
+var cellCount = 9;
 
 
 
 function changeCarousel() {
     updateDimensions();
-    cellCount = parseInt(cellsRange.value, 10);
     theta = 360 / cellCount;
     var cellSize = isHorizontal ? cellWidth : cellHeight;
     radius = Math.round( ((cellSize / 2) / Math.tan( Math.PI / cellCount )) * radiusSpacingFactor );
@@ -149,24 +146,6 @@ window.addEventListener( 'resize', function() {
     changeCarousel();
 });
 
-var orientationRadios = document.querySelectorAll('input[name="orientation"]');
-( function() {
-    for ( var i=0; i < orientationRadios.length; i++ ) {
-        var radio = orientationRadios[i];
-        radio.addEventListener( 'change', onOrientationChange );
-    }
-})();
-
-function onOrientationChange() {
-    var checkedRadio = document.querySelector('input[name="orientation"]:checked');
-    isHorizontal = checkedRadio.value === 'horizontal';
-    rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
-
-    carousel.classList.toggle('is-horizontal', isHorizontal);
-    carousel.classList.toggle('is-vertical', !isHorizontal);
-
-    changeCarousel();
-}
 
 if (lightboxClose) {
     lightboxClose.addEventListener('click', closeLightbox);
@@ -187,4 +166,4 @@ document.addEventListener('keydown', function(event) {
 });
 
 // set initials
-onOrientationChange();
+changeCarousel();

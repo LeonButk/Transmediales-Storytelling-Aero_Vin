@@ -1,3 +1,14 @@
+@font-face {
+    font-family: "Cormorant";
+    src: url('ASSETS/FONTS/Cormorant-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: "Social";
+    src: url('ASSETS/FONTS/ABCSocial.woff');
+    font-weight: 300;
+}
 * { box-sizing: border-box; }
 
 body {
@@ -10,7 +21,6 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 1.25rem;
     padding: 2rem 1rem 1.5rem;
     overflow-y: auto;
     overflow-x: hidden;
@@ -80,17 +90,15 @@ body {
 }
 
 .carousel-options {
+    width: auto;
     text-align: center;
-    position: relative;
+    flex: 0 0 140px;
     z-index: 2;
-    padding: 0.75rem 1rem;
-    border-radius: 0.5rem;
-    width: min(90vw, 1200px);
 }
 
 .descriptions {
-    width: min(90vw, 1200px);
-    position: relative;
+    width: auto;
+    flex: 1 1 auto;
     z-index: 1;
 }
 
@@ -147,6 +155,28 @@ body {
     width: 2.5rem;
     height: 2.5rem;
     cursor: pointer;
+}
+
+.cellTitel{
+    font-family: "Cormorant", serif;
+    font-size: 3rem;
+    color: #230A0C;
+}
+
+.cellLead{
+    font-family: "ABCSocial", serif;
+    font-size: 1.5rem;
+    color: #230A0C;
+}
+
+.descriptionAndNavigation{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: min(90vw, 1200px);
+    margin-top: 1rem;
 }
 
 @media (max-width: 700px) {

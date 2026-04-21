@@ -132,7 +132,7 @@ carousel.addEventListener('click', function(event) {
     openLightboxFromCell(clickedCell);
 });
 
-var cellCount = 8;
+var cellCount = 9;
 
 
 

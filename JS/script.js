@@ -9,13 +9,13 @@ var rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
 var radiusSpacingFactor = 1.08;
 var radius, theta;
 var scene = document.querySelector('.scene');
+var descriptionAndNavigation = document.querySelector('.descriptionAndNavigation');
 var descriptionsContainer = document.querySelector('.descriptions');
 var descriptionCells = descriptionsContainer ? descriptionsContainer.querySelectorAll('.description_cell, .desciption_cell') : [];
 var scrollLock = false;
 var scrollLockTimeout = null;
 var scrollThreshold = 5;
 var scrollLockDuration = 1000;
-var defaultIframeSrc = 'https://www.youtube-nocookie.com/embed/HvguTsCrz6U?si=agQxIJnhEPidXTbi';
 
 function getActiveCellIndex() {
     if (!cellCount) {
@@ -54,7 +54,7 @@ function getIframeUrlForCell(cell) {
         return '';
     }
 
-    return cell.dataset.iframeSrc || defaultIframeSrc;
+    return cell.dataset.iframeSrc || '';
 }
 
 function appendAutoplayParameter(url) {
@@ -131,15 +131,21 @@ function triggerCarouselScroll(direction) {
     scrollLockTimeout = setTimeout(unlockScrollNavigation, scrollLockDuration);
 }
 
-if (scene) {
-    scene.addEventListener('wheel', function(event) {
-        if (Math.abs(event.deltaY) < scrollThreshold) {
-            return;
-        }
+function handleCarouselWheel(event) {
+    if (Math.abs(event.deltaY) < scrollThreshold) {
+        return;
+    }
 
-        event.preventDefault();
-        triggerCarouselScroll(event.deltaY);
-    }, { passive: false });
+    event.preventDefault();
+    triggerCarouselScroll(event.deltaY);
+}
+
+if (scene) {
+    scene.addEventListener('wheel', handleCarouselWheel, { passive: false });
+}
+
+if (descriptionAndNavigation) {
+    descriptionAndNavigation.addEventListener('wheel', handleCarouselWheel, { passive: false });
 }
 
 carousel.addEventListener('click', function(event) {

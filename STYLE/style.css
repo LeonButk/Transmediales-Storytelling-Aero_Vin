@@ -5,9 +5,9 @@
 }
 
 @font-face {
-    font-family: "Social";
-    src: url('../ASSETS/FONTS/ABCSocial.woff') format("woff");
-    font-weight: 300;
+    font-family: "Inter";
+    src: url('../ASSETS/FONTS/Inter.ttf') format("ttf");
+    font-weight: 100;
 }
 * { box-sizing: border-box; }
 
@@ -219,7 +219,7 @@ body {
 }
 
 .cellLead{
-    font-family: "Social", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 1.5rem;
     color: #230A0C;
 }

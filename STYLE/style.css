@@ -15,7 +15,7 @@ body {
     font-family: sans-serif;
     text-align: center;
     margin: 0;
-    max-height: 100vh;
+    min-height: 100vh;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -115,6 +115,7 @@ body {
     position: relative;
     width: min(90vw, 1200px);
     height: min(78vh, 800px);
+    flex-shrink: 0;
     margin: 0 auto;
     perspective: clamp(900px, 120vmin, 1800px);
 }
@@ -175,15 +176,19 @@ body {
     display: block;
 }
 
-.carousel-options {
-    width: auto;
-    text-align: center;
-    flex: 0 0 140px;
-    z-index: 2;
+.carousel__cell iframe,
+.first_carousel__cell iframe,
+.carousel__iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
 }
 
-.carousel-options:hover {
-    cursor: pointer;
+/* Priorisiert Carousel-Scroll: iframe darf Wheel-Events nicht schlucken. */
+.has-iframe iframe,
+.has-iframe .carousel__iframe {
+    pointer-events: none;
 }
 
 .descriptions {
@@ -206,46 +211,6 @@ body {
     display: block;
 }
 
-.lightbox {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    background: rgba(0, 0, 0, 0.7);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s ease;
-    z-index: 20;
-}
-
-.lightbox.is-open {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-.lightbox__video {
-    width: min(92vw, 1400px);
-    aspect-ratio: 16 / 9;
-    max-height: 88vh;
-    border: 3px solid #fff;
-    background: #111;
-}
-
-.lightbox__close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    border: 0;
-    background: rgba(0, 0, 0, 0.6);
-    color: #fff;
-    font-size: 2rem;
-    line-height: 1;
-    width: 2.5rem;
-    height: 2.5rem;
-    cursor: pointer;
-}
 
 .cellTitel{
     font-family: "Cormorant", serif;
@@ -264,9 +229,21 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.5rem;
     width: min(90vw, 1200px);
     margin-top: 1rem;
+}
+
+.anchor-target {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 @media (max-width: 700px) {
@@ -289,7 +266,4 @@ body {
         font-size: clamp(2rem, 14vw, 4rem);
     }
 
-    .carousel-options {
-        width: 94vw;
-    }
 }

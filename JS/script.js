@@ -1,6 +1,6 @@
 var carousel = document.querySelector('.carousel');
 var cells = carousel.querySelectorAll('.carousel__cell, .first_carousel__cell');
-var cellCount; // cellCount set from cells-range input value
+var cellCount = 9;
 var selectedIndex = 0;
 var cellWidth = 0;
 var cellHeight = 0;
@@ -8,11 +8,14 @@ var isHorizontal = true;
 var rotateFn = isHorizontal ? 'rotateY' : 'rotateX';
 var radiusSpacingFactor = 1.08;
 var radius, theta;
-var lightbox = document.querySelector('.lightbox');
-var lightboxVideo = document.querySelector('.lightbox__video');
-var lightboxClose = document.querySelector('.lightbox__close');
+var scene = document.querySelector('.scene');
 var descriptionsContainer = document.querySelector('.descriptions');
 var descriptionCells = descriptionsContainer ? descriptionsContainer.querySelectorAll('.description_cell, .desciption_cell') : [];
+var scrollLock = false;
+var scrollLockTimeout = null;
+var scrollThreshold = 5;
+var scrollLockDuration = 1000;
+var defaultIframeSrc = 'https://www.youtube-nocookie.com/embed/HvguTsCrz6U?si=agQxIJnhEPidXTbi';
 
 function getActiveCellIndex() {
     if (!cellCount) {
@@ -46,43 +49,46 @@ function updateDescriptions() {
     }
 }
 
-function getLightboxVideoUrl() {
-    if (!lightboxVideo) {
+function getIframeUrlForCell(cell) {
+    if (!cell) {
         return '';
     }
 
-    var baseUrl = lightboxVideo.dataset.src || '';
-    if (!baseUrl) {
+    return cell.dataset.iframeSrc || defaultIframeSrc;
+}
+
+function appendAutoplayParameter(url) {
+    if (!url) {
         return '';
     }
 
-    var separator = baseUrl.indexOf('?') === -1 ? '?' : '&';
-    return baseUrl + separator + 'autoplay=1';
+    var separator = url.indexOf('?') === -1 ? '?' : '&';
+    return url + separator + 'autoplay=1';
 }
 
-function openLightboxFromCell() {
-    if (!lightbox || !lightboxVideo) {
+function replaceCellContentWithIframe(cell) {
+    if (!cell || cell.dataset.mediaLoaded === 'true') {
         return;
     }
 
-    var videoUrl = getLightboxVideoUrl();
-    if (!videoUrl) {
+    var iframeUrl = appendAutoplayParameter(getIframeUrlForCell(cell));
+    if (!iframeUrl) {
         return;
     }
 
-    lightboxVideo.src = videoUrl;
-    lightbox.classList.add('is-open');
-    lightbox.setAttribute('aria-hidden', 'false');
-}
+    cell.innerHTML = '';
 
-function closeLightbox() {
-    if (!lightbox || !lightboxVideo) {
-        return;
-    }
+    var iframe = document.createElement('iframe');
+    iframe.className = 'carousel__iframe';
+    iframe.src = iframeUrl;
+    iframe.title = cell.dataset.iframeTitle || 'AERO VIN Video';
+    iframe.setAttribute('allow', 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share');
+    iframe.setAttribute('referrerpolicy', 'strict-origin-when-cross-origin');
+    iframe.setAttribute('allowfullscreen', '');
 
-    lightbox.classList.remove('is-open');
-    lightbox.setAttribute('aria-hidden', 'true');
-    lightboxVideo.src = '';
+    cell.appendChild(iframe);
+    cell.dataset.mediaLoaded = 'true';
+    cell.classList.add('has-iframe');
 }
 
 function updateDimensions() {
@@ -98,24 +104,43 @@ function rotateCarousel() {
     updateDescriptions();
 }
 
-var prevButton = document.querySelector('.previous-button');
-prevButton.addEventListener( 'click', function() {
-    selectedIndex--;
-    rotateCarousel();
-});
+function unlockScrollNavigation() {
+    scrollLock = false;
+    scrollLockTimeout = null;
+}
 
-/*
-if(selectedIndex > 0){
-        selectedIndex--;
-        rotateCarousel();
+function triggerCarouselScroll(direction) {
+    if (scrollLock) {
+        return;
     }
- */
 
-var nextButton = document.querySelector('.next-button');
-nextButton.addEventListener( 'click', function() {
-    selectedIndex++;
+    scrollLock = true;
+
+    if (scrollLockTimeout) {
+        clearTimeout(scrollLockTimeout);
+    }
+
+    if (direction > 0) {
+        selectedIndex++;
+    } else if (direction < 0) {
+        selectedIndex--;
+    }
+
     rotateCarousel();
-});
+
+    scrollLockTimeout = setTimeout(unlockScrollNavigation, scrollLockDuration);
+}
+
+if (scene) {
+    scene.addEventListener('wheel', function(event) {
+        if (Math.abs(event.deltaY) < scrollThreshold) {
+            return;
+        }
+
+        event.preventDefault();
+        triggerCarouselScroll(event.deltaY);
+    }, { passive: false });
+}
 
 carousel.addEventListener('click', function(event) {
     var clickedCell = event.target.closest('.carousel__cell, .first_carousel__cell');
@@ -129,12 +154,8 @@ carousel.addEventListener('click', function(event) {
         return;
     }
 
-    openLightboxFromCell(clickedCell);
+    replaceCellContentWithIframe(clickedCell);
 });
-
-var cellCount = 9;
-
-
 
 function changeCarousel() {
     updateDimensions();
@@ -162,24 +183,6 @@ window.addEventListener( 'resize', function() {
     changeCarousel();
 });
 
-
-if (lightboxClose) {
-    lightboxClose.addEventListener('click', closeLightbox);
-}
-
-if (lightbox) {
-    lightbox.addEventListener('click', function(event) {
-        if (event.target === lightbox) {
-            closeLightbox();
-        }
-    });
-}
-
-document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && lightbox && lightbox.classList.contains('is-open')) {
-        closeLightbox();
-    }
-});
 
 // set initials
 changeCarousel();

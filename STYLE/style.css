@@ -9,263 +9,37 @@
     src: url('../ASSETS/FONTS/Inter.ttf');
     font-weight: 300;
 }
-* { box-sizing: border-box; }
+
+* {
+    box-sizing: border-box;
+}
 
 body {
-    font-family: sans-serif;
-    text-align: center;
     margin: 0;
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 2rem 1rem 1.5rem;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    background: #FEF5E8;
-}
-
-.corner-menu {
-    position: fixed;
-    top: 1rem;
-    right: 1rem;
-    z-index: 30;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.6rem;
-}
-
-/* From Uiverse.io by JulanDeAlb */
-.hamburger {
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    background: #7B9859;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-}
-
-.menu-toggle {
-    display: none;
-}
-
-.hamburger svg {
-    height: 2em;
-    transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line {
-    fill: none;
-    stroke: white;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 3;
-    /* Define the transition for transforming the Stroke */
-    transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
-    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.line-top-bottom {
-    stroke-dasharray: 12 63;
-}
-
-.menu-toggle:checked + .hamburger svg {
-    transform: rotate(-45deg);
-}
-
-.menu-toggle:checked + .hamburger svg .line-top-bottom {
-    stroke-dasharray: 20 300;
-    stroke-dashoffset: -32.42;
-}
-
-.aside-links {
-    display: none;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.35rem;
-    padding: 0.75rem;
-    border-radius: 0.75rem;
-    background: rgba(123, 152, 89, 0.95);
-}
-
-.menu-toggle:checked ~ .aside-links {
-    display: flex;
-}
-
-.aside-links a {
-    color: #FEF5E8;
-    text-decoration: none;
-    font-family: "Cormorant", serif;
-    font-size: 1.2rem;
-    text-transform: lowercase;
-}
-
-.aside-links a:hover {
-    text-decoration: underline;
-}
-
-
-.scene {
-    position: relative;
-    width: min(90vw, 1200px);
-    height: min(78vh, 800px);
-    flex-shrink: 0;
-    margin: 0 auto;
-    perspective: clamp(900px, 120vmin, 1800px);
-}
-
-.carousel {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    transform: translateZ(0);
-    transform-style: preserve-3d;
-    transition: transform 1s;
-}
-
-.carousel__cell {
-    position: absolute;
-    width: calc(100% - 4rem);
-    height: calc(100% - 4rem);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 1s, opacity 1s;
-    overflow: hidden;
-    background: #7B9859;
-    transform-style: preserve-3d;
-}
-
-.first_carousel__cell {
-    position: absolute;
-    width: calc(100% - 1rem);
-    height: calc(100% - 1rem);
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 1s, opacity 1s;
-    overflow: hidden;
-    background: #7B9859;
-    transform-style: preserve-3d;
-}
-
-.first_carousel__cell:hover, .carousel__cell:hover {
-    cursor: pointer;
-}
-
-.carousel__cell img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-}
-
-.carousel__cell iframe,
-.first_carousel__cell iframe,
-.carousel__iframe {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    display: block;
-}
-
-/* Priorisiert Carousel-Scroll: iframe darf Wheel-Events nicht schlucken. */
-.has-iframe iframe,
-.has-iframe .carousel__iframe {
-    pointer-events: none;
-}
-
-.descriptions {
-    width: auto;
-    flex: 1 1 auto;
-    z-index: 1;
-}
-
-.description_cell,
-.desciption_cell {
-    display: none;
-    padding: 1rem;
-    text-align: center;
-    background: #FEF5E8;
-    border-radius: 0.5rem;
-}
-
-.description_cell.is-active,
-.desciption_cell.is-active {
-    display: block;
-}
-
-
-.cellTitel{
-    font-family: "Cormorant", serif;
-    font-size: 3rem;
-    color: #230A0C;
-}
-
-.cellLead{
-    font-family: "Inter", sans-serif;
-    font-size: 1.5rem;
-    color: #230A0C;
-}
-
-.descriptionAndNavigation{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    width: min(90vw, 1200px);
-    margin-top: 1rem;
-    position: fixed;
-    bottom: 1.5rem;
-}
-
-.anchor-target {
-    position: absolute;
-    width: 1px;
-    height: 1px;
     padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #FEF5E8;
+    font-family: "Inter", sans-serif;
 }
 
-@media (max-width: 700px) {
-    body {
-        padding-top: 1rem;
-    }
+.svg-container {
+    width: 100%;
+    max-width: 600px;
+    padding: 2rem;
+}
 
-    .scene {
-        width: 94vw;
-        height: 62vh;
-    }
+.sonne-animation {
+    width: 100%;
+    height: auto;
+    display: block;
+}
 
-    .carousel__cell {
-        width: calc(100% - 2.5rem);
-        height: calc(100% - 2.5rem);
-        left: 0;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        font-size: clamp(2rem, 14vw, 4rem);
-    }
-
+/* SVG-Pfade für Stroke-Animation vorbereiten */
+.cls-1,
+.cls-circle {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
 }

@@ -7,7 +7,7 @@
 @font-face {
     font-family: "Inter";
     src: url('../ASSETS/FONTS/Inter.ttf');
-    font-weight: 300;
+
 }
 
 * {
@@ -17,29 +17,40 @@
 body {
     margin: 0;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: #FEF5E8;
-    font-family: "Inter", sans-serif;
+    background: green;
+    font-size: 62.5%;
+    border: 3dvh #fff solid;
 }
 
-.svg-container {
-    width: 100%;
-    max-width: 600px;
-    padding: 2rem;
+.inhalt{
+    width: 100dvw;
+    height: 92.5dvh;
 }
 
-.sonne-animation {
-    width: 100%;
-    height: auto;
-    display: block;
+.topLeft{
+    position: absolute;
+    top: 3.5dvh;
+    left: 2rem;
+    margin: 0;
+    padding: 0;
+    color: #fff;
 }
 
-/* SVG-Pfade für Stroke-Animation vorbereiten */
-.cls-1,
-.cls-circle {
-    stroke-dasharray: 1000;
-    stroke-dashoffset: 1000;
+.topLeft h1{
+    font-family: "Cormorant", serif;
+    font-size: 12rem;
+    margin: 0;
+    line-height: 55%;
+}
+
+.topLeft p{
+    font-family: "Inter", serif;
+    font-weight: 500;
+    font-size: 4rem;
+    transform: rotate(-90deg);
+    transform-origin: 0 0;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 27rem;
 }

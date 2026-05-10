@@ -35,8 +35,6 @@ body {
     position: absolute;
     bottom: 0;
     left: 0;
-    margin: 0;
-    padding: 0;
     color: #fff;
     width: 100%;
     height: 100%;
@@ -64,4 +62,35 @@ body {
     transform-origin: bottom left;
     line-height: 1;
     margin: 0;
+}
+
+.topRight{
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+}
+
+.topRight p{
+    font-family: "Inter", serif;
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 500;
+    position: absolute;
+    top: 0.3dvh;
+    right: 4.35dvw;
+}
+
+.topRight h1{
+    font-family: "Inter", serif;
+    font-size: 5.5rem;
+    position: absolute;
+    top: 45.5dvh;
+    right: -1dvw;
+    display: inline-block;
+    transform: rotate(90deg);
+    transform-origin: top right;
+    line-height: 1;
 }

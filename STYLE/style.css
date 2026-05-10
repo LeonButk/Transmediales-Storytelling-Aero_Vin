@@ -23,10 +23,6 @@ body {
 
 }
 
-.rand{
-
-}
-
 .rand_container{
     position: fixed;
     border: 3dvh #fff solid;
@@ -104,6 +100,7 @@ body {
     padding: 0;
     height: 94dvh;
     width: 94dvw;
+    z-index: 2;
 }
 
 .titel{
@@ -121,8 +118,8 @@ body {
     display: inline-block;
     font-size: 5rem;
     position: absolute;
-    top: -2.8dvh;
-    left: 0;
+    top: 0.2dvh;
+    left: 1.5dvw;
     color: #fff;
     line-height: 0;
 }
@@ -143,8 +140,8 @@ body {
     font-size: 2rem;
     font-weight: 150;
     position: absolute;
-    bottom: -1.8dvh;
-    right: 0.1dvw;
+    bottom: 1.2dvh;
+    right: 1.8dvw;
     line-height: 0;
 }
 

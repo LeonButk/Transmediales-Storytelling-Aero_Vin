@@ -24,7 +24,11 @@ body {
 }
 
 .rand{
-    position: relative;
+
+}
+
+.rand_container{
+    position: fixed;
     border: 3dvh #fff solid;
     width: 100dvw;
     height: 100dvh;

@@ -1,6 +1,6 @@
 @font-face {
     font-family: "Cormorant";
-    src: url('../ASSETS/FONTS/Cormorant-Bold.ttf');
+    src: url('../ASSETS/FONTS/Cormorant-Font.ttf');
 }
 
 @font-face {
@@ -28,6 +28,7 @@ body {
     border: 3dvh #fff solid;
     width: 100dvw;
     height: 100dvh;
+    z-index: 1;
 }
 
 .bottomLeft{
@@ -97,6 +98,8 @@ body {
 .abschnitt{
     margin: 0;
     padding: 0;
+    height: 94dvh;
+    width: 94dvw;
 }
 
 .titel{
@@ -139,4 +142,21 @@ body {
     bottom: -1.8dvh;
     right: 0.1dvw;
     line-height: 0;
+}
+
+.video{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 94dvh;
+}
+
+.video iframe{
+    width: min(1200px, 90%);
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+    display: block;
+    z-index: 2;
 }

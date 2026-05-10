@@ -1,7 +1,6 @@
 @font-face {
     font-family: "Cormorant";
     src: url('../ASSETS/FONTS/Cormorant-Bold.ttf');
-    font-weight: normal;
 }
 
 @font-face {
@@ -88,9 +87,56 @@ body {
     font-size: 5.5rem;
     position: absolute;
     top: 45.5dvh;
-    right: -1dvw;
+    right: -0.65dvw;
     display: inline-block;
     transform: rotate(90deg);
     transform-origin: top right;
     line-height: 1;
+}
+
+.abschnitt{
+    margin: 0;
+    padding: 0;
+}
+
+.titel{
+    font-family: "Cormorant", serif;
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.titel h1{
+    display: inline-block;
+    font-size: 5rem;
+    position: absolute;
+    top: -2.8dvh;
+    left: 0;
+    color: #fff;
+    line-height: 0;
+}
+
+.teaser{
+    font-family: "Inter", serif;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.teaser p{
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 150;
+    position: absolute;
+    bottom: -1.8dvh;
+    right: 0.1dvw;
+    line-height: 0;
 }

@@ -19,38 +19,45 @@ body {
     padding: 0;
     background: green;
     font-size: 62.5%;
-    border: 3dvh #fff solid;
-}
-
-.inhalt{
     width: 100dvw;
-    height: 92.5dvh;
+    height: 100dvh;
+
 }
 
-.topLeft{
+.rand{
+    border: 3dvh #fff solid;
+    width: 100dvw;
+    height: 100dvh;
+}
+
+.bottomLeft{
     position: absolute;
-    top: 3.5dvh;
+    bottom: 3.5dvh;
     left: 2rem;
     margin: 0;
     padding: 0;
     color: #fff;
 }
 
-.topLeft h1{
-    font-family: "Cormorant", serif;
-    font-size: 12rem;
+.bottomLeft p{
+    font-family: "Inter", serif;
+    font-size: 4rem;
     margin: 0;
-    line-height: 55%;
+    font-weight: 500;
+    position: absolute;
+    bottom: 0;
+    left: 7rem;
 }
 
-.topLeft p{
-    font-family: "Inter", serif;
-    font-weight: 500;
-    font-size: 4rem;
+.bottomLeft h1{
+    font-family: "Cormorant", serif;
+    font-size: 8rem;
     transform: rotate(-90deg);
     transform-origin: 0 0;
     margin: 0;
     padding: 0;
+    line-height: 55%;
     position: absolute;
-    top: 27rem;
+    bottom: 0;
+    left: 0;
 }

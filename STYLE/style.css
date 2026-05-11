@@ -194,3 +194,24 @@ body {
     letter-spacing: 4px;
     text-transform: uppercase;
 }
+
+#horizontalLinks .content{
+    height: 100dvh;
+    width: 100dvw;
+    display: grid;
+    place-items: center;
+    background: #0C0C0C;
+    flex-shrink: 0;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+#horizontalLinks {
+    display: flex;
+    overflow-x: hidden;
+    color: whitesmoke;
+    font-family: "KuahAyman", sans-serif;
+    flex-direction: row-reverse;
+}

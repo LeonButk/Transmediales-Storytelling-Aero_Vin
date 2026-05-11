@@ -1,10 +1,21 @@
-// GSAP slide-in for section #abschnitt1
+// GSAP horizontal scroll for section #abschnitt3
 const contents = gsap.utils.toArray("#horizontal .content");
 
 gsap.to(contents, {
 	xPercent: -100 * (contents.length - 1),
 	scrollTrigger: {
-		trigger: "#horizontal",
+		trigger: "#abschnitt3",
+		pin: true,
+		scrub: 2
+	}
+});
+
+const contentsLinks = gsap.utils.toArray("#horizontalLinks .content");
+
+gsap.to(contentsLinks, {
+	xPercent: 100 * (contentsLinks.length - 1),
+	scrollTrigger: {
+		trigger: "#abschnitt5",
 		pin: true,
 		scrub: 2
 	}

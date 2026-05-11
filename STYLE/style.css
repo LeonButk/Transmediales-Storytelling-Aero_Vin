@@ -166,3 +166,24 @@ body {
     display: block;
     z-index: 2;
 }
+
+#horizontal {
+    display: flex;
+    overflow-x: hidden;
+    color: whitesmoke;
+    font-family: "KuahAyman", sans-serif;
+}
+
+#horizontal .content{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    background: #0C0C0C;
+    flex-shrink: 0;
+    font-size: 4rem;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding-right: 2%;
+}

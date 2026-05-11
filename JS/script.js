@@ -1,4 +1,14 @@
 // GSAP slide-in for section #abschnitt1
+const contents = gsap.utils.toArray("#horizontal .content");
+
+gsap.to(contents, {
+	xPercent: -100 * (contents.length - 1),
+	scrollTrigger: {
+		trigger: "#horizontal",
+		pin: true,
+		scrub: 2
+	}
+});
 document.addEventListener('DOMContentLoaded', function() {
 	if (typeof gsap === 'undefined') {
 		console.warn('GSAP nicht geladen — Animationen werden nicht ausgeführt.');

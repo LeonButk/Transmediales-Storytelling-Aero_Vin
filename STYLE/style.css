@@ -167,6 +167,14 @@ body {
     z-index: 2;
 }
 
+.bild img{
+    width: min(1200px, 90%);
+    aspect-ratio: 16 / 9;
+    height: auto;
+    border: 0;
+    display: block;
+}
+
 #horizontal {
     display: flex;
     overflow-x: hidden;
@@ -175,8 +183,8 @@ body {
 }
 
 #horizontal .content{
-    height: 100vh;
-    width: 100vw;
+    height: 100dvh;
+    width: 100dvw;
     display: grid;
     place-items: center;
     background: #0C0C0C;
@@ -185,5 +193,4 @@ body {
     font-weight: bold;
     letter-spacing: 4px;
     text-transform: uppercase;
-    padding-right: 2%;
 }

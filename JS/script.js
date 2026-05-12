@@ -14,10 +14,13 @@ const contentsLinks = gsap.utils.toArray("#horizontalLinks .content");
 
 gsap.to(contentsLinks, {
 	xPercent: 100 * (contentsLinks.length - 1),
+	ease: "none",
 	scrollTrigger: {
 		trigger: "#abschnitt5",
 		pin: true,
-		scrub: 2
+		scrub: 2,
+		snap: 1 / (contentsLinks.length - 1),
+		end: "+=3500",
 	}
 });
 document.addEventListener('DOMContentLoaded', function() {

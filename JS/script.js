@@ -8,7 +8,11 @@ gsap.to(contentsRechts, {
 		trigger: "#abschnitt3",
 		pin: true,
 		scrub: 2,
-		snap: 1 / (contentsRechts.length - 1),
+		snap: {
+			snapTo:	1 / (contentsRechts.length - 1),
+			duration: 0.5,
+			ease: "power1.in",
+		},
 		end: "+=3500",
 	}
 });
@@ -22,7 +26,11 @@ gsap.to(contentsLinks, {
 		trigger: "#abschnitt5",
 		pin: true,
 		scrub: 2,
-		snap: 1 / (contentsLinks.length - 1),
+		snap: {
+			snapTo:	1 / (contentsLinks.length - 1),
+			duration: 0.5,
+			ease: "power1.in",
+		},
 		end: "+=3500",
 	}
 });

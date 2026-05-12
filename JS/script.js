@@ -1,12 +1,15 @@
 // GSAP horizontal scroll for section #abschnitt3
-const contents = gsap.utils.toArray("#horizontal .content");
+const contentsRechts = gsap.utils.toArray("#horizontal .content");
 
-gsap.to(contents, {
-	xPercent: -100 * (contents.length - 1),
+gsap.to(contentsRechts, {
+	xPercent: -100 * (contentsRechts.length - 1),
+	ease: "none",
 	scrollTrigger: {
 		trigger: "#abschnitt3",
 		pin: true,
-		scrub: 2
+		scrub: 2,
+		snap: 1 / (contentsRechts.length - 1),
+		end: "+=3500",
 	}
 });
 

@@ -26,6 +26,7 @@ gsap.to(contentsLinks, {
 		end: "+=3500",
 	}
 });
+
 document.addEventListener('DOMContentLoaded', function() {
 	if (typeof gsap === 'undefined') {
 		console.warn('GSAP nicht geladen — Animationen werden nicht ausgeführt.');

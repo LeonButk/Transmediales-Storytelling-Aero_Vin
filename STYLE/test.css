@@ -158,26 +158,33 @@ body {
     z-index: 4;
 }
 
+.video{
+    position: absolute;
+    top: 3dvh;
+}
+
 .video, .bild{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 94dvh;
+    height: 100dvh;
 }
 
 .video iframe{
-    width: min(1200px, 90%);
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
     aspect-ratio: 16 / 9;
-    height: auto;
     border: 0;
     display: block;
 }
 
 .bild img{
-    width: min(1200px, 90%);
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
     aspect-ratio: 16 / 9;
-    height: auto;
     border: 0;
     display: block;
 }
@@ -208,6 +215,11 @@ body {
     color: whitesmoke;
     font-family: "KuahAyman", sans-serif;
     flex-direction: row-reverse;
+}
+
+#bild1 img{
+    transform: translate(50%, 70%);
+
 }
 
 @media (max-width: 1492px){
@@ -258,10 +270,5 @@ body {
         width: 100dvw;
         height: 100dvh;
         object-fit: cover;
-    }
-
-    #bild1 img{
-        transform: translate(50%, 70%);
-
     }
 }

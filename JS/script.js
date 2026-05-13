@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
 			outPosition = { y: -20 };
 			inPosition = { y: 0 };
 		} else if (direction === "left") {
-			outPosition = { x: -30 };
+			outPosition = { x: -50 };
 			inPosition = { x: 0 };
 		} else if (direction === "right") {
-			outPosition = { x: 30 };
+			outPosition = { x: 50 };
 			inPosition = { x: 0 };
 		}
 
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 				// Fade in new content with animation
 				gsap.to([titelEl, teaserEl], {
-					duration: 0.8,
+					duration: 1,
 					autoAlpha: 1,
 					...inPosition,
 					ease: 'power2.out'
@@ -101,6 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		gsap.to([titelEl, teaserEl], {
 			scrollTrigger: {
 				trigger: section,
+				start: "-12rem center",
 				onEnter: function() {
 					// When entering section from above
 					var newTitel = section.getAttribute('data-titel');
@@ -116,6 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 					// Animationsrichtung aus data-animation-direction atribut lesen
 					var direction = section.getAttribute('data-animation-direction') || "top";
 					animateTextChange(newTitel, newTeaser, direction);
+					console.warn(section.getAttribute('id')+'');
 				}
 			}
 		});

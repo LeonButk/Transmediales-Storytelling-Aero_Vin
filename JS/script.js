@@ -41,33 +41,85 @@ document.addEventListener('DOMContentLoaded', function() {
 		return;
 	}
 
-	var section = document.getElementById('abschnitt1');
-	if (!section) {
+	var titelEl = document.getElementById('titel');
+	var teaserEl = document.getElementById('teaser');
+
+	if (!titelEl || !teaserEl) {
+		console.warn('Titel oder Teaser Element nicht gefunden');
 		return;
 	}
 
-	var titel = section.querySelector('.titel');
-	var teaser = section.querySelector('.teaser');
+	// Set initial state - invisible
+	gsap.set([titelEl, teaserEl], {autoAlpha: 0, y: -40});
 
-	// Set initial (hidden, shifted up)
-	gsap.set([titel, teaser], {autoAlpha: 0, y: -40});
+	// Helper function to animate text change with direction
+	// Direction kann sein: "top" (von oben), "left" (von links), "right" (von rechts)
+	function animateTextChange(newTitel, newTeaser, direction) {
+		direction = direction || "top"; // Standard ist "top" wenn nichts angegeben
 
-	// Timeline: titel and teaser appear simultaneously
-	var tl = gsap.timeline({paused: true});
-	tl.to([titel, teaser], {duration: 1.5, y: 0, autoAlpha: 1, ease: 'power3.out'});
+		// Position für die Eingangsanimation basierend auf Richtung
+		var outPosition = {};
+		var inPosition = {};
 
-	// IntersectionObserver to trigger when section is visible
-	var observer = new IntersectionObserver(function(entries) {
-		entries.forEach(function(entry) {
-			if (entry.isIntersecting) {
-				tl.play();
-			} else {
-				tl.reverse();
+		if (direction === "top") {
+			outPosition = { y: -20 };
+			inPosition = { y: 0 };
+		} else if (direction === "left") {
+			outPosition = { x: -30 };
+			inPosition = { x: 0 };
+		} else if (direction === "right") {
+			outPosition = { x: 30 };
+			inPosition = { x: 0 };
+		}
+
+		// Fade out current content
+		gsap.to([titelEl, teaserEl], {
+			duration: 0.5,
+			autoAlpha: 0,
+			...outPosition,
+			ease: 'power2.in',
+			onComplete: function() {
+				// Update content
+				if (newTitel) titelEl.innerHTML = newTitel;
+				if (newTeaser) teaserEl.innerHTML = newTeaser;
+
+				// Fade in new content with animation
+				gsap.to([titelEl, teaserEl], {
+					duration: 0.8,
+					autoAlpha: 1,
+					...inPosition,
+					ease: 'power2.out'
+				});
 			}
 		});
-	}, {threshold: 0.25});
+	}
 
-	observer.observe(section);
+	// Create ScrollTrigger animations for each section
+	var abschnitte = document.querySelectorAll('.abschnitt');
+
+	abschnitte.forEach(function(section) {
+		gsap.to([titelEl, teaserEl], {
+			scrollTrigger: {
+				trigger: section,
+				onEnter: function() {
+					// When entering section from above
+					var newTitel = section.getAttribute('data-titel');
+					var newTeaser = section.getAttribute('data-teaser');
+					// Animationsrichtung aus data-animation-direction atribut lesen
+					var direction = section.getAttribute('data-animation-direction') || "top";
+					animateTextChange(newTitel, newTeaser, direction);
+				},
+				onEnterBack: function() {
+					// When scrolling back into section from below
+					var newTitel = section.getAttribute('data-titel');
+					var newTeaser = section.getAttribute('data-teaser');
+					// Animationsrichtung aus data-animation-direction atribut lesen
+					var direction = section.getAttribute('data-animation-direction') || "top";
+					animateTextChange(newTitel, newTeaser, direction);
+				}
+			}
+		});
+	});
 });
 
 

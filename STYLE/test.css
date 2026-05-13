@@ -6,7 +6,6 @@
 @font-face {
     font-family: "Inter";
     src: url('../ASSETS/FONTS/Inter.ttf');
-
 }
 
 * {
@@ -60,21 +59,12 @@ body {
     left: 0;
 }
 
-.rand_container{
-    position: fixed;
-    border: 3dvh #fff solid;
-    width: 100dvw;
-    height: 100dvh;
-    z-index: 1;
-}
-
 .bigLeft, .smallBottom{
     position: fixed;
     bottom: 0;
     left: 0;
     color: #fff;
     width: 100%;
-    height: 100%;
     z-index: 1000;
 }
 
@@ -108,7 +98,6 @@ body {
     right: 0;
     color: #fff;
     width: 100%;
-    height: 100%;
     z-index: 1000;
 }
 
@@ -146,45 +135,27 @@ body {
 }
 
 .titel{
-    font-family: "Cormorant", serif;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.titel h1{
     display: inline-block;
     font-size: 5rem;
-    position: absolute;
+    font-family: "Cormorant", serif;
+    position: fixed;
     top: 0.2dvh;
     left: 1.5dvw;
     color: #fff;
     line-height: 0;
+    z-index: 4;
 }
 
 .teaser{
-    font-family: "Inter", serif;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.teaser p{
     color: #fff;
     font-size: 2rem;
     font-weight: 150;
-    position: absolute;
+    font-family: "Inter", serif;
+    position: fixed;
     bottom: 1.2dvh;
     right: 1.8dvw;
     line-height: 0;
+    z-index: 4;
 }
 
 .video, .bild{
@@ -266,14 +237,13 @@ body {
         display: inline-block;
     }
 
-    .titel h1{
+    .titel{
         font-size: 4rem;
-        position: absolute;
         top: 0.2dvh;
-        left: 1.5dvh;
+        left: 3dvh;
     }
 
-    .teaser p{
+    .teaser{
         font-size: 1.75rem;
         bottom: 1.2dvh;
         right: 1.8dvw;

@@ -1,4 +1,7 @@
 // GSAP horizontal scroll for section #abschnitt3
+ScrollTrigger.config({
+	limitCallbacks: true
+});
 const contentsRechts = gsap.utils.toArray("#horizontal .content");
 
 gsap.to(contentsRechts, {
@@ -95,32 +98,29 @@ document.addEventListener('DOMContentLoaded', function() {
 	}
 
 	// Create ScrollTrigger animations for each section
-	var abschnitte = document.querySelectorAll('.abschnitt');
+	const abschnitte = document.querySelectorAll('.abschnitt');
 
 	abschnitte.forEach(function(section) {
-		gsap.to([titelEl, teaserEl], {
-			scrollTrigger: {
-				trigger: section,
-				start: "-12rem center",
-				onEnter: function() {
-					// When entering section from above
-					var newTitel = section.getAttribute('data-titel');
-					var newTeaser = section.getAttribute('data-teaser');
-					// Animationsrichtung aus data-animation-direction atribut lesen
-					var direction = section.getAttribute('data-animation-direction') || "top";
-					animateTextChange(newTitel, newTeaser, direction);
-				},
-				onEnterBack: function() {
-					// When scrolling back into section from below
-					var newTitel = section.getAttribute('data-titel');
-					var newTeaser = section.getAttribute('data-teaser');
-					// Animationsrichtung aus data-animation-direction atribut lesen
-					var direction = section.getAttribute('data-animation-direction') || "top";
-					animateTextChange(newTitel, newTeaser, direction);
-					console.warn(section.getAttribute('id')+'');
-				}
-			}
+
+		ScrollTrigger.create({
+			trigger: section,
+
+			start: "top 60%",
+			end: "bottom 40%",
+
+			onEnter: updateText,
+			onEnterBack: updateText
 		});
+
+		function updateText() {
+
+			const newTitel = section.getAttribute('data-titel');
+			const newTeaser = section.getAttribute('data-teaser');
+			const direction =
+				section.getAttribute('data-animation-direction') || "top";
+
+			animateTextChange(newTitel, newTeaser, direction);
+		}
 	});
 });
 

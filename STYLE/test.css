@@ -21,7 +21,7 @@ body {
     padding: 0;
     background: green;
     font-size: 62.5%;
-    width: 100dvw;
+    max-width: 100dvw;
     height: 100dvh;
 }
 
@@ -249,11 +249,19 @@ body {
         right: 1.8dvw;
     }
 
-    .video iframe{
-        width: min(1000px, 90%);
+    .video{
+        position: absolute;
+        top: 3dvh;
     }
 
-    .bild img{
-        width: min(1000px, 90%);
+    .video iframe, .bild img{
+        width: 100dvw;
+        height: 100dvh;
+        object-fit: cover;
+    }
+
+    #bild1 img{
+        transform: translate(50%, 70%);
+
     }
 }

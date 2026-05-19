@@ -258,6 +258,12 @@ body {
     transform: scale(1.02);
 }
 
+/* When playing, bring the video above the decorative frames */
+.video.is-playing{
+    z-index: 10001;
+    position: relative;
+}
+
 .bild img{
     width: 100dvw;
     height: 100dvh;

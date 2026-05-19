@@ -6,7 +6,6 @@
 @font-face {
     font-family: "Inter";
     src: url('../ASSETS/FONTS/Inter.ttf');
-
 }
 
 * {
@@ -22,39 +21,56 @@ body {
     padding: 0;
     background: green;
     font-size: 62.5%;
-    width: 100dvw;
+    max-width: 100dvw;
     height: 100dvh;
+    overflow-x: hidden;
 }
 
-.rand_container{
+.frame{
     position: fixed;
-    border: 3dvh #fff solid;
-    width: 100dvw;
-    height: 100dvh;
-    z-index: 1;
+    background-color: white;
+    z-index: 10000;
 }
 
-.bottomLeft{
-    position: absolute;
+.frame:nth-of-type(1){
+    width: 94dvw;
+    height: 1.5dvh;
+    left: 3dvw;
+    top: 3dvh;
+}
+
+.frame:nth-of-type(2){
+    width: 1.5dvh;
+    height: 94dvh;
+    right: 3dvw;
+    top: 3dvh;
+
+}
+
+.frame:nth-of-type(3){
+    width: 94vw;
+    height: 1.5dvh;
+    bottom: 3dvh;
+    left: 3dvw;
+}
+
+.frame:nth-of-type(4){
+    width: 1.5dvh;
+    height: 94dvh;
+    bottom: 3dvh;
+    left: 3dvw;
+}
+
+.bigLeft, .smallBottom{
+    position: fixed;
     bottom: 0;
     left: 0;
     color: #fff;
     width: 100%;
-    height: 100%;
+    z-index: 1000;
 }
 
-.bottomLeft p{
-    font-family: "Inter", serif;
-    font-size: 2.5rem;
-    margin: 0;
-    font-weight: 500;
-    position: absolute;
-    bottom: 0.3dvh;
-    left: 4dvw;
-    transform: rotate(-180deg);
-}
-
-.bottomLeft h1{
+.bigLeft h1{
     font-family: "Cormorant", serif;
     font-size: 6.5rem;
     position: absolute;
@@ -67,16 +83,27 @@ body {
     margin: 0;
 }
 
-.topRight{
+.smallBottom p{
+    font-family: "Inter", serif;
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: 500;
     position: absolute;
+    bottom: 0.3dvh;
+    left: 4dvw;
+    transform: rotate(-180deg);
+}
+
+.bigRight, .smallTop{
+    position: fixed;
     top: 0;
     right: 0;
     color: #fff;
     width: 100%;
-    height: 100%;
+    z-index: 1000;
 }
 
-.topRight p{
+.smallTop p{
     font-family: "Inter", serif;
     font-size: 2.5rem;
     margin: 0;
@@ -86,7 +113,7 @@ body {
     right: 4.35dvw;
 }
 
-.topRight h1{
+.bigRight h1{
     font-family: "Inter", serif;
     font-size: 5.5rem;
     position: absolute;
@@ -105,50 +132,41 @@ body {
     padding: 0;
     height: 100dvh;
     width: 100dvw;
-    display: inline-block;
-    vertical-align: top;
+    display: block; /* stack vertically to avoid overlap issues */
+}
+
+.tester{
+    display: block;
 }
 
 .titel{
-    font-family: "Cormorant", serif;
-    position: absolute;
-    top: 0;
-    left: 0;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.titel h1{
     display: inline-block;
     font-size: 5rem;
-    position: absolute;
+    font-family: "Cormorant", serif;
+    position: fixed;
     top: 0.2dvh;
     left: 1.5dvw;
     color: #fff;
     line-height: 0;
+    z-index: 10;
 }
 
 .teaser{
-    font-family: "Inter", serif;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-.teaser p{
     color: #fff;
     font-size: 2rem;
     font-weight: 150;
-    position: absolute;
+    font-family: "Inter", serif;
+    position: fixed;
     bottom: 1.2dvh;
     right: 1.8dvw;
     line-height: 0;
+    z-index: 10;
+}
+
+.video{
+    position: absolute;
+    overflow: hidden;
+    isolation: isolate;
 }
 
 .video, .bild{
@@ -156,22 +174,95 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 94dvh;
+    height: 100dvh;
 }
 
 .video iframe{
-    width: min(1200px, 90%);
+    position: absolute;
+    inset: 0;
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
     aspect-ratio: 16 / 9;
-    height: auto;
     border: 0;
     display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.video.is-playing iframe{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.video-thumb{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
     z-index: 2;
+    opacity: 1;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.video-thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-thumb::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.26));
+}
+
+.video-thumb-play{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7rem;
+    height: 7rem;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 0.2rem solid rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    z-index: 3;
+}
+
+.video-thumb-play::before{
+    content: "";
+    position: absolute;
+    left: 2.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 1.35rem solid transparent;
+    border-bottom: 1.35rem solid transparent;
+    border-left: 2.2rem solid #fff;
+}
+
+.video.is-playing .video-thumb{
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.02);
 }
 
 .bild img{
-    width: min(1200px, 90%);
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
     aspect-ratio: 16 / 9;
-    height: auto;
     border: 0;
     display: block;
 }
@@ -204,51 +295,73 @@ body {
     flex-direction: row-reverse;
 }
 
+#bild1 img{
+    transform: none; /* GSAP setzt Startpositionen */
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
+    display: block;
+}
+
+/* ensure abschnitt2 sits above the horizontal section */
+#abschnitt2{
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+}
+
+#abschnitt3{
+    position: relative;
+    z-index: 1;
+}
+
 @media (max-width: 1492px){
 
-    .bottomLeft p{
+    .smallBottom p{
         font-size: 2rem;
-        bottom: 0.3dvh;
-        left: 5.5dvw;
+        bottom: 3.5dvh;
+        left: 12dvh;
     }
 
-    .bottomLeft h1{
+    .bigLeft h1{
         font-size: 6.5rem;
-        bottom: 0;
-        left: 5.6dvw;
+        bottom: 2.5dvh;
+        left: 12dvh;
     }
 
-    .topRight p{
+    .smallTop p{
         font-size: 2rem;
-        top: 0.3dvh;
-        right: 5.5dvw;
+        top: 3.3dvh;
+        right: 12dvh;
     }
 
-    .topRight h1{
+    .bigRight h1{
         font-size: 5.5rem;
-        top: 53dvh;
-        right: -1dvw;
+        top: 56dvh;
+        right: 1.6dvh;
         display: inline-block;
     }
 
-    .titel h1{
+    .titel{
         font-size: 4rem;
-        position: absolute;
         top: 0.2dvh;
-        left: 1.5dvw;
+        left: 3dvh;
     }
 
-    .teaser p{
+    .teaser{
         font-size: 1.75rem;
         bottom: 1.2dvh;
         right: 1.8dvw;
     }
 
-    .video iframe{
-        width: min(1000px, 90%);
+    .video{
+        position: absolute;
     }
 
-    .bild img{
-        width: min(1000px, 90%);
+    .video iframe, .bild img{
+        width: 100dvw;
+        height: 100dvh;
+        object-fit: cover;
     }
+
 }

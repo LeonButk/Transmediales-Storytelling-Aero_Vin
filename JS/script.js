@@ -1,4 +1,7 @@
 // GSAP horizontal scroll for section #abschnitt3
+
+// Lenis removed for testing — use native browser scrolling and default ScrollTrigger behavior
+// If you want to re-enable Lenis later, add the script tag in index.html and restore the scrollerProxy + RAF logic.
 const contentsRechts = gsap.utils.toArray("#horizontal .content");
 const horizontalSpeedFactor = 1.8; // Größer = langsameres horizontales Scrollen
 
@@ -50,6 +53,25 @@ document.addEventListener('DOMContentLoaded', function() {
 		return;
 	}
 
+		// --- Video thumbnail behaviour: load iframe only on click ---
+		const videoThumbButtons = document.querySelectorAll('.video-thumb');
+		videoThumbButtons.forEach(btn => {
+			btn.addEventListener('click', function() {
+				const videoBlock = btn.closest('.video');
+				if (!videoBlock) return;
+				const iframe = videoBlock.querySelector('iframe');
+				if (!iframe) return;
+				const baseSrc = iframe.getAttribute('data-src');
+				if (!baseSrc) return;
+				const joiner = baseSrc.includes('?') ? '&' : '?';
+				const full = baseSrc + joiner + 'autoplay=1&playsinline=1&rel=0&mute=1';
+				if (!iframe.getAttribute('src')) iframe.setAttribute('src', full);
+							videoBlock.classList.add('is-playing');
+				btn.setAttribute('aria-hidden', 'true');
+				btn.setAttribute('tabindex', '-1');
+			});
+		});
+
 	var titelEl = document.getElementById('titel');
 	var teaserEl = document.getElementById('teaser');
 
@@ -81,26 +103,24 @@ document.addEventListener('DOMContentLoaded', function() {
 			inPosition = { x: 0 };
 		}
 
-		// Fade out current content
-		gsap.to([titelEl, teaserEl], {
-			duration: 0.5,
-			autoAlpha: 0,
-			...outPosition,
-			ease: 'power2.in',
-			onComplete: function() {
-				// Update content
+		// Fade out current content, update and fade in via timeline
+		gsap.timeline()
+			.to([titelEl, teaserEl], {
+				duration: 0.5,
+				autoAlpha: 0,
+				...outPosition,
+				ease: 'power2.in'
+			})
+			.call(function() {
 				if (newTitel) titelEl.innerHTML = newTitel;
 				if (newTeaser) teaserEl.innerHTML = newTeaser;
-
-				// Fade in new content with animation
-				gsap.to([titelEl, teaserEl], {
-					duration: 1,
-					autoAlpha: 1,
-					...inPosition,
-					ease: 'power2.out'
-				});
-			}
-		});
+			})
+			.to([titelEl, teaserEl], {
+				duration: 1,
+				autoAlpha: 1,
+				...inPosition,
+				ease: 'power2.out'
+			});
 	}
 
 	// Create ScrollTrigger animations for each section
@@ -176,32 +196,35 @@ function createScrollDebugByVH(stepVH = 100) {
 
 createScrollDebugByVH(100);
 
-// Animation für Video: verschiebt das Video nach links/oben beim betreten von abschnitt2
-// toggleActions: "play reverse pause reverse" bedeutet:
-// - play: Animation spielen wenn ScrollTrigger aktiviert wird
-// - reverse: Animation rückwärts spielen beim Zurückscollen
-// - pause: Animation pausieren wenn ScrollTrigger wieder verlassen wird
-// - reverse: Animation rückwärts spielen wenn wieder zurückgescrollt wird
-gsap.to(".video iframe",{
-	duration: 0.5,
-	scrollTrigger:{
-		start: "-100 center",
-		trigger:"#abschnitt2",
-		toggleActions: "play reverse pause reverse"
-	},
-	x: "-50%",
-	y: "-70%"
-})
+// Smooth diagonal transition between video and image when entering #abschnitt2
+// Single scrubbed timeline so both elements move in sync (feels like diagonal scroll).
+gsap.registerPlugin(ScrollTrigger);
 
-// Animation für Bild: verschiebt das Bild beim betreten von abschnitt2
-// Die Reverse-Animation bringt das Bild zurück zu seiner ursprünglichen Position
-gsap.to(".bild img",{
-	duration: 0.5,
-	scrollTrigger:{
-		start: "-100 center",
-		trigger:"#abschnitt2",
-		toggleActions: "play reverse pause reverse"
-	},
-	x: 0,
-	y: 0
-})
+// Set sensible, less extreme start/end positions so image is fullframe before #abschnitt3
+gsap.set("#bild1 img", { xPercent: 30, yPercent: 30 });
+gsap.set(".video", { xPercent: 0, yPercent: 0 });
+
+const tlTransition = gsap.timeline({
+	scrollTrigger: {
+		trigger: "#abschnitt2",
+		start: "top 90%",   // start when top of abschnitt2 nears bottom of viewport
+		end: "top 10%",     // end when top of abschnitt2 near top of viewport
+		scrub: 0.45,
+		// markers: true
+	}
+});
+
+// video moves slightly up-left; image moves from lower-right into fullframe
+tlTransition.fromTo(
+	".video",
+	{ xPercent: 0, yPercent: 0 },
+	{ xPercent: -20, yPercent: -8, ease: "none" },
+	0
+);
+
+tlTransition.fromTo(
+	"#bild1 img",
+	{ xPercent: 30, yPercent: 30 },
+	{ xPercent: 0, yPercent: 0, ease: "none" },
+	0
+);

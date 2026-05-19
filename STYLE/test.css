@@ -23,6 +23,7 @@ body {
     font-size: 62.5%;
     max-width: 100dvw;
     height: 100dvh;
+    overflow-x: hidden;
 }
 
 .frame{
@@ -32,31 +33,32 @@ body {
 }
 
 .frame:nth-of-type(1){
-    width: 100vw;
-    height: 3dvh;
-    left: 0;
-    top: 0;
+    width: 94dvw;
+    height: 1.5dvh;
+    left: 3dvw;
+    top: 3dvh;
 }
 
 .frame:nth-of-type(2){
-    width: 3dvh;
-    height: 100dvh;
-    right: 0;
-    top: 0;
+    width: 1.5dvh;
+    height: 94dvh;
+    right: 3dvw;
+    top: 3dvh;
+
 }
 
 .frame:nth-of-type(3){
-    width: 100vw;
-    height: 3dvh;
-    bottom: 0;
-    left: 0;
+    width: 94vw;
+    height: 1.5dvh;
+    bottom: 3dvh;
+    left: 3dvw;
 }
 
 .frame:nth-of-type(4){
-    width: 3dvh;
-    height: 100dvh;
-    bottom: 0;
-    left: 0;
+    width: 1.5dvh;
+    height: 94dvh;
+    bottom: 3dvh;
+    left: 3dvw;
 }
 
 .bigLeft, .smallBottom{
@@ -130,8 +132,11 @@ body {
     padding: 0;
     height: 100dvh;
     width: 100dvw;
-    display: inline-block;
-    vertical-align: top;
+    display: block; /* stack vertically to avoid overlap issues */
+}
+
+.tester{
+    display: block;
 }
 
 .titel{
@@ -143,7 +148,7 @@ body {
     left: 1.5dvw;
     color: #fff;
     line-height: 0;
-    z-index: 4;
+    z-index: 10;
 }
 
 .teaser{
@@ -155,12 +160,13 @@ body {
     bottom: 1.2dvh;
     right: 1.8dvw;
     line-height: 0;
-    z-index: 4;
+    z-index: 10;
 }
 
 .video{
     position: absolute;
-    top: 3dvh;
+    overflow: hidden;
+    isolation: isolate;
 }
 
 .video, .bild{
@@ -172,12 +178,84 @@ body {
 }
 
 .video iframe{
+    position: absolute;
+    inset: 0;
     width: 100dvw;
     height: 100dvh;
     object-fit: cover;
     aspect-ratio: 16 / 9;
     border: 0;
     display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.video.is-playing iframe{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.video-thumb{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.video-thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-thumb::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.26));
+}
+
+.video-thumb-play{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7rem;
+    height: 7rem;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 0.2rem solid rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    z-index: 3;
+}
+
+.video-thumb-play::before{
+    content: "";
+    position: absolute;
+    left: 2.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 1.35rem solid transparent;
+    border-bottom: 1.35rem solid transparent;
+    border-left: 2.2rem solid #fff;
+}
+
+.video.is-playing .video-thumb{
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.02);
 }
 
 .bild img{
@@ -218,8 +296,23 @@ body {
 }
 
 #bild1 img{
-    transform: translate(50%, 70%);
+    transform: none; /* GSAP setzt Startpositionen */
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
+    display: block;
+}
 
+/* ensure abschnitt2 sits above the horizontal section */
+#abschnitt2{
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+}
+
+#abschnitt3{
+    position: relative;
+    z-index: 1;
 }
 
 @media (max-width: 1492px){
@@ -263,7 +356,6 @@ body {
 
     .video{
         position: absolute;
-        top: 3dvh;
     }
 
     .video iframe, .bild img{
@@ -271,4 +363,5 @@ body {
         height: 100dvh;
         object-fit: cover;
     }
+
 }

@@ -19,11 +19,25 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background: green;
     font-size: 62.5%;
     max-width: 100dvw;
-    height: 100dvh;
+    min-height: 100dvh;
+    height: auto;
     overflow-x: hidden;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    z-index: -1;
+}
+
+.background > img {
+    width: 100%;
+    object-fit: contain;
 }
 
 .frame{
@@ -126,13 +140,20 @@ body {
 }
 
 
-.abschnitt{
+.abschnitt,
+.abschnitt--intro,
+.abschnitt--horizontal,
+.abschnitt--image,
+.abschnitt--horizontal-reverse{
     position: relative;
     margin: 0;
     padding: 0;
-    height: 100dvh;
+    min-height: 100dvh;
+    height: auto;
     width: 100dvw;
-    display: block; /* stack vertically to avoid overlap issues */
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
 }
 
 .tester{
@@ -149,6 +170,7 @@ body {
     color: #fff;
     line-height: 0;
     z-index: 10;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
 }
 
 .teaser{
@@ -161,12 +183,77 @@ body {
     right: 1.8dvw;
     line-height: 0;
     z-index: 10;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* reusable subsection base class */
+.unterabschnitt,
+.text{
+    position: relative;
+    width: 100dvw;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.unterabschnitt--media{
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.unterabschnitt--text,
+.text, .unterabschnitt--ueberleitung{
+    font-family: "Inter", serif;
+    font-size: 1.5rem;
+    padding: 8dvh 10dvw;
+    text-align: left;
+    color: white;
+}
+
+.unterabschnitt--ueberleitung p{
+    max-width: 65dvw;
+    margin: 0;
+    line-height: 1.2;
+    background-color: rgb(197 56 130 / 1);
+    padding: 2vh;
+    transform: translate(-8rem, 0) rotate(-8deg);
+}
+
+.unterabschnitt--text p,
+.text p{
+    max-width: 65dvw;
+    margin: 0;
+    line-height: 1.2;
+    background-color: rgb(197 56 130 / 1);
+    padding: 2vh;
+}
+
+span{
+    background-color: rgb(197 56 130 / 0.8);
+}
+
+.unterabschnitt--image{
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.unterabschnitt--image img{
+    width: 80dvw;
+    height: 80dvh;
+    object-fit: cover;
+    display: block;
 }
 
 .video{
-    position: absolute;
+    position: relative;
     overflow: hidden;
     isolation: isolate;
+    width: 100%;
+    min-height: 100dvh;
+    z-index: 2;
 }
 
 .video, .bild{
@@ -281,18 +368,37 @@ body {
     font-family: "KuahAyman", sans-serif;
 }
 
-#horizontal .content, #horizontalLinks .content{
+.abschnitt__card--horizontal,
+#horizontal .content,
+#horizontalLinks .content{
     height: 100dvh;
     width: 100dvw;
     display: grid;
     place-items: center;
-    background: #0C0C0C;
     flex-shrink: 0;
-    font-size: 4rem;
-    font-weight: bold;
-    letter-spacing: 4px;
-    text-transform: uppercase;
+    font-size: 1.5rem;
     z-index: 4;
+    font-family: "Inter", serif;
+}
+
+.abschnitt__card--horizontal p{
+    max-width: 65dvw;
+    margin: 0;
+    line-height: 1.2;
+    background-color: rgb(197 56 130 / 1);
+    padding: 2vh;
+}
+
+.abschnitt__card--horizontal img{
+    width: 80dvw;
+    height: 80dvh;
+    object-fit: cover;
+}
+
+.abschnitt__card--horizontal .video img{
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
 }
 
 #horizontalLinks {

@@ -33,7 +33,7 @@ body {
 }
 
 .frame:nth-of-type(1){
-    width: 94dvw;
+    width: 89dvw;
     height: 1.5dvh;
     left: 3dvw;
     top: 3dvh;
@@ -41,23 +41,23 @@ body {
 
 .frame:nth-of-type(2){
     width: 1.5dvh;
-    height: 94dvh;
+    height: 32dvh;
     right: 3dvw;
-    top: 3dvh;
+    bottom: 3dvh;
 
 }
 
 .frame:nth-of-type(3){
-    width: 94vw;
+    width: 89vw;
     height: 1.5dvh;
     bottom: 3dvh;
-    left: 3dvw;
+    right: 3dvw;
 }
 
 .frame:nth-of-type(4){
     width: 1.5dvh;
-    height: 94dvh;
-    bottom: 3dvh;
+    height: 42dvh;
+    top: 3dvh;
     left: 3dvw;
 }
 
@@ -100,7 +100,7 @@ body {
     right: 0;
     color: #fff;
     width: 100%;
-    z-index: 1000;
+    z-index: 9999;
 }
 
 .smallTop p{
@@ -145,7 +145,7 @@ body {
     font-family: "Cormorant", serif;
     position: fixed;
     top: 0.2dvh;
-    left: 1.5dvw;
+    left: 3dvw;
     color: #fff;
     line-height: 0;
     z-index: 10;
@@ -194,6 +194,7 @@ body {
 .video.is-playing iframe{
     opacity: 1;
     pointer-events: auto;
+    z-index: 1000;
 }
 
 .video-thumb{
@@ -291,6 +292,7 @@ body {
     font-weight: bold;
     letter-spacing: 4px;
     text-transform: uppercase;
+    z-index: 4;
 }
 
 #horizontalLinks {
@@ -350,14 +352,14 @@ body {
 
     .titel{
         font-size: 4rem;
-        top: 0.2dvh;
-        left: 3dvh;
+        top: 3dvh;
+        left: 7dvh;
     }
 
     .teaser{
         font-size: 1.75rem;
-        bottom: 1.2dvh;
-        right: 1.8dvw;
+        bottom: 3dvh;
+        right: 4.5dvw;
     }
 
     .video{

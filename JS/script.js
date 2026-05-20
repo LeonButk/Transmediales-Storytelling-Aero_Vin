@@ -72,6 +72,39 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		});
 
+		// register ScrollTrigger (safe to call even if already registered)
+		if (gsap && gsap.registerPlugin) gsap.registerPlugin(ScrollTrigger);
+
+		// Reset video in #abschnitt1 when leaving the section (so thumbnail returns)
+		(function setupResetOnLeave() {
+			const abs1 = document.getElementById('abschnitt1');
+			if (!abs1 || typeof ScrollTrigger === 'undefined') return;
+
+			function resetVideo() {
+				const videoBlock = abs1.querySelector('.video');
+				if (!videoBlock) return;
+				const iframe = videoBlock.querySelector('iframe');
+				const thumb = videoBlock.querySelector('.video-thumb');
+				// remove src to stop playback and free resources
+				if (iframe && iframe.getAttribute('src')) {
+					iframe.removeAttribute('src');
+				}
+				videoBlock.classList.remove('is-playing');
+				if (thumb) {
+					thumb.removeAttribute('aria-hidden');
+					thumb.removeAttribute('tabindex');
+				}
+			}
+
+			ScrollTrigger.create({
+				trigger: abs1,
+				start: 'top top',
+				end: 'bottom top',
+				onLeave: resetVideo,
+				onLeaveBack: resetVideo // also reset if leaving upwards (edge cases)
+			});
+		})();
+
 	var titelEl = document.getElementById('titel');
 	var teaserEl = document.getElementById('teaser');
 
@@ -201,30 +234,3 @@ createScrollDebugByVH(100);
 gsap.registerPlugin(ScrollTrigger);
 
 // Set sensible, less extreme start/end positions so image is fullframe before #abschnitt3
-gsap.set("#bild1 img", { xPercent: 30, yPercent: 30 });
-gsap.set(".video", { xPercent: 0, yPercent: 0 });
-
-const tlTransition = gsap.timeline({
-	scrollTrigger: {
-		trigger: "#abschnitt2",
-		start: "top 90%",   // start when top of abschnitt2 nears bottom of viewport
-		end: "top 10%",     // end when top of abschnitt2 near top of viewport
-		scrub: 0.45,
-		// markers: true
-	}
-});
-
-// video moves slightly up-left; image moves from lower-right into fullframe
-tlTransition.fromTo(
-	".video",
-	{ xPercent: 0, yPercent: 0 },
-	{ xPercent: -20, yPercent: -8, ease: "none" },
-	0
-);
-
-tlTransition.fromTo(
-	"#bild1 img",
-	{ xPercent: 30, yPercent: 30 },
-	{ xPercent: 0, yPercent: 0, ease: "none" },
-	0
-);

@@ -19,11 +19,16 @@ html {
 body {
     margin: 0;
     padding: 0;
-    background: green;
     font-size: 62.5%;
     max-width: 100dvw;
-    height: 100dvh;
+    min-height: 100dvh;
+    height: auto;
     overflow-x: hidden;
+    background-image: url('../ASSETS/IMAGES/hintergrund.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    background-attachment: scroll;
 }
 
 .frame{
@@ -126,13 +131,20 @@ body {
 }
 
 
-.abschnitt{
+.abschnitt,
+.abschnitt--intro,
+.abschnitt--horizontal,
+.abschnitt--image,
+.abschnitt--horizontal-reverse{
     position: relative;
     margin: 0;
     padding: 0;
-    height: 100dvh;
+    min-height: 100dvh;
+    height: auto;
     width: 100dvw;
-    display: block; /* stack vertically to avoid overlap issues */
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
 }
 
 .tester{
@@ -163,10 +175,58 @@ body {
     z-index: 10;
 }
 
+/* reusable subsection base class */
+.unterabschnitt,
+.text{
+    position: relative;
+    width: 100dvw;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.unterabschnitt--media{
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.unterabschnitt--text,
+.text{
+    font-family: "Inter", serif;
+    font-size: 1.5rem;
+    padding: 8dvh 10dvw;
+    text-align: left;
+    color: white;
+}
+
+.unterabschnitt--text p,
+.text p{
+    max-width: 65dvw;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.unterabschnitt--image{
+    align-items: stretch;
+    justify-content: stretch;
+    overflow: hidden;
+}
+
+.unterabschnitt--image img{
+    width: 100dvw;
+    height: 100dvh;
+    object-fit: cover;
+    display: block;
+}
+
 .video{
-    position: absolute;
+    position: relative;
     overflow: hidden;
     isolation: isolate;
+    width: 100%;
+    min-height: 100dvh;
+    z-index: 2;
 }
 
 .video, .bild{
@@ -281,7 +341,9 @@ body {
     font-family: "KuahAyman", sans-serif;
 }
 
-#horizontal .content, #horizontalLinks .content{
+.abschnitt__card--horizontal,
+#horizontal .content,
+#horizontalLinks .content{
     height: 100dvh;
     width: 100dvw;
     display: grid;
@@ -292,6 +354,7 @@ body {
     font-weight: bold;
     letter-spacing: 4px;
     text-transform: uppercase;
+    z-index: 4;
 }
 
 #horizontalLinks {

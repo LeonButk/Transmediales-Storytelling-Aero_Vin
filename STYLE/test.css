@@ -27,10 +27,20 @@ body {
     background-color: blanchedalmond;
 }
 
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100dvw;
+    height: 100dvh;
+    z-index: -1;
+}
+
 .background > img {
     width: 100%;
-    object-fit: contain;
+    object-fit: fill;
 }
+
 
 .frame{
     position: fixed;

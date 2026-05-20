@@ -234,17 +234,15 @@ span{
     background-color: rgb(197 56 130 / 0.8);
 }
 
-
-
 .unterabschnitt--image{
-    align-items: stretch;
-    justify-content: stretch;
+    align-items: center;
     overflow: hidden;
+    justify-content: center;
 }
 
 .unterabschnitt--image img{
-    width: 100dvw;
-    height: 100dvh;
+    width: 80dvw;
+    height: 80dvh;
     object-fit: cover;
     display: block;
 }
@@ -392,6 +390,12 @@ span{
 }
 
 .abschnitt__card--horizontal img{
+    width: 80dvw;
+    height: 80dvh;
+    object-fit: cover;
+}
+
+.abschnitt__card--horizontal .video img{
     width: 100dvw;
     height: 100dvh;
     object-fit: cover;

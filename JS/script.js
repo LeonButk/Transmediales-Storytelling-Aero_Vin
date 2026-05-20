@@ -2,19 +2,36 @@
 
 // Lenis removed for testing — use native browser scrolling and default ScrollTrigger behavior
 // If you want to re-enable Lenis later, add the script tag in index.html and restore the scrollerProxy + RAF logic.
-const contentsRechts = gsap.utils.toArray("#horizontal .content");
 const horizontalSpeedFactor = 1.8; // Größer = langsameres horizontales Scrollen
 
-gsap.to(contentsRechts, {
-	xPercent: -100 * (contentsRechts.length - 1),
-	ease: "none",
-	scrollTrigger: {
-		trigger: "#abschnitt3",
-		pin: true,
-		scrub: 0.5,
-		end: () => "+=" + (window.innerWidth * (contentsRechts.length - 1) * horizontalSpeedFactor)
-	}
-});
+// Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante
+function setupHorizontalSections() {
+	const sections = gsap.utils.toArray('.abschnitt--horizontal, .abschnitt--horizontal-reverse');
+
+	sections.forEach(section => {
+		const container = section.querySelector('.abschnitt__horizontal');
+		if (!container) return;
+
+		const contents = gsap.utils.toArray(container.querySelectorAll('.content'));
+		if (!contents.length) return;
+
+		const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
+		const xPercentValue = isReverse ? 100 * (contents.length - 1) : -100 * (contents.length - 1);
+
+		gsap.to(contents, {
+			xPercent: xPercentValue,
+			ease: 'none',
+			scrollTrigger: {
+				trigger: section,
+				pin: true,
+				scrub: 0.5,
+				end: () => "+=" + (window.innerWidth * (contents.length - 1) * horizontalSpeedFactor)
+			}
+		});
+	});
+}
+
+// Initial run will be done after ScrollTrigger registration in DOMContentLoaded
 
 /*
 snap: {
@@ -25,18 +42,7 @@ snap: {
 		end: "+=3500",
  */
 
-const contentsLinks = gsap.utils.toArray("#horizontalLinks .content");
 
-gsap.to(contentsLinks, {
-	xPercent: 100 * (contentsLinks.length - 1),
-	ease: "none",
-	scrollTrigger: {
-		trigger: "#abschnitt5",
-		pin: true,
-		scrub: 0.5,
-		end: () => "+=" + (window.innerWidth * (contentsLinks.length - 1) * horizontalSpeedFactor)
-	}
-});
 
 /*
 snap: {
@@ -74,6 +80,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		// register ScrollTrigger (safe to call even if already registered)
 		if (gsap && gsap.registerPlugin) gsap.registerPlugin(ScrollTrigger);
+
+		// Setup any horizontal sections now that ScrollTrigger is registered
+		if (typeof setupHorizontalSections === 'function') setupHorizontalSections();
 
 		// Reset video in #abschnitt1 when leaving the section (so thumbnail returns)
 		(function setupResetOnLeave() {

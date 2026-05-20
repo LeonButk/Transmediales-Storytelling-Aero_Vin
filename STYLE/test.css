@@ -204,12 +204,21 @@ body {
 }
 
 .unterabschnitt--text,
-.text{
+.text, .unterabschnitt--ueberleitung{
     font-family: "Inter", serif;
     font-size: 1.5rem;
     padding: 8dvh 10dvw;
     text-align: left;
     color: white;
+}
+
+.unterabschnitt--ueberleitung p{
+    max-width: 65dvw;
+    margin: 0;
+    line-height: 1.2;
+    background-color: rgb(197 56 130 / 1);
+    padding: 2vh;
+    transform: translate(-8rem, 0) rotate(-8deg);
 }
 
 .unterabschnitt--text p,
@@ -219,7 +228,6 @@ body {
     line-height: 1.2;
     background-color: rgb(197 56 130 / 1);
     padding: 2vh;
-    transform: translate(-8rem, 0) rotate(-8deg);
 }
 
 span{

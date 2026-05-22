@@ -29,7 +29,94 @@ function setupHorizontalSections() {
 			}
 		});
 	});
+
+	// Simple fade-in reveal for elements with .reveal-type
+	function setupRevealType() {
+		if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+		const revealEls = document.querySelectorAll('.reveal-type');
+		revealEls.forEach(el => {
+			gsap.from(el, {
+				autoAlpha: 0,
+				duration: 3,
+				ease: 'power2.out',
+				scrollTrigger: {
+					trigger: el,
+					start: 'top 50%',
+					end: 'center',
+					scrub: 0.5,
+					toggleActions: 'play play reverse reverse',
+					markers: false
+				}
+			});
+		});
+	}
+
+	if (document.readyState === 'loading') {
+		document.addEventListener('DOMContentLoaded', setupRevealType);
+	} else {
+		setupRevealType();
+	}
+
 }
+
+// Separate reveal animation for horizontal text blocks using a dedicated class
+function setupHorizontalTextReveal() {
+	if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+	const textEls = gsap.utils.toArray('.reveal-horizontal-text');
+
+	textEls.forEach(el => {
+		const section = el.closest('.abschnitt--horizontal, .abschnitt--horizontal-reverse');
+		if (!section) return;
+
+		const direction = section.getAttribute('data-animation-direction') || 'left';
+		const fromVars = direction === 'right'
+			? { x: 180 }
+			: direction === 'left'
+				? { x: -180 }
+				: { y: 0 };
+
+		gsap.from(el, {
+			autoAlpha: 0,
+			...fromVars,
+			duration: 1,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: section,
+				start: 'top 30%',
+				toggleActions: 'play play none none',
+				markers: false
+			}
+		});
+	});
+}
+
+// New: class-based reveal for vertical text paragraphs
+function setupVerticalClassReveal() {
+	if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+	const els = gsap.utils.toArray('.reveal-vertical-text');
+	els.forEach(el => {
+		const section = el.closest('.abschnitt');
+		if (!section) return;
+
+		gsap.from(el, {
+			y: 36,
+			autoAlpha: 0,
+			duration: 0.8,
+			ease: 'power2.out',
+			scrollTrigger: {
+				trigger: section,
+				start: 'top 80%',
+				toggleActions: 'play none none reset',
+				markers: false
+			}
+		});
+	});
+}
+
+
 
 // Initial run will be done after ScrollTrigger registration in DOMContentLoaded
 
@@ -83,6 +170,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
 		// Setup any horizontal sections now that ScrollTrigger is registered
 		if (typeof setupHorizontalSections === 'function') setupHorizontalSections();
+		if (typeof setupHorizontalTextReveal === 'function') setupHorizontalTextReveal();
+		if (typeof setupVerticalClassReveal === 'function') setupVerticalClassReveal();
 
 		// Reset video in #abschnitt1 when leaving the section (so thumbnail returns)
 		(function setupResetOnLeave() {
@@ -191,6 +280,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		}
 	});
 });
+
+
 
 
 function createScrollDebugByVH(stepVH = 100) {

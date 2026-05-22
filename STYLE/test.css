@@ -421,6 +421,12 @@ body {
     z-index: 1;
 }
 
+p .char {
+    display: inline !important;
+    white-space: normal;
+    word-break: break-word;
+}
+
 @media (max-width: 1492px){
 
     .smallBottom p{

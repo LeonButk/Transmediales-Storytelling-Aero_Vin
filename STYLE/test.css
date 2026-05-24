@@ -16,29 +16,31 @@ html {
     scrollbar-width: none;
 }
 
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-size: 62.5%;
-    max-width: 100dvw;
-    min-height: 100dvh;
+    min-height: 100vh;
     height: auto;
     overflow-x: hidden;
     background-color: blanchedalmond;
 }
 
-.background {
+.background{
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100dvw;
-    height: 100dvh;
+    inset: 0;
     z-index: -1;
-}
 
-.background > img {
-    width: 100%;
-    object-fit: fill;
+    background-image: url("../ASSETS/IMAGES/hintergrund.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 
@@ -49,32 +51,32 @@ body {
 }
 
 .frame:nth-of-type(1){
-    width: 89dvw;
-    height: 1.5dvh;
-    left: 3dvw;
-    top: 3dvh;
+    width: 89vw;
+    height: 1.5vh;
+    left: 3vw;
+    top: 3vh;
 }
 
 .frame:nth-of-type(2){
-    width: 1.5dvh;
-    height: 32dvh;
-    right: 3dvw;
-    bottom: 3dvh;
+    width: 1.5vh;
+    height: 32vh;
+    right: 3vw;
+    bottom: 3vh;
 
 }
 
 .frame:nth-of-type(3){
     width: 89vw;
-    height: 1.5dvh;
-    bottom: 3dvh;
-    right: 3dvw;
+    height: 1.5vh;
+    bottom: 3vh;
+    right: 3vw;
 }
 
 .frame:nth-of-type(4){
-    width: 1.5dvh;
-    height: 42dvh;
-    top: 3dvh;
-    left: 3dvw;
+    width: 1.5vh;
+    height: 42vh;
+    top: 3vh;
+    left: 3vw;
 }
 
 .bigLeft, .smallBottom{
@@ -91,7 +93,7 @@ body {
     font-size: 6.5rem;
     position: absolute;
     bottom: 0;
-    left: 4.35dvw;
+    left: 4.35vw;
     display: inline-block;
     transform: rotate(-90deg);
     transform-origin: bottom left;
@@ -105,8 +107,8 @@ body {
     margin: 0;
     font-weight: 500;
     position: absolute;
-    bottom: 0.3dvh;
-    left: 4dvw;
+    bottom: 0.3vh;
+    left: 4vw;
     transform: rotate(-180deg);
 }
 
@@ -125,16 +127,16 @@ body {
     margin: 0;
     font-weight: 500;
     position: absolute;
-    top: 0.3dvh;
-    right: 4.35dvw;
+    top: 0.3vh;
+    right: 4.35vw;
 }
 
 .bigRight h1{
     font-family: "Inter", serif;
     font-size: 5.5rem;
     position: absolute;
-    top: 47.8dvh;
-    right: -0.65dvw;
+    top: 47.8vh;
+    right: -0.65vw;
     display: inline-block;
     transform: rotate(90deg);
     transform-origin: top right;
@@ -150,9 +152,9 @@ body {
     position: relative;
     margin: 0;
     padding: 0;
-    min-height: 100dvh;
+    min-height: 100vh;
     height: auto;
-    width: 100dvw;
+    width: 100vw;
     display: flex;
     flex-direction: column;
     overflow: visible;
@@ -167,8 +169,8 @@ body {
     font-size: 5rem;
     font-family: "Cormorant", serif;
     position: fixed;
-    top: 0.2dvh;
-    left: 3dvw;
+    top: 0.2vh;
+    left: 3vw;
     color: #fff;
     line-height: 0;
     z-index: 10;
@@ -181,8 +183,8 @@ body {
     font-weight: 150;
     font-family: "Inter", serif;
     position: fixed;
-    bottom: 1.2dvh;
-    right: 1.8dvw;
+    bottom: 1.2vh;
+    right: 1.8vw;
     line-height: 0;
     z-index: 10;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
@@ -192,8 +194,8 @@ body {
 .unterabschnitt,
 .text{
     position: relative;
-    width: 100dvw;
-    min-height: 100dvh;
+    width: 100vw;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -209,13 +211,13 @@ body {
 .text, .unterabschnitt--ueberleitung{
     font-family: "Inter", serif;
     font-size: 1.5rem;
-    padding: 8dvh 10dvw;
+    padding: 8vh 10vw;
     text-align: left;
     color: white;
 }
 
 .unterabschnitt--ueberleitung p{
-    max-width: 65dvw;
+    max-width: 65vw;
     margin: 0;
     line-height: 1.2;
     transform: translate(-8rem, 0) rotate(-8deg);
@@ -223,7 +225,7 @@ body {
 
 .unterabschnitt--text p,
 .text p{
-    max-width: 65dvw;
+    max-width: 65vw;
     margin: 0;
     line-height: 1.2;
 }
@@ -235,8 +237,8 @@ body {
 }
 
 .unterabschnitt--image img{
-    width: 80dvw;
-    height: 80dvh;
+    width: 80vw;
+    height: 80vh;
     object-fit: cover;
     display: block;
 }
@@ -246,7 +248,7 @@ body {
     overflow: hidden;
     isolation: isolate;
     width: 100%;
-    min-height: 100dvh;
+    min-height: 100vh;
     z-index: 2;
 }
 
@@ -255,14 +257,14 @@ body {
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100dvh;
+    height: 100vh;
 }
 
 .video iframe{
     position: absolute;
     inset: 0;
-    width: 100dvw;
-    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     aspect-ratio: 16 / 9;
     border: 0;
@@ -347,8 +349,8 @@ body {
 }
 
 .bild img{
-    width: 100dvw;
-    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     aspect-ratio: 16 / 9;
     border: 0;
@@ -365,8 +367,8 @@ body {
 .abschnitt__card--horizontal,
 #horizontal .content,
 #horizontalLinks .content{
-    height: 100dvh;
-    width: 100dvw;
+    height: 100vh;
+    width: 100vw;
     display: grid;
     place-items: center;
     flex-shrink: 0;
@@ -376,20 +378,20 @@ body {
 }
 
 .abschnitt__card--horizontal p{
-    max-width: 65dvw;
+    max-width: 65vw;
     margin: 0;
     line-height: 1.2;
 }
 
 .abschnitt__card--horizontal img{
-    width: 80dvw;
-    height: 80dvh;
+    width: 80vw;
+    height: 80vh;
     object-fit: cover;
 }
 
 .abschnitt__card--horizontal .video img{
-    width: 100dvw;
-    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
 }
 
@@ -403,8 +405,8 @@ body {
 
 #bild1 img{
     transform: none; /* GSAP setzt Startpositionen */
-    width: 100dvw;
-    height: 100dvh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     display: block;
 }
@@ -431,39 +433,39 @@ p .char {
 
     .smallBottom p{
         font-size: 2rem;
-        bottom: 3.5dvh;
-        left: 12dvh;
+        bottom: 3.5vh;
+        left: 12vh;
     }
 
     .bigLeft h1{
         font-size: 6.5rem;
-        bottom: 2.5dvh;
-        left: 12dvh;
+        bottom: 2.5vh;
+        left: 12vh;
     }
 
     .smallTop p{
         font-size: 2rem;
-        top: 3.3dvh;
-        right: 12dvh;
+        top: 3.3vh;
+        right: 12vh;
     }
 
     .bigRight h1{
         font-size: 5.5rem;
-        top: 56dvh;
-        right: 1.6dvh;
+        top: 56vh;
+        right: 1.6vh;
         display: inline-block;
     }
 
     .titel{
         font-size: 4rem;
-        top: 3dvh;
-        left: 7dvh;
+        top: 3vh;
+        left: 7vh;
     }
 
     .teaser{
         font-size: 1.75rem;
-        bottom: 3dvh;
-        right: 4.5dvw;
+        bottom: 3vh;
+        right: 4.5vw;
     }
 
     .video{
@@ -471,8 +473,8 @@ p .char {
     }
 
     .video iframe, .bild img{
-        width: 100dvw;
-        height: 100dvh;
+        width: 100vw;
+        height: 100vh;
         object-fit: cover;
     }
 

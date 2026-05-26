@@ -30,6 +30,11 @@ body {
     height: auto;
     overflow-x: hidden;
     background-color: blanchedalmond;
+    background-image: url('../ASSETS/IMAGES/test.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
 }
 
 .background{
@@ -220,7 +225,6 @@ body {
     max-width: 65vw;
     margin: 0;
     line-height: 1.2;
-    transform: translate(-8rem, 0) rotate(-8deg);
 }
 
 .unterabschnitt--text p,

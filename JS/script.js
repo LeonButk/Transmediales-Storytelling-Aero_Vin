@@ -1,7 +1,7 @@
 // GSAP horizontal scroll for section #abschnitt3
 
 // Lenis removed for testing — use native browser scrolling and default ScrollTrigger behavior
-// If you want to re-enable Lenis later, add the script tag in index.html and restore the scrollerProxy + RAF logic.
+// If you want to re-enable Lenis later, add the script tag in test.html and restore the scrollerProxy + RAF logic.
 const horizontalSpeedFactor = 1.8; // Größer = langsameres horizontales Scrollen
 
 // Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante

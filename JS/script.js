@@ -160,6 +160,40 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
+    const menu = document.querySelector('.menu');
+    const menuToggle = document.querySelector('.menu__toggle');
+    const menuLinks = document.querySelectorAll('.menu__nav a');
+
+    if (menu && menuToggle) {
+        const closeMenu = () => {
+            menu.classList.remove('is-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        };
+
+        menuToggle.addEventListener('click', () => {
+            const isOpen = menu.classList.toggle('is-open');
+            menuToggle.setAttribute('aria-expanded', String(isOpen));
+        });
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const targetId = link.getAttribute('href');
+                const target = targetId ? document.querySelector(targetId) : null;
+
+                closeMenu();
+
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!menu.contains(event.target)) closeMenu();
+        });
+    }
+
     // --- Video thumbnail behaviour: load iframe only on click ---
     const videoThumbButtons = document.querySelectorAll('.video-thumb');
     videoThumbButtons.forEach(btn => {

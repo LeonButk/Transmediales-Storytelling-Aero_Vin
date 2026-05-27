@@ -55,6 +55,93 @@ body::before {
     to { opacity: 0; }
 }
 
+.menu{
+    position: fixed;
+    top: 6vh;
+    right: 4.75vw;
+    z-index: 20000;
+}
+
+.menu__toggle{
+    width: 4rem;
+    height: 4rem;
+    border: 0;
+    border-radius: 50%;
+    background: rgb(255 255 255 / 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.36rem;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: 0 0.4rem 1rem rgba(0,0,0,0.18);
+}
+
+.menu__toggle span{
+    display: block;
+    width: 1.5rem;
+    height: 0.18rem;
+    background: #000000;
+    border-radius: 999px;
+    transform-origin: center;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+    will-change: transform, opacity;
+}
+
+.menu__nav{
+    position: absolute;
+    top: calc(100% + 0.9rem);
+    right: 0;
+    min-width: 13rem;
+    padding: 0.9rem;
+    border-radius: 1rem;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(12px);
+    display: grid;
+    gap: 0.45rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-0.5rem) scale(0.98);
+    transform-origin: top right;
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+}
+
+.menu.is-open .menu__nav{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+}
+
+.menu__nav a{
+    color: #fff;
+    text-decoration: none;
+    font-family: "Inter", serif;
+    font-size: 1rem;
+    padding: 0.45rem 0.6rem;
+    border-radius: 0.6rem;
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.menu__nav a:hover,
+.menu__nav a:focus-visible{
+    background: rgba(255,255,255,0.12);
+    transform: translateX(0.15rem);
+    outline: none;
+}
+
+.menu.is-open .menu__toggle span:nth-child(1){
+    transform: translateY(0.5rem) rotate(45deg);
+}
+
+.menu.is-open .menu__toggle span:nth-child(2){
+    opacity: 0;
+}
+
+.menu.is-open .menu__toggle span:nth-child(3){
+    transform: translateY(-0.5rem) rotate(-45deg);
+}
+
 .frame{
     position: fixed;
     background-color: white;
@@ -70,7 +157,7 @@ body::before {
 
 .frame:nth-of-type(2){
     width: 1.5vh;
-    height: 32vh;
+    height: 23vh;
     right: 4.5vw;
     bottom: 6vh;
 }
@@ -124,7 +211,7 @@ body::before {
     font-family: "Inter", serif;
     font-size: 5.5rem;
     position: absolute;
-    top: 54vh;
+    top: 62.5vh;
     right: 4vw;
     display: inline-block;
     transform: rotate(90deg);
@@ -371,7 +458,7 @@ body::before {
     position: relative;
 }
 
-#horizontal {
+.abschnitt__horizontal {
     display: flex;
     overflow-x: hidden;
     color: white;
@@ -379,8 +466,8 @@ body::before {
 }
 
 .abschnitt__card--horizontal,
-#horizontal .content,
-#horizontalLinks .content{
+.abschnitt__horizontal .content,
+.abschnitt__horizontal--reverse .content{
     height: 100vh;
     width: 100vw;
     display: grid;
@@ -409,7 +496,7 @@ body::before {
     object-fit: cover;
 }
 
-#horizontalLinks {
+.abschnitt__horizontal--reverse {
     display: flex;
     overflow-x: hidden;
     color: white;

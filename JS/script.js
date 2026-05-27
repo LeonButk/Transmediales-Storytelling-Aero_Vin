@@ -116,7 +116,53 @@ function setupVerticalClassReveal() {
 	});
 }
 
+// New: Setup frame build animation and text fade-in
+function setupFrameAndTextBuildAnimation() {
+	if (typeof gsap === 'undefined') return;
 
+	const frames = gsap.utils.toArray('.frame');
+	const bigLeft = document.querySelector('.bigLeft');
+	const bigRight = document.querySelector('.bigRight');
+
+	if (frames.length < 4 || !bigLeft || !bigRight) return;
+
+	const tl = gsap.timeline();
+
+	// Frame 1 (top horizontal) - grow width
+	tl.from(frames[0], {
+		width: 0,
+		duration: 2,
+		ease: 'power2.out'
+	}, 0);
+
+	// Frame 2 (right vertical) - grow height
+	tl.from(frames[1], {
+		height: 0,
+		duration: 2,
+		ease: 'power2.out'
+	}, 0);
+
+	// Frame 3 (bottom horizontal) - grow width
+	tl.from(frames[2], {
+		width: 0,
+		duration: 2,
+		ease: 'power2.out'
+	}, 0);
+
+	// Frame 4 (left vertical) - grow height
+	tl.from(frames[3], {
+		height: 0,
+		duration: 2,
+		ease: 'power2.out'
+	}, 0);
+
+	// After frames finish, fade in bigLeft and bigRight
+	tl.from([bigLeft, bigRight], {
+		autoAlpha: 0,
+		duration: 1,
+		ease: 'power2.out'
+	}, 1.5);
+}
 
 // Initial run will be done after ScrollTrigger registration in DOMContentLoaded
 
@@ -168,7 +214,8 @@ document.addEventListener('DOMContentLoaded', function() {
 		// register ScrollTrigger (safe to call even if already registered)
 		if (gsap && gsap.registerPlugin) gsap.registerPlugin(ScrollTrigger);
 
-		// Setup any horizontal sections now that ScrollTrigger is registered
+		// Setup animations
+		if (typeof setupFrameAndTextBuildAnimation === 'function') setupFrameAndTextBuildAnimation();
 		if (typeof setupHorizontalSections === 'function') setupHorizontalSections();
 		if (typeof setupHorizontalTextReveal === 'function') setupHorizontalTextReveal();
 		if (typeof setupVerticalClassReveal === 'function') setupVerticalClassReveal();

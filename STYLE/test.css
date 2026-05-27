@@ -46,7 +46,7 @@ body::before {
     background: #000;
     z-index: 30000;
     pointer-events: none;
-    animation: site-intro-fade 1.2s ease-out forwards;
+    animation: site-intro-fade 2s ease-out forwards;
 }
 
 @keyframes site-intro-fade {

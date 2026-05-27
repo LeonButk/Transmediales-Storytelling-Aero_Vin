@@ -36,18 +36,6 @@ body {
     background-position: center;
 }
 
-.background{
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-
-    background-image: url("../ASSETS/IMAGES/hintergrund.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-
 .frame{
     position: fixed;
     background-color: white;
@@ -125,6 +113,36 @@ body {
     line-height: 1;
 }
 
+.scrollInfo{
+    position:absolute;
+    bottom: 11.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inter", serif;
+    color: white;
+    font-size: 1.5rem;
+    animation: arrow-bounce 1.6s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+.arrow-svg{
+    position: absolute;
+    bottom: 10vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: arrow-bounce 1.6s ease-in-out infinite;
+    opacity: 0.8;
+}
+
+@keyframes arrow-bounce{
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(6px); }
+    100% { transform: translateY(0); }
+}
 
 .abschnitt,
 .abschnitt--intro,

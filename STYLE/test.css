@@ -1,0 +1,445 @@
+@font-face {
+    font-family: "Cormorant";
+    src: url('../ASSETS/FONTS/Cormorant-Font.ttf');
+}
+
+@font-face {
+    font-family: "Inter";
+    src: url('../ASSETS/FONTS/Inter.ttf');
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scrollbar-width: none;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: clip;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 62.5%;
+    min-height: 100vh;
+    height: auto;
+    overflow-x: hidden;
+    background-color: #c69b5f;
+    background-image: url('../ASSETS/IMAGES/grain.png');
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.background{
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+
+    background-image: url("../ASSETS/IMAGES/hintergrund.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+
+.frame{
+    position: fixed;
+    background-color: white;
+    z-index: 10000;
+}
+
+.frame:nth-of-type(1){
+    width: 86.5vw;
+    height: 1.5vh;
+    left: 4.5vw;
+    top: 6vh;
+}
+
+.frame:nth-of-type(2){
+    width: 1.5vh;
+    height: 32vh;
+    right: 4.5vw;
+    bottom: 6vh;
+}
+
+.frame:nth-of-type(3){
+    width: 86vw;
+    height: 1.5vh;
+    bottom: 6vh;
+    right: 4.5vw;
+}
+
+.frame:nth-of-type(4){
+    width: 1.5vh;
+    height: 41vh;
+    top: 6vh;
+    left: 4.5vw;
+}
+
+.aeroVin{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    color: #fff;
+    width: 100%;
+    z-index: 1000;
+}
+
+.aeroVin h1{
+    font-family: "Cormorant", serif;
+    font-size: 6.5rem;
+    position: absolute;
+    bottom: 6vh;
+    left: 9vw;
+    display: inline-block;
+    transform: rotate(-90deg);
+    transform-origin: bottom left;
+    line-height: 1;
+    margin: 0;
+}
+
+.momentum{
+    position: fixed;
+    top: 0;
+    right: 0;
+    color: #fff;
+    width: 100%;
+    z-index: 9999;
+}
+
+.momentum h1{
+    font-family: "Inter", serif;
+    font-size: 5.5rem;
+    position: absolute;
+    top: 54vh;
+    right: 4vw;
+    display: inline-block;
+    transform: rotate(90deg);
+    transform-origin: top right;
+    line-height: 1;
+}
+
+
+.abschnitt,
+.abschnitt--intro,
+.abschnitt--horizontal,
+.abschnitt--image,
+.abschnitt--horizontal-reverse{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    height: auto;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+}
+
+.tester{
+    display: block;
+}
+
+.titel{
+    font-size: 5rem;
+    font-family: "Cormorant", serif;
+    position: absolute;
+    top: 10vh;
+    left: 8vw;
+    color: #fff;
+    z-index: 10;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
+    max-width: 32vw;
+    line-height: 80%;
+}
+
+.teaser{
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 150;
+    font-family: "Inter", serif;
+    position: absolute;
+    top: 30vh;
+    left: 8vw;
+    line-height: 0;
+    z-index: 10;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* reusable subsection base class */
+.unterabschnitt,
+.text{
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.unterabschnitt--media{
+    align-items: stretch;
+    justify-content: stretch;
+}
+
+.unterabschnitt--text,
+.text, .unterabschnitt--ueberleitung{
+    font-family: "Inter", serif;
+    font-size: 1.5rem;
+    padding: 8vh 10vw;
+    text-align: left;
+    color: white;
+}
+
+.unterabschnitt--ueberleitung p{
+    max-width: 65vw;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.unterabschnitt--text p,
+.text p{
+    max-width: 40vw;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.unterabschnitt--image{
+    align-items: center;
+    overflow: hidden;
+    justify-content: center;
+}
+
+.unterabschnitt--image img{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    display: block;
+}
+
+.video{
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 2;
+}
+
+.video, .bild{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.video iframe{
+    position: absolute;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    display: block;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+
+.video.is-playing iframe{
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1000;
+}
+
+.video-thumb{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+    z-index: 2;
+    opacity: 1;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.video-thumb img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.video-thumb::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.18), rgba(0,0,0,0.26));
+}
+
+.video-thumb-play{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 7rem;
+    height: 7rem;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: rgba(255,255,255,0.18);
+    border: 0.2rem solid rgba(255,255,255,0.92);
+    backdrop-filter: blur(6px);
+    z-index: 3;
+}
+
+.video-thumb-play::before{
+    content: "";
+    position: absolute;
+    left: 2.65rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 1.35rem solid transparent;
+    border-bottom: 1.35rem solid transparent;
+    border-left: 2.2rem solid #fff;
+}
+
+.video.is-playing .video-thumb{
+    opacity: 0;
+    pointer-events: none;
+    transform: scale(1.02);
+}
+
+/* When playing, bring the video above the decorative frames */
+.video.is-playing{
+    z-index: 10001;
+    position: relative;
+}
+
+#horizontal {
+    display: flex;
+    overflow-x: hidden;
+    color: white;
+    font-family: "KuahAyman", sans-serif;
+}
+
+.abschnitt__card--horizontal,
+#horizontal .content,
+#horizontalLinks .content{
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    font-size: 1.5rem;
+    z-index: 4;
+    font-family: "Inter", serif;
+}
+
+.abschnitt__card--horizontal p{
+    max-width: 40vw;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.abschnitt__card--horizontal img{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.abschnitt__card--horizontal .video img{
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+#horizontalLinks {
+    display: flex;
+    overflow-x: hidden;
+    color: white;
+    font-family: "KuahAyman", sans-serif;
+    flex-direction: row-reverse;
+}
+
+/* ensure abschnitt2 sits above the horizontal section */
+#abschnitt2{
+    position: relative;
+    z-index: 5;
+    overflow: visible;
+}
+
+#abschnitt3{
+    position: relative;
+    z-index: 1;
+}
+
+p .char {
+    display: inline !important;
+    white-space: normal;
+    word-break: break-word;
+}
+
+@media (max-width: 1492px){
+
+    .smallBottom p{
+        font-size: 2rem;
+        bottom: 3.5vh;
+        left: 12vh;
+    }
+
+    .aeroVin h1{
+        font-size: 6.5rem;
+        bottom: 2.5vh;
+        left: 12vh;
+    }
+
+    .smallTop p{
+        font-size: 2rem;
+        top: 3.3vh;
+        right: 12vh;
+    }
+
+    .momentum h1{
+        font-size: 5.5rem;
+        top: 56vh;
+        right: 1.6vh;
+        display: inline-block;
+    }
+
+    .titel{
+        font-size: 4rem;
+        top: 3vh;
+        left: 7vh;
+    }
+
+    .teaser{
+        font-size: 1.75rem;
+        bottom: 3vh;
+        right: 4.5vw;
+    }
+
+    .video{
+        position: absolute;
+    }
+
+    .video iframe{
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+    }
+
+}

@@ -83,7 +83,7 @@ body {
     left: 3vw;
 }
 
-.bigLeft, .smallBottom{
+.aeroVin{
     position: fixed;
     bottom: 0;
     left: 0;
@@ -92,7 +92,7 @@ body {
     z-index: 1000;
 }
 
-.bigLeft h1{
+.aeroVin h1{
     font-family: "Cormorant", serif;
     font-size: 6.5rem;
     position: absolute;
@@ -105,18 +105,7 @@ body {
     margin: 0;
 }
 
-.smallBottom p{
-    font-family: "Inter", serif;
-    font-size: 2.5rem;
-    margin: 0;
-    font-weight: 500;
-    position: absolute;
-    bottom: 0.3vh;
-    left: 4vw;
-    transform: rotate(-180deg);
-}
-
-.bigRight, .smallTop{
+.momentum{
     position: fixed;
     top: 0;
     right: 0;
@@ -125,17 +114,7 @@ body {
     z-index: 9999;
 }
 
-.smallTop p{
-    font-family: "Inter", serif;
-    font-size: 2.5rem;
-    margin: 0;
-    font-weight: 500;
-    position: absolute;
-    top: 0.3vh;
-    right: 4.35vw;
-}
-
-.bigRight h1{
+.momentum h1{
     font-family: "Inter", serif;
     font-size: 5.5rem;
     position: absolute;
@@ -169,16 +148,16 @@ body {
 }
 
 .titel{
-    display: inline-block;
     font-size: 5rem;
     font-family: "Cormorant", serif;
-    position: fixed;
-    top: 3vh;
-    left: 4.5vw;
+    position: absolute;
+    top: 10vh;
+    left: 8vw;
     color: #fff;
-    line-height: 0;
     z-index: 10;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
+    max-width: 32vw;
+    line-height: 80%;
 }
 
 .teaser{
@@ -186,9 +165,9 @@ body {
     font-size: 2rem;
     font-weight: 150;
     font-family: "Inter", serif;
-    position: fixed;
-    bottom: 3vh;
-    right: 4.5vw;
+    position: absolute;
+    top: 30vh;
+    left: 8vw;
     line-height: 0;
     z-index: 10;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
@@ -240,8 +219,8 @@ body {
 }
 
 .unterabschnitt--image img{
-    width: 80vw;
-    height: 80vh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
     display: block;
 }
@@ -351,15 +330,6 @@ body {
     position: relative;
 }
 
-.bild img{
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    aspect-ratio: 16 / 9;
-    border: 0;
-    display: block;
-}
-
 #horizontal {
     display: flex;
     overflow-x: hidden;
@@ -387,8 +357,8 @@ body {
 }
 
 .abschnitt__card--horizontal img{
-    width: 80vw;
-    height: 80vh;
+    width: 100vw;
+    height: 100vh;
     object-fit: cover;
 }
 
@@ -404,14 +374,6 @@ body {
     color: white;
     font-family: "KuahAyman", sans-serif;
     flex-direction: row-reverse;
-}
-
-#bild1 img{
-    transform: none; /* GSAP setzt Startpositionen */
-    width: 100vw;
-    height: 100vh;
-    object-fit: cover;
-    display: block;
 }
 
 /* ensure abschnitt2 sits above the horizontal section */
@@ -440,7 +402,7 @@ p .char {
         left: 12vh;
     }
 
-    .bigLeft h1{
+    .aeroVin h1{
         font-size: 6.5rem;
         bottom: 2.5vh;
         left: 12vh;
@@ -452,7 +414,7 @@ p .char {
         right: 12vh;
     }
 
-    .bigRight h1{
+    .momentum h1{
         font-size: 5.5rem;
         top: 56vh;
         right: 1.6vh;
@@ -475,7 +437,7 @@ p .char {
         position: absolute;
     }
 
-    .video iframe, .bild img{
+    .video iframe{
         width: 100vw;
         height: 100vh;
         object-fit: cover;

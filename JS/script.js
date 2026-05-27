@@ -60,38 +60,6 @@ function setupHorizontalSections() {
 
 }
 
-// Separate reveal animation for horizontal text blocks using a dedicated class
-function setupHorizontalTextReveal() {
-	if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-	const textEls = gsap.utils.toArray('.reveal-horizontal-text');
-
-	textEls.forEach(el => {
-		const section = el.closest('.abschnitt--horizontal, .abschnitt--horizontal-reverse');
-		if (!section) return;
-
-		const direction = section.getAttribute('data-animation-direction') || 'left';
-		const fromVars = direction === 'right'
-			? { x: 180 }
-			: direction === 'left'
-				? { x: -180 }
-				: { y: 0 };
-
-		gsap.from(el, {
-			autoAlpha: 0,
-			...fromVars,
-			duration: 1,
-			ease: 'power2.out',
-			scrollTrigger: {
-				trigger: section,
-				start: 'top 30%',
-				toggleActions: 'play play none none',
-				markers: false
-			}
-		});
-	});
-}
-
 // New: class-based reveal for vertical text paragraphs
 function setupVerticalClassReveal() {
 	if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -121,8 +89,8 @@ function setupFrameAndTextBuildAnimation() {
 	if (typeof gsap === 'undefined') return;
 
 	const frames = gsap.utils.toArray('.frame');
-	const bigLeft = document.querySelector('.bigLeft');
-	const bigRight = document.querySelector('.bigRight');
+	const bigLeft = document.querySelector('.aeroVin');
+	const bigRight = document.querySelector('.momentum');
 
 	if (frames.length < 4 || !bigLeft || !bigRight) return;
 
@@ -250,82 +218,7 @@ document.addEventListener('DOMContentLoaded', function() {
 			});
 		})();
 
-	var titelEl = document.getElementById('titel');
-	var teaserEl = document.getElementById('teaser');
 
-	if (!titelEl || !teaserEl) {
-		console.warn('Titel oder Teaser Element nicht gefunden');
-		return;
-	}
-
-	// Set initial state - invisible
-	gsap.set([titelEl, teaserEl], {autoAlpha: 0, y: -40});
-
-	// Helper function to animate text change with direction
-	// Direction kann sein: "top" (von oben), "left" (von links), "right" (von rechts)
-	function animateTextChange(newTitel, newTeaser, direction) {
-		direction = direction || "top"; // Standard ist "top" wenn nichts angegeben
-
-		// Position für die Eingangsanimation basierend auf Richtung
-		var outPosition = {};
-		var inPosition = {};
-
-		if (direction === "top") {
-			outPosition = { y: -20 };
-			inPosition = { y: 0 };
-		} else if (direction === "left") {
-			outPosition = { x: -50 };
-			inPosition = { x: 0 };
-		} else if (direction === "right") {
-			outPosition = { x: 50 };
-			inPosition = { x: 0 };
-		}
-
-		// Fade out current content, update and fade in via timeline
-		gsap.timeline()
-			.to([titelEl, teaserEl], {
-				duration: 0.5,
-				autoAlpha: 0,
-				...outPosition,
-				ease: 'power2.in'
-			})
-			.call(function() {
-				if (newTitel) titelEl.innerHTML = newTitel;
-				if (newTeaser) teaserEl.innerHTML = newTeaser;
-			})
-			.to([titelEl, teaserEl], {
-				duration: 1,
-				autoAlpha: 1,
-				...inPosition,
-				ease: 'power2.out'
-			});
-	}
-
-	// Create ScrollTrigger animations for each section
-	const abschnitte = document.querySelectorAll('.abschnitt');
-
-	abschnitte.forEach(function(section) {
-
-		ScrollTrigger.create({
-			trigger: section,
-
-			start: "top 60%",
-			end: "bottom 40%",
-
-			onEnter: updateText,
-			onEnterBack: updateText
-		});
-
-		function updateText() {
-
-			const newTitel = section.getAttribute('data-titel');
-			const newTeaser = section.getAttribute('data-teaser');
-			const direction =
-				section.getAttribute('data-animation-direction') || "top";
-
-			animateTextChange(newTitel, newTeaser, direction);
-		}
-	});
 });
 
 

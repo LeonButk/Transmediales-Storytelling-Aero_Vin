@@ -288,7 +288,7 @@ body::before {
     line-height: 80%;
 }
 
-.teaser{
+.teaser, .teaser-vertikal{
     color: #fff;
     font-size: 2rem;
     font-weight: 400;
@@ -296,7 +296,6 @@ body::before {
     position: absolute;
     top: 30vh;
     left: 8vw;
-    line-height: 0;
     z-index: 10;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
 }
@@ -522,6 +521,10 @@ p .char {
     word-break: break-word;
 }
 
+.aeroVinText{
+    font-family: "Cormorant", serif
+}
+
 @media (max-width: 1492px){
 
     .aeroVin h1{
@@ -546,6 +549,13 @@ p .char {
     .teaser{
         font-size: 1.75rem;
         top: 35vh;
+        left: 10vw;
+        width: 30vw;
+    }
+
+    .teaser-vertikal{
+        font-size: 1.75rem;
+        top: 32vh;
         left: 10vw;
         width: 30vw;
     }
@@ -580,14 +590,35 @@ p .char {
 
     .unterabschnitt--text,
     .text, .unterabschnitt--ueberleitung{
-        font-size: 1.5rem;
+        font-size: 1.9rem;
         padding: 0;
     }
 
     .unterabschnitt--text p,
     .text p{
-        max-width: 50vw;
+        max-width: 60vw;
         line-height: 1.2;
+    }
+
+    .bigLabel{
+        font-size: 2rem;
+        font-weight: 550;
+    }
+
+    .aeroVinText{
+        font-size: 1.9rem;
+        font-weight: 600;
+    }
+
+    .abschnitt__card--horizontal,
+    .abschnitt__horizontal .content,
+    .abschnitt__horizontal--reverse .content{
+        font-size: 1.9rem;
+    }
+
+    .abschnitt__card--horizontal p{
+        max-width: 60vw;
+        line-height: 1.1;
     }
 
 }

@@ -524,41 +524,30 @@ p .char {
 
 @media (max-width: 1492px){
 
-    .smallBottom p{
-        font-size: 2rem;
-        bottom: 3.5vh;
-        left: 12vh;
-    }
-
     .aeroVin h1{
-        font-size: 6.5rem;
-        bottom: 2.5vh;
-        left: 12vh;
-    }
-
-    .smallTop p{
-        font-size: 2rem;
-        top: 3.3vh;
-        right: 12vh;
+        font-size: 6rem;
+        bottom: 6vh;
+        left: 16.5vh;
     }
 
     .momentum h1{
-        font-size: 5.5rem;
-        top: 56vh;
-        right: 1.6vh;
+        font-size: 5rem;
+        top: 61vh;
+        right: 6.5vh;
         display: inline-block;
     }
 
     .titel{
         font-size: 4rem;
-        top: 3vh;
-        left: 7vh;
+        top: 18vh;
+        left: 16vh;
     }
 
     .teaser{
         font-size: 1.75rem;
-        bottom: 3vh;
-        right: 4.5vw;
+        top: 35vh;
+        left: 10vw;
+        width: 30vw;
     }
 
     .video{
@@ -569,6 +558,36 @@ p .char {
         width: 100vw;
         height: 100vh;
         object-fit: cover;
+    }
+
+    .menu{
+        top: 6.75vh;
+        right: 4.75vw;
+    }
+
+    .menu__toggle{
+        width: 3.5rem;
+        height: 3.5rem;
+    }
+
+    .frame:nth-of-type(2){
+        height: 25vh;
+    }
+
+    .frame:nth-of-type(3){
+        width: 84vw;
+    }
+
+    .unterabschnitt--text,
+    .text, .unterabschnitt--ueberleitung{
+        font-size: 1.5rem;
+        padding: 0;
+    }
+
+    .unterabschnitt--text p,
+    .text p{
+        max-width: 50vw;
+        line-height: 1.2;
     }
 
 }

@@ -610,10 +610,8 @@ p .char {
         width: 84vw;
     }
 
-    .unterabschnitt--text,
-    .text, .unterabschnitt--ueberleitung{
+    .unterabschnitt--ueberleitung{
         font-size: 3rem;
-        padding: 0;
     }
 
     .unterabschnitt--ueberleitung p{
@@ -633,14 +631,16 @@ p .char {
     }
 
     .aeroVinText{
-        font-size: 1.9rem;
+        font-size: 2.5rem;
         font-weight: 600;
     }
 
     .abschnitt__card--horizontal,
     .abschnitt__horizontal .content,
-    .abschnitt__horizontal--reverse .content{
+    .abschnitt__horizontal--reverse .content,
+    .text, .unterabschnitt--text{
         font-size: 1.9rem;
+        padding: 0;
     }
 
     .abschnitt__card--horizontal p{

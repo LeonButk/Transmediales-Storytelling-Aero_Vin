@@ -558,7 +558,7 @@ p .char {
 
     .momentum h1{
         font-size: 5rem;
-        top: 61vh;
+        top: 63vh;
         right: 6.5vh;
         display: inline-block;
     }
@@ -603,15 +603,20 @@ p .char {
     }
 
     .frame:nth-of-type(2){
-        height: 25vh;
+        height: 23vh;
     }
 
     .frame:nth-of-type(3){
-        width: 84vw;
+        width: 85vw;
+    }
+
+    .frame:nth-of-type(4){
+        height: 39vh;
     }
 
     .unterabschnitt--ueberleitung{
         font-size: 3rem;
+        font-weight: 500;
     }
 
     .unterabschnitt--ueberleitung p{
@@ -622,7 +627,7 @@ p .char {
     .unterabschnitt--text p,
     .text p{
         max-width: 60vw;
-        line-height: 1.2;
+        line-height: 1.1;
     }
 
     .bigLabel{
@@ -639,7 +644,7 @@ p .char {
     .abschnitt__horizontal .content,
     .abschnitt__horizontal--reverse .content,
     .text, .unterabschnitt--text{
-        font-size: 1.9rem;
+        font-size: 2.2rem;
         padding: 0;
     }
 

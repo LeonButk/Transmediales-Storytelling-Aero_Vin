@@ -1,7 +1,3 @@
-// GSAP horizontal scroll for section #abschnitt3
-
-// Lenis removed for testing — use native browser scrolling and default ScrollTrigger behavior
-// If you want to re-enable Lenis later, add the script tag in test.html and restore the scrollerProxy + RAF logic.
 const horizontalSpeedFactor = 1.8; // Größer = langsameres horizontales Scrollen
 
 // Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante
@@ -132,28 +128,6 @@ function setupFrameAndTextBuildAnimation() {
     }, 1.5);
 }
 
-// Initial run will be done after ScrollTrigger registration in DOMContentLoaded
-
-/*
-snap: {
-			snapTo:	1 / (contentsRechts.length - 1),
-			duration: 0.5,
-			ease: "power1.in",
-		},
-		end: "+=3500",
- */
-
-
-
-/*
-snap: {
-			snapTo:	1 / (contentsLinks.length - 1),
-			duration: 0.5,
-			ease: "power1.in",
-		},
-		end: "+=3500",
- */
-
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof gsap === 'undefined') {
         console.warn('GSAP nicht geladen — Animationen werden nicht ausgeführt.');
@@ -219,8 +193,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Setup animations
     if (typeof setupFrameAndTextBuildAnimation === 'function') setupFrameAndTextBuildAnimation();
     if (typeof setupHorizontalSections === 'function') setupHorizontalSections();
-    if (typeof setupHorizontalTextReveal === 'function') setupHorizontalTextReveal();
     if (typeof setupVerticalClassReveal === 'function') setupVerticalClassReveal();
+
 
     // Reset video in #abschnitt1 when leaving the section (so thumbnail returns)
     (function setupResetOnLeave() {
@@ -254,58 +228,3 @@ document.addEventListener('DOMContentLoaded', function() {
 
 
 });
-
-
-
-
-function createScrollDebugByVH(stepVH = 100) {
-
-    // gespeicherter letzter Scrollwert
-    let lastScrollY = window.scrollY;
-
-    // aktuelle "Stufe" (0 = Start)
-    let currentStep = 0;
-
-    // 100dvh in Pixeln
-    const getStepSize = () => {
-        return window.innerHeight * (stepVH / 100);
-    };
-
-    window.addEventListener("scroll", () => {
-
-        const scrollY = window.scrollY;
-        const stepSize = getStepSize();
-
-        // Differenz seit letztem Event
-        const delta = scrollY - lastScrollY;
-
-        // wenn nichts passiert → skip
-        if (delta === 0) return;
-
-        // neue absolute Step-Position berechnen
-        const newStep = Math.round(scrollY / stepSize);
-
-        // nur reagieren wenn sich Step wirklich ändert
-        if (newStep !== currentStep) {
-
-            // Richtung erkennen
-            const direction = newStep > currentStep ? "↓ down" : "↑ up";
-
-            currentStep = newStep;
-
-            console.log(
-                `Scroll Step: ${currentStep} (${direction})`
-            );
-        }
-
-        lastScrollY = scrollY;
-    });
-}
-
-createScrollDebugByVH(100);
-
-// Smooth diagonal transition between video and image when entering #abschnitt2
-// Single scrubbed timeline so both elements move in sync (feels like diagonal scroll).
-gsap.registerPlugin(ScrollTrigger);
-
-// Set sensible, less extreme start/end positions so image is fullframe before #abschnitt3

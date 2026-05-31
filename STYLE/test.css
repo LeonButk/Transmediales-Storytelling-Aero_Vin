@@ -145,7 +145,8 @@ body::before {
 .frame{
     position: fixed;
     background-color: white;
-    z-index: 10000;
+    /* raise frames above section content so images sit visually underneath */
+    z-index: 1000;
 }
 
 .frame:nth-of-type(1){
@@ -182,7 +183,7 @@ body::before {
     left: 0;
     color: #fff;
     width: 100%;
-    z-index: 1000;
+    z-index: 999;
 }
 
 .aeroVin h1{
@@ -204,7 +205,7 @@ body::before {
     right: 0;
     color: #fff;
     width: 100%;
-    z-index: 9999;
+    z-index: 999;
 }
 
 .momentum h1{
@@ -271,6 +272,7 @@ body::before {
     overflow: visible;
 }
 
+
 .tester{
     display: block;
 }
@@ -315,6 +317,7 @@ body::before {
 .unterabschnitt--media{
     align-items: stretch;
     justify-content: stretch;
+    z-index: 2;
 }
 
 .unterabschnitt--text,
@@ -358,10 +361,19 @@ body::before {
     isolation: isolate;
     width: 100%;
     min-height: 100vh;
-    z-index: 2;
+    z-index: 30;
 }
 
-.video, .bild{
+.videoIntro{
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    width: 100%;
+    min-height: 100vh;
+    z-index: 1;
+}
+
+.video, .videoIntro, .bild{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -381,12 +393,13 @@ body::before {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
+    z-index: 34;
 }
 
 .video.is-playing iframe{
     opacity: 1;
     pointer-events: auto;
-    z-index: 1000;
+    z-index: 36;
 }
 
 .video-thumb{
@@ -399,7 +412,7 @@ body::before {
     background: transparent;
     cursor: pointer;
     display: block;
-    z-index: 2;
+    z-index: 35;
     opacity: 1;
     transition: opacity 0.4s ease, transform 0.4s ease;
 }
@@ -473,8 +486,11 @@ body::before {
     place-items: center;
     flex-shrink: 0;
     font-size: 2rem;
-    z-index: 4;
     font-family: "Inter", serif;
+}
+
+.content .abschnitt__card--horizontal img{
+    z-index: 1;
 }
 
 .abschnitt__card--horizontal p{
@@ -512,7 +528,7 @@ body::before {
 
 #abschnitt3{
     position: relative;
-    z-index: 1;
+    z-index: 3;
 }
 
 p .char {

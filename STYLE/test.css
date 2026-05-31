@@ -277,17 +277,26 @@ body::before {
     display: block;
 }
 
+.infoWrapper{
+    position: absolute;
+    top:10vh;
+    left: 8vw;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    gap: 1rem;
+}
+
 .titel{
     font-size: 5rem;
     font-family: "Cormorant", serif;
-    position: absolute;
-    top: 10vh;
-    left: 8vw;
     color: #fff;
     z-index: 10;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
     max-width: 32vw;
     line-height: 80%;
+    margin: 0;
 }
 
 .teaser, .teaser-vertikal{
@@ -295,11 +304,9 @@ body::before {
     font-size: 2rem;
     font-weight: 400;
     font-family: "Inter", serif;
-    position: absolute;
-    top: 30vh;
-    left: 8vw;
     z-index: 10;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
+    margin: 0;
 }
 
 /* reusable subsection base class */
@@ -556,23 +563,22 @@ p .char {
         display: inline-block;
     }
 
-    .titel{
-        font-size: 4rem;
+    .infoWrapper{
         top: 18vh;
         left: 16vh;
     }
 
+    .titel{
+        font-size: 4rem;
+    }
+
     .teaser{
         font-size: 1.75rem;
-        top: 35vh;
-        left: 10vw;
         width: 30vw;
     }
 
     .teaser-vertikal{
         font-size: 1.75rem;
-        top: 32vh;
-        left: 10vw;
         width: 30vw;
     }
 
@@ -606,8 +612,13 @@ p .char {
 
     .unterabschnitt--text,
     .text, .unterabschnitt--ueberleitung{
-        font-size: 1.9rem;
+        font-size: 3rem;
         padding: 0;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        max-width: 60vw;
+        line-height: 1.1;
     }
 
     .unterabschnitt--text p,

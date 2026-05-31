@@ -570,6 +570,7 @@ p .char {
 
     .titel{
         font-size: 4rem;
+        line-height: 1;
     }
 
     .teaser{
@@ -627,7 +628,7 @@ p .char {
     .unterabschnitt--text p,
     .text p{
         max-width: 60vw;
-        line-height: 1.1;
+        line-height: 1;
     }
 
     .bigLabel{

@@ -141,11 +141,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (menu && menuToggle) {
         const closeMenu = () => {
             menu.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
             menuToggle.setAttribute('aria-expanded', 'false');
         };
 
         menuToggle.addEventListener('click', () => {
             const isOpen = menu.classList.toggle('is-open');
+            document.body.classList.toggle('menu-open', isOpen);
             menuToggle.setAttribute('aria-expanded', String(isOpen));
         });
 
@@ -196,6 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const menuEl = document.querySelector('.menu');
             if (menuEl) {
                 menuEl.classList.remove('is-open');
+                document.body.classList.remove('menu-open');
                 const toggle = menuEl.querySelector('.menu__toggle');
                 if (toggle) toggle.setAttribute('aria-expanded', 'false');
             }

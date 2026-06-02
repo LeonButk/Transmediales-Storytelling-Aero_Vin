@@ -168,6 +168,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Insert a close button inside the sliding panel (.menu__nav) that mirrors the
+    // three-span X from the toggle and closes the menu when clicked.
+    (function insertPanelCloseButton(){
+        const nav = document.querySelector('.menu__nav');
+        if (!nav) return;
+
+        // create button only if it doesn't exist
+        if (nav.querySelector('.menu__close')) return;
+
+        const btn = document.createElement('button');
+        btn.className = 'menu__close';
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Menü schließen');
+
+        // create three spans to form the hamburger/X
+        for (let i=0;i<3;i++){
+            const s = document.createElement('span');
+            btn.appendChild(s);
+        }
+
+        nav.appendChild(btn);
+
+        btn.addEventListener('click', function(e){
+            e.stopPropagation();
+            // close the menu by removing class
+            const menuEl = document.querySelector('.menu');
+            if (menuEl) {
+                menuEl.classList.remove('is-open');
+                const toggle = menuEl.querySelector('.menu__toggle');
+                if (toggle) toggle.setAttribute('aria-expanded', 'false');
+            }
+        });
+    })();
+
     // --- Video thumbnail behaviour: load iframe only on click ---
     const videoThumbButtons = document.querySelectorAll('.video-thumb');
     videoThumbButtons.forEach(btn => {

@@ -62,55 +62,113 @@ body::before {
     width: 4rem;
     height: 4rem;
     border: 0;
-    border-radius: 50%;
-    background: rgb(255 255 255 / 0.8);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.36rem;
+    /* no visible circle: transparent background, no shadow */
+    border-radius: 0;
+    background: transparent;
+    position: relative; /* allow absolute-positioned spans to prevent layout shifts */
+    display: block;
     cursor: pointer;
     padding: 0;
-    box-shadow: 0 0.4rem 1rem rgba(0,0,0,0.18);
+    box-shadow: none;
+}
+
+/* keep keyboard accessibility visible on focus without creating a permanent circle */
+.menu__toggle:focus-visible{
+    outline: 2px solid rgba(255,255,255,0.12);
+    outline-offset: 4px;
+    border-radius: 4px;
+}
+
+.menu__toggle{
+    --bar-gap: 1rem; /* vertical gap from center to first/third bar */
 }
 
 .menu__toggle span{
+    position: absolute;
+    left: 50%;
+    /* center each bar exactly in both axes, then offset via top */
+    transform: translate(-50%, -50%);
     display: block;
-    width: 1.5rem;
-    height: 0.18rem;
-    background: #000000;
-    border-radius: 999px;
-    transform-origin: center;
-    transition: transform 0.3s ease, opacity 0.2s ease;
+    width: 3rem; /* longer lines */
+    height: 0.34rem; /* slightly thicker */
+    background: #ffffff;
+    transform-origin: center center;
+    transition: transform 0.28s cubic-bezier(.2,.9,.2,1), opacity 0.18s ease;
     will-change: transform, opacity;
 }
 
+/* vertical placement of the three bars (symmetric around center) */
+.menu__toggle span:nth-child(1){ top: calc(50% - var(--bar-gap)); }
+.menu__toggle span:nth-child(2){ top: 50%; }
+.menu__toggle span:nth-child(3){ top: calc(50% + var(--bar-gap)); }
+
 .menu__nav{
-    position: absolute;
-    top: calc(100% + 0.9rem);
+    /* slide-in panel from the right that covers full viewport height */
+    position: fixed;
+    top: 0;
     right: 0;
-    min-width: 13rem;
-    padding: 0.9rem;
-    border-radius: 1rem;
-    background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(12px);
-    display: grid;
-    gap: 0.45rem;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-0.5rem) scale(0.98);
+    height: 100vh;
+    min-width: 38vw; /* width of the sliding panel (adjustable) */
+    max-width: 95vw;
+    padding: 2.2rem;
+    border-radius: 0 0 0 0.6rem;
+    background: rgb(255 255 255);
+    backdrop-filter: blur(8px);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    /* start off-screen to the right */
+    transform: translateX(110%);
     transform-origin: top right;
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+    transition: transform 0.38s cubic-bezier(.2,.9,.2,1), opacity 0.25s ease;
+    z-index: 20001;
+    pointer-events: none; /* disable interactions when closed */
 }
 
 .menu.is-open .menu__nav{
+    transform: translateX(0);
     opacity: 1;
-    visibility: visible;
-    transform: translateY(0) scale(1);
+    pointer-events: auto;
 }
 
+/* Close button inside sliding panel (uses same 3-span X) */
+.menu__nav .menu__close{
+    position: absolute;
+    top: 1.2rem;
+    right: 1.2rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    border: 0;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+    display: block;
+    z-index: 20002;
+}
+
+.menu__nav .menu__close span{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 2.4rem;
+    height: 0.34rem;
+    background: #000000;
+    border-radius: 999px;
+    transition: transform 0.28s cubic-bezier(.2,.9,.2,1), opacity 0.18s ease;
+}
+
+.menu__nav .menu__close span:nth-child(1){ top: calc(50% - var(--bar-gap)); }
+.menu__nav .menu__close span:nth-child(2){ top: 50%; }
+.menu__nav .menu__close span:nth-child(3){ top: calc(50% + var(--bar-gap)); }
+
+/* when panel is open, show X on close button */
+.menu.is-open .menu__nav .menu__close span:nth-child(1){ transform: translate(-50%, -50%) rotate(45deg); top: 50%; }
+.menu.is-open .menu__nav .menu__close span:nth-child(2){ opacity: 0; }
+.menu.is-open .menu__nav .menu__close span:nth-child(3){ transform: translate(-50%, -50%) rotate(-45deg); top: 50%; }
+
 .menu__nav a{
-    color: #fff;
+    color: #000000;
     text-decoration: none;
     font-family: "Inter", serif;
     font-size: 1rem;
@@ -127,7 +185,9 @@ body::before {
 }
 
 .menu.is-open .menu__toggle span:nth-child(1){
-    transform: translateY(0.5rem) rotate(45deg);
+    /* keep centered while rotating: include original translate to avoid jumps */
+    transform: translate(-50%, -50%) rotate(45deg);
+    top: 50%;
 }
 
 .menu.is-open .menu__toggle span:nth-child(2){
@@ -135,7 +195,8 @@ body::before {
 }
 
 .menu.is-open .menu__toggle span:nth-child(3){
-    transform: translateY(-0.5rem) rotate(-45deg);
+    transform: translate(-50%, -50%) rotate(-45deg);
+    top: 50%;
 }
 
 .frame{
@@ -540,7 +601,7 @@ body::before {
 
     .momentum h1{
         font-size: 5rem;
-        top: 63vh;
+        top: 61vh;
         right: 6.5vh;
         display: inline-block;
     }
@@ -576,17 +637,29 @@ body::before {
     }
 
     .menu{
-        top: 6.75vh;
+        top: 5.3vh;
         right: 4.75vw;
     }
 
     .menu__toggle{
         width: 3.5rem;
         height: 3.5rem;
+        /* use the same --bar-gap variable but smaller on narrow viewports */
+        --bar-gap: 1rem;
+    }
+
+    /* adjust hamburger bar size for smaller toggle; positions use --bar-gap */
+    .menu__toggle span{
+        width: 3.3rem;
+        height: 0.6rem;
+    }
+
+    .frame:nth-of-type(1){
+        width: 85vw;
     }
 
     .frame:nth-of-type(2){
-        height: 23vh;
+        height: 24vh;
     }
 
     .frame:nth-of-type(3){

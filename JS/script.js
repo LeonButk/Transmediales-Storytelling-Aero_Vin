@@ -26,6 +26,26 @@ function setupHorizontalSections() {
         });
     });
 
+    /*
+snap: {
+			snapTo:	1 / (contentsRechts.length - 1),
+			duration: 0.5,
+			ease: "power1.in",
+		},
+		end: "+=3500",
+ */
+
+
+
+    /*
+    snap: {
+                snapTo:	1 / (contentsLinks.length - 1),
+                duration: 0.5,
+                ease: "power1.in",
+            },
+            end: "+=3500",
+     */
+
     // Simple fade-in reveal for elements with .reveal-type
     function setupRevealType() {
         if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;

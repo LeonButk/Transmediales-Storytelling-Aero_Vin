@@ -148,7 +148,7 @@ body::before {
     max-width: 95vw;
     padding: 5rem 2.2rem 0 2.2rem;
     border-radius: 0 0 0 0.6rem;
-    background: rgb(255 255 255);
+    background: #f1f1f1;
     backdrop-filter: blur(8px);
     display: flex;
     flex-direction: column;
@@ -189,7 +189,7 @@ body::before {
     display: block;
     width: 2.4rem;
     height: 0.34rem;
-    background: #000000;
+    background: #232323;
     border-radius: 999px;
     transition: transform 0.28s cubic-bezier(.2,.9,.2,1), opacity 0.18s ease;
 }
@@ -204,7 +204,7 @@ body::before {
 .menu.is-open .menu__nav .menu__close span:nth-child(3){ transform: translate(-50%, -50%) rotate(-45deg); top: 50%; }
 
 .menu__nav a{
-    color: #000000;
+    color: #232323;
     text-decoration: none;
     font-family: "Inter", serif;
     font-size: 2rem;
@@ -263,13 +263,13 @@ body::before {
 
 .frame:nth-of-type(1){
     width: 86.5vw;
-    height: 1.1vh;
+    height: 0.9vh;
     left: 4.5vw;
     top: 6vh;
 }
 
 .frame:nth-of-type(2){
-    width: 1.1vh;
+    width: 0.9vh;
     height: 23vh;
     right: 4.5vw;
     bottom: 6vh;
@@ -277,13 +277,13 @@ body::before {
 
 .frame:nth-of-type(3){
     width: 86vw;
-    height: 1.1vh;
+    height: 0.9vh;
     bottom: 6vh;
     right: 4.5vw;
 }
 
 .frame:nth-of-type(4){
-    width: 1.1vh;
+    width: 0.9vh;
     height: 41vh;
     top: 6vh;
     left: 4.5vw;
@@ -309,7 +309,7 @@ body::before {
     transform-origin: bottom left;
     line-height: 1;
     margin: 0;
-    font-weight: 450;
+    font-weight: 400;
 }
 
 .momentum{
@@ -331,22 +331,28 @@ body::before {
     transform: rotate(90deg);
     transform-origin: top right;
     line-height: 1;
-    font-weight: 450;
+    font-weight: 400;
+    letter-spacing: 0.03em;
 }
 
 .introText{
-    position:absolute;
-    bottom: 30vh;
+    /* center intro text horizontally and vertically in the viewport */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: "Inter", serif;
+    font-family: "Cormorant";
     color: white;
-    font-size: 2rem;
+    font-size: 3.5rem;
     opacity: 1;
-    max-width: 50%;
-
+    max-width: 50%; /* limit width relative to viewport for better centering */
+    width: calc(100% - 10vw);
+    line-height: 3.6rem;
+    z-index: 5; /* ensure it's visible above video but below UI if needed */
 }
 
 .versalien {
@@ -369,7 +375,12 @@ body::before {
     color: white;
     font-size: 1.5rem;
     animation: arrow-bounce 1.6s ease-in-out infinite;
+    opacity: 0;
+}
+
+.scrollInfo:hover{
     opacity: 0.8;
+    transition-duration: 1s;
 }
 
 .arrow-svg{
@@ -380,14 +391,7 @@ body::before {
     display: flex;
     justify-content: center;
     align-items: center;
-    animation: arrow-bounce 1.6s ease-in-out infinite;
     opacity: 0.8;
-}
-
-@keyframes arrow-bounce{
-    0%   { transform: translateY(0); }
-    50%  { transform: translateY(6px); }
-    100% { transform: translateY(0); }
 }
 
 .abschnitt,
@@ -425,8 +429,8 @@ body::before {
     z-index: 10;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
     max-width: 32vw;
-    line-height: 80%;
     margin: 0;
+    font-weight: 400;
 }
 
 .teaser, .teaser-vertikal{
@@ -460,7 +464,7 @@ body::before {
 .unterabschnitt--text,
 .text, .unterabschnitt--ueberleitung{
     font-family: "Inter", serif;
-    font-size: 2rem;
+    font-size: 1.7rem;
     padding: 8vh 10vw;
     text-align: left;
     color: white;
@@ -479,7 +483,7 @@ body::before {
 .text p{
     max-width: 40vw;
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.18;
 }
 
 .unterabschnitt--image{
@@ -625,7 +629,7 @@ body::before {
     display: grid;
     place-items: center;
     flex-shrink: 0;
-    font-size: 2rem;
+    font-size: 0.75em;
     font-family: "Inter", serif;
 }
 
@@ -634,9 +638,11 @@ body::before {
 }
 
 .abschnitt__card--horizontal p{
-    max-width: 50vw;
+    max-width: 60vw;
     margin: 0;
-    line-height: 1.1;
+    line-height: 1.18;
+    font-size: 1.7rem;
+    font-weight: 200;
 }
 
 .abschnitt__card--horizontal img{
@@ -679,31 +685,33 @@ body::before {
 @media (max-width: 1492px){
 
     .aeroVin h1{
-        font-size: 6rem;
+        font-size: 5rem;
         bottom: 6vh;
-        left: 16.5vh;
+        left: 15vh;
     }
 
     .momentum h1{
-        font-size: 5rem;
-        top: 61vh;
+        font-size: 4.5rem;
+        top: 59vh;
         right: 6.5vh;
         display: inline-block;
     }
 
     .infoWrapper{
         top: 18vh;
-        left: 16vh;
+        left: 22vh;
     }
 
     .titel{
-        font-size: 4rem;
-        line-height: 1;
+        font-size: 4.3rem;
+        line-height: 0.85;
     }
 
     .teaser{
         font-size: 1.75rem;
         width: 30vw;
+        letter-spacing: 1px;
+        padding-left: 5vw;
     }
 
     .teaser-vertikal{
@@ -723,7 +731,7 @@ body::before {
 
     .menu{
         top: 5.3vh;
-        right: 4.75vw;
+        right: 4.5vw;
     }
 
     .menu__toggle{
@@ -736,15 +744,15 @@ body::before {
     /* adjust hamburger bar size for smaller toggle; positions use --bar-gap */
     .menu__toggle span{
         width: 3.3rem;
-        height: 0.6rem;
+        height: 0.5rem;
     }
 
     .frame:nth-of-type(1){
-        width: 85vw;
+        width: 84vw;
     }
 
     .frame:nth-of-type(2){
-        height: 24vh;
+        height: 26vh;
     }
 
     .frame:nth-of-type(3){
@@ -752,7 +760,7 @@ body::before {
     }
 
     .frame:nth-of-type(4){
-        height: 39vh;
+        height: 46vh;
     }
 
     .unterabschnitt--ueberleitung{
@@ -769,16 +777,23 @@ body::before {
     .text p{
         max-width: 60vw;
         line-height: 1.18;
-        font-size: 0.75em;
+    }
+
+    .einruecker{
+        padding-left: 5rem;
     }
 
     .bigLabel{
-        font-size: 2rem;
-        font-weight: 550;
+        font-size: 1.8rem;
+        font-weight: 500;
+    }
+
+    .firstSentence{
+        font-weight: 500;
     }
 
     .aeroVinText{
-        font-size: 2.2rem;
+        font-size: 1.7rem;
         font-weight: 600;
     }
 
@@ -786,13 +801,8 @@ body::before {
     .abschnitt__horizontal .content,
     .abschnitt__horizontal--reverse .content,
     .text, .unterabschnitt--text{
-        font-size: 2.2rem;
         padding: 0;
-    }
-
-    .abschnitt__card--horizontal p{
-        max-width: 60vw;
-        line-height: 1.1;
+        line-height: 1.18;
     }
 
 }

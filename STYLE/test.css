@@ -332,6 +332,25 @@ body::before {
     line-height: 1;
 }
 
+.introText{
+    position:absolute;
+    bottom: 21vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-family: "Inter", serif;
+    color: white;
+    font-size: 2rem;
+    opacity: 1;
+    max-width: 50%;
+}
+
+.bigIntro{
+    font-size: 3rem;
+    font-weight: bold;
+}
+
 .scrollInfo{
     position:absolute;
     bottom: 11.5vh;

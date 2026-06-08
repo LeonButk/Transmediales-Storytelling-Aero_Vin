@@ -76,6 +76,20 @@ snap: {
 
 }
 
+function revealIntroText(){
+    const introText = document.querySelector('.introText');
+
+    if (!introText) return;
+
+    // Fade in the introText after the frame animation completes (2 seconds)
+    gsap.from(introText, {
+        autoAlpha: 0,
+        duration: 1.2,
+        ease: 'power2.out',
+        delay: 2 // Startet nach der Frame-Animation
+    });
+}
+
 // New: class-based reveal for vertical text paragraphs
 function setupVerticalClassReveal() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
@@ -100,9 +114,17 @@ function setupVerticalClassReveal() {
     });
 }
 
+// Store timeline globally to kill it on resize
+let frameAnimationTimeline = null;
+
 // New: Setup frame build animation and text fade-in
 function setupFrameAndTextBuildAnimation() {
     if (typeof gsap === 'undefined') return;
+
+    // Kill previous timeline if it exists
+    if (frameAnimationTimeline) {
+        frameAnimationTimeline.kill();
+    }
 
     const frames = gsap.utils.toArray('.frame');
     const bigLeft = document.querySelector('.aeroVin');
@@ -110,38 +132,38 @@ function setupFrameAndTextBuildAnimation() {
 
     if (frames.length < 4 || !bigLeft || !bigRight) return;
 
-    const tl = gsap.timeline();
+    frameAnimationTimeline = gsap.timeline();
 
     // Frame 1 (top horizontal) - grow width
-    tl.from(frames[0], {
+    frameAnimationTimeline.from(frames[0], {
         width: 0,
         duration: 2,
         ease: 'power2.out'
     }, 0);
 
     // Frame 2 (right vertical) - grow height
-    tl.from(frames[1], {
+    frameAnimationTimeline.from(frames[1], {
         height: 0,
         duration: 2,
         ease: 'power2.out'
     }, 0);
 
     // Frame 3 (bottom horizontal) - grow width
-    tl.from(frames[2], {
+    frameAnimationTimeline.from(frames[2], {
         width: 0,
         duration: 2,
         ease: 'power2.out'
     }, 0);
 
     // Frame 4 (left vertical) - grow height
-    tl.from(frames[3], {
+    frameAnimationTimeline.from(frames[3], {
         height: 0,
         duration: 2,
         ease: 'power2.out'
     }, 0);
 
     // After frames finish, fade in bigLeft and bigRight
-    tl.from([bigLeft, bigRight], {
+    frameAnimationTimeline.from([bigLeft, bigRight], {
         autoAlpha: 0,
         duration: 1,
         ease: 'power2.out'
@@ -251,6 +273,21 @@ document.addEventListener('DOMContentLoaded', function() {
     if (typeof setupFrameAndTextBuildAnimation === 'function') setupFrameAndTextBuildAnimation();
     if (typeof setupHorizontalSections === 'function') setupHorizontalSections();
     if (typeof setupVerticalClassReveal === 'function') setupVerticalClassReveal();
+    if (typeof revealIntroText === 'function') revealIntroText();
+
+    // Add resize listener to rebuild frame animation on window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            if (typeof setupFrameAndTextBuildAnimation === 'function') {
+                setupFrameAndTextBuildAnimation();
+            }
+            if (typeof revealIntroText === 'function') {
+                revealIntroText();
+            }
+        }, 250); // Debounce: wait 250ms after resize stops
+    });
 
 
     // Reset video in #abschnitt1 when leaving the section (so thumbnail returns)

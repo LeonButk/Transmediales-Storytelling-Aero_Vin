@@ -263,13 +263,13 @@ body::before {
 
 .frame:nth-of-type(1){
     width: 86.5vw;
-    height: 1.5vh;
+    height: 1.1vh;
     left: 4.5vw;
     top: 6vh;
 }
 
 .frame:nth-of-type(2){
-    width: 1.5vh;
+    width: 1.1vh;
     height: 23vh;
     right: 4.5vw;
     bottom: 6vh;
@@ -277,13 +277,13 @@ body::before {
 
 .frame:nth-of-type(3){
     width: 86vw;
-    height: 1.5vh;
+    height: 1.1vh;
     bottom: 6vh;
     right: 4.5vw;
 }
 
 .frame:nth-of-type(4){
-    width: 1.5vh;
+    width: 1.1vh;
     height: 41vh;
     top: 6vh;
     left: 4.5vw;
@@ -309,6 +309,7 @@ body::before {
     transform-origin: bottom left;
     line-height: 1;
     margin: 0;
+    font-weight: 450;
 }
 
 .momentum{
@@ -330,6 +331,7 @@ body::before {
     transform: rotate(90deg);
     transform-origin: top right;
     line-height: 1;
+    font-weight: 450;
 }
 
 .introText{
@@ -348,7 +350,7 @@ body::before {
 
 .bigIntro{
     font-size: 3rem;
-    font-weight: bold;
+    font-weight: 450;
 }
 
 .scrollInfo{
@@ -456,6 +458,7 @@ body::before {
     padding: 8vh 10vw;
     text-align: left;
     color: white;
+    letter-spacing: 2px;
 }
 
 .unterabschnitt--ueberleitung p{
@@ -766,7 +769,7 @@ body::before {
     }
 
     .aeroVinText{
-        font-size: 2.5rem;
+        font-size: 2.2rem;
         font-weight: 600;
     }
 

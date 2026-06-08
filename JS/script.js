@@ -81,9 +81,13 @@ function revealIntroText(){
 
     if (!introText) return;
 
+    // Ensure any previous tweens are removed and set the element to hidden
+    gsap.killTweensOf(introText);
+    gsap.set(introText, {autoAlpha: 0});
+
     // Fade in the introText after the frame animation completes (2 seconds)
-    gsap.from(introText, {
-        autoAlpha: 0,
+    gsap.to(introText, {
+        autoAlpha: 1,
         duration: 1.2,
         ease: 'power2.out',
         delay: 2 // Startet nach der Frame-Animation
@@ -132,16 +136,28 @@ function setupFrameAndTextBuildAnimation() {
 
     if (frames.length < 4 || !bigLeft || !bigRight) return;
 
+    // Remove any inline width/height left from previous runs so computed (CSS) values
+    // reflect the current viewport. This avoids animating to stale px-values.
+    frames.forEach(f => {
+        f.style.removeProperty('width');
+        f.style.removeProperty('height');
+    });
+
+    // Force reflow so computed styles are up-to-date
+    // eslint-disable-next-line no-unused-expressions
+    document.body.offsetHeight;
+
+    // Create a fresh timeline that animates FROM 0 to the element's current computed size
     frameAnimationTimeline = gsap.timeline();
 
-    // Frame 1 (top horizontal) - grow width
+    // Frame 1 (top horizontal) - grow width from 0 to the CSS-sized width
     frameAnimationTimeline.from(frames[0], {
         width: 0,
         duration: 2,
         ease: 'power2.out'
     }, 0);
 
-    // Frame 2 (right vertical) - grow height
+    // Frame 2 (right vertical) - grow height from 0 to the CSS-sized height
     frameAnimationTimeline.from(frames[1], {
         height: 0,
         duration: 2,
@@ -201,9 +217,27 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 closeMenu();
 
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (!target) return;
+
+                // For GSAP-pinned horizontal sections, jump to the ScrollTrigger start
+                // so navigation always opens on the first panel/card.
+                const isHorizontalSection =
+                    target.classList.contains('abschnitt--horizontal') ||
+                    target.classList.contains('abschnitt--horizontal-reverse');
+
+                if (isHorizontalSection && typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
+                    const trigger = ScrollTrigger.getAll().find(st => st.trigger === target && st.pin);
+                    if (trigger) {
+                        window.scrollTo({
+                            top: Math.max(0, trigger.start + 1),
+                            behavior: 'smooth'
+                        });
+                        return;
+                    }
                 }
+
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 

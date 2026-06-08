@@ -336,7 +336,7 @@ body::before {
 
 .introText{
     position:absolute;
-    bottom: 21vh;
+    bottom: 30vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -346,6 +346,12 @@ body::before {
     font-size: 2rem;
     opacity: 1;
     max-width: 50%;
+
+}
+
+.versalien {
+    font-size: 3.4rem;
+    letter-spacing: 0.03rem;
 }
 
 .bigIntro{
@@ -458,7 +464,9 @@ body::before {
     padding: 8vh 10vw;
     text-align: left;
     color: white;
-    letter-spacing: 2px;
+    letter-spacing: 1.2px;
+    font-weight: 200;
+    line-height: 1.18;
 }
 
 .unterabschnitt--ueberleitung p{
@@ -760,7 +768,8 @@ body::before {
     .unterabschnitt--text p,
     .text p{
         max-width: 60vw;
-        line-height: 1;
+        line-height: 1.18;
+        font-size: 0.75em;
     }
 
     .bigLabel{

@@ -196,6 +196,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu__toggle');
     const menuLinks = document.querySelectorAll('.menu__nav a');
 
+    // --- Language Selection Setup ---
+    (function setupLanguageSelection() {
+        const languageSelect = document.getElementById('language-select');
+        const htmlElement = document.documentElement;
+
+        if (!languageSelect) return;
+
+        // Get saved language or default to 'de'
+        const savedLanguage = localStorage.getItem('selectedLanguage') || 'de';
+
+        // Set initial language
+        languageSelect.value = savedLanguage;
+        setLanguage(savedLanguage);
+
+        // Add change listener to select
+        languageSelect.addEventListener('change', function() {
+            const lang = this.value;
+            setLanguage(lang);
+        });
+
+        function setLanguage(lang) {
+            htmlElement.setAttribute('lang', lang);
+            localStorage.setItem('selectedLanguage', lang);
+            console.log('Sprache geändert zu:', lang);
+        }
+    })();
+
     if (menu && menuToggle) {
         const closeMenu = () => {
             menu.classList.remove('is-open');

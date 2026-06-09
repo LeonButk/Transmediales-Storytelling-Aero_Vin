@@ -137,6 +137,16 @@ body::before {
 .menu:not(.is-open) .menu__toggle:hover span:nth-child(3){
     transform: translate(-50%, -50%) translateX(-6px);
 }
+.page-selector{
+    gap: 0.5rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.page-selector a{
+    color: #232323;
+}
 
 .menu__nav{
     /* slide-in panel from the right that covers full viewport height */
@@ -146,13 +156,13 @@ body::before {
     height: 100vh;
     min-width: 38vw; /* width of the sliding panel (adjustable) */
     max-width: 95vw;
-    padding: 5rem 2.2rem 0 2.2rem;
-    border-radius: 0 0 0 0.6rem;
+    display: flex;
+    justify-content: center;
+    padding: 0 2.5rem 0 2.5rem;
     background: #f1f1f1;
     backdrop-filter: blur(8px);
-    display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 5rem;
     /* start off-screen to the right */
     transform: translateX(110%);
     transform-origin: top right;
@@ -203,8 +213,69 @@ body::before {
 .menu.is-open .menu__nav .menu__close span:nth-child(2){ opacity: 0; }
 .menu.is-open .menu__nav .menu__close span:nth-child(3){ transform: translate(-50%, -50%) rotate(-45deg); top: 50%; }
 
-.menu__nav a{
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 0.8rem;
+    border-bottom: 2px solid #232323;
+    justify-content: start;
+}
+
+.language-label {
+    font-family: "Inter", serif;
+    font-size: 1.5rem;
     color: #232323;
+    font-weight: 500;
+}
+
+.language-select {
+    background: transparent;
+    border: 2px solid #232323;
+    border-radius: 0.4rem;
+    padding: 0.6rem 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    font-family: "Inter", serif;
+    color: #232323;
+    font-weight: 500;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.language-select:hover {
+    background-color: #f0f0f0;
+}
+
+.language-select:focus-visible {
+    outline: 2px solid #232323;
+    outline-offset: 2px;
+}
+
+.language-select option {
+    background-color: #f1f1f1;
+    color: #232323;
+    padding: 0.5rem;
+}
+
+.subPage-container{
+    border-top: 2px solid #232323;
+    margin-top: 1.5rem;
+}
+
+.subPage-container a{
+    color: #9c9c9c;
+    font-family: "Inter", serif;
+    font-size: 1.5rem;
+}
+
+.subPage-container a:hover{
+    text-decoration: underline;
+    transition-duration: 1s;
+}
+
+.menu__nav a{
+
     text-decoration: none;
     font-family: "Inter", serif;
     font-size: 2rem;
@@ -365,32 +436,43 @@ body::before {
     font-weight: 450;
 }
 
-.scrollInfo{
-    position:absolute;
-    bottom: 11.5vh;
+.scrollInfoText{
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: "Inter", serif;
     color: white;
     font-size: 1.5rem;
-    animation: arrow-bounce 1.6s ease-in-out infinite;
     opacity: 0;
+    margin: 0;
+}
+
+.scrollInfoText p{
+    margin: 0;
+}
+
+.scrollInfo{
+    position:absolute;
+    bottom: 11.5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-direction: column;
 }
 
 .scrollInfo:hover{
-    opacity: 0.8;
-    transition-duration: 1s;
+    .scrollInfoText{
+        opacity: 0.8;
+        transition-duration: 1s;
+    }
+
 }
 
 .arrow-svg{
-    position: absolute;
-    bottom: 10vh;
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
     opacity: 0.8;
 }
 
@@ -684,7 +766,22 @@ body::before {
 
 @media (max-width: 1492px){
 
-    .aeroVin h1{
+    .language-selector {
+        gap: 0.8rem;
+        margin-bottom: 1.5rem;
+        padding: 0.6rem;
+    }
+
+    .language-label {
+        font-size: 1.3rem;
+    }
+
+    .language-select {
+        padding: 0.5rem 0.8rem;
+        font-size: 1.2rem;
+    }
+
+     .aeroVin h1{
         font-size: 5rem;
         bottom: 6vh;
         left: 15vh;
@@ -717,6 +814,8 @@ body::before {
     .teaser-vertikal{
         font-size: 1.75rem;
         width: 30vw;
+        letter-spacing: 1px;
+        padding-left: 5vw;
     }
 
     .video{
@@ -765,7 +864,7 @@ body::before {
 
     .unterabschnitt--ueberleitung{
         font-size: 3rem;
-        font-weight: 500;
+        font-weight: 200;
     }
 
     .unterabschnitt--ueberleitung p{
@@ -784,8 +883,8 @@ body::before {
     }
 
     .bigLabel{
-        font-size: 1.8rem;
-        font-weight: 500;
+        font-size: 1.7rem;
+        font-weight: 400;
     }
 
     .firstSentence{

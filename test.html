@@ -28,6 +28,16 @@
     </button>
 
     <nav class="menu__nav" id="section-nav" aria-label="Abschnitte">
+        <div class="language-selector">
+            <label for="language-select" class="language-label">Language:</label>
+            <select id="language-select" class="language-select">
+                <option value="ger">GER</option>
+                <option value="da">DK</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+
+        <div class="page-selector">
         <a href="#abschnitt1"><span>Intro</span><span class="menu__arrow" aria-hidden="true">→</span></a>
         <a href="#abschnitt3"><span>From filmmaking to winemaking</span><span class="menu__arrow" aria-hidden="true">→</span></a>
         <a href="#abschnitt5"><span>The island changed everything</span><span class="menu__arrow" aria-hidden="true">→</span></a>
@@ -35,6 +45,11 @@
         <a href="#abschnitt9"><span>The Climate Sailor</span><span class="menu__arrow" aria-hidden="true">→</span></a>
         <a href="#abschnitt11"><span>Where wine meets climate</span><span class="menu__arrow" aria-hidden="true">→</span></a>
         <a href="#abschnitt13"><span>Get your own MOMENTUM</span><span class="menu__arrow" aria-hidden="true">→</span></a>
+        </div>
+
+        <div class="subPage-container">
+            <a href="impressum.html" class="subPage">Impressum</a>
+        </div>
     </nav>
 </div>
 
@@ -53,11 +68,13 @@
                 <p>Change opens the door to new opportunities and perspectives. We call this: <span class="versalien">MOMENTUM</span>.</p>
             </div>
             <div class="scrollInfo">
-                <p>scrollen</p>
+                <div class="scrollInfoText">
+                    <p>scrollen</p>
+                </div>
+                <svg class="arrow-svg" width="40" height="40" viewBox="0 0 24 24">
+                    <path d="M2 8l10 10 10-10" stroke="#fff" stroke-width="2" fill="none"/>
+                </svg>
             </div>
-            <svg class="arrow-svg" width="40" height="40" viewBox="0 0 24 24">
-                <path d="M2 8l10 10 10-10" stroke="#fff" stroke-width="2" fill="none" />
-            </svg>
             <video class="video__content" autoplay muted loop>
                 <source src="ASSETS/IMAGES/Intro.mp4" type="video/mp4">
             </video>
@@ -67,7 +84,7 @@
     <div class="unterabschnitt unterabschnitt--text reveal-type">
         <p><span class="bigLabel">MOMENTUM</span><span class="firstSentence"> is designed to combine digital components and nature. With climate change taking center stage, we explore the chances it can provide and the aspects of life influenced by it. Our prime example is viticulture in Denmark.</span></p>
             <br>
-            <p class="einruecker">This transmedia campaign for <span class="aeroVinText">ÆRØ VIN</span> includes a series of documentaries on the aspects of life influenced by climate change, including both life at sea and on land. On top of that, we also brought to life a wine trail under the name <span class="aeroVinText">ÆRØ VIN TRAIL</span>, filled with interactive information, both physically and digitally, on viticulture in Denmark.</p>
+            <p class="einruecker">This transmedia campaign for <span class="aeroVinText">ÆRØ VIN</span> includes a series of documentaries on the aspects of life influenced by climate change as well as the <span class="aeroVinText">ÆRØ VIN TRAIL</span>, an interactive wine trail filled with information on viticulture in Denmark.</p>
             <br>
             <p class="einruecker">Experience our stories at your own pace!
             Scroll through the following website and visit <span class="aeroVinText">ÆRØ VIN</span>, where you can experience the <span class="aeroVinText">ÆRØ VIN TRAIL</span> for yourself!</p>

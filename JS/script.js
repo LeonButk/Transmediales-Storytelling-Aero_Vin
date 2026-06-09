@@ -200,26 +200,41 @@ document.addEventListener('DOMContentLoaded', function() {
     (function setupLanguageSelection() {
         const languageSelect = document.getElementById('language-select');
         const htmlElement = document.documentElement;
-
+        
         if (!languageSelect) return;
-
+        
+        // Map language codes to page URLs
+        const languagePages = {
+            'de': 'indexGer.html',
+            'da': 'test.html',
+            'en': 'test.html'
+        };
+        
         // Get saved language or default to 'de'
         const savedLanguage = localStorage.getItem('selectedLanguage') || 'de';
-
-        // Set initial language
+        
+        // Set initial language select value
         languageSelect.value = savedLanguage;
-        setLanguage(savedLanguage);
-
+        setLanguageAttribute(savedLanguage);
+        
         // Add change listener to select
         languageSelect.addEventListener('change', function() {
             const lang = this.value;
-            setLanguage(lang);
+            setLanguageAttribute(lang);
+            navigateToLanguagePage(lang);
         });
-
-        function setLanguage(lang) {
+        
+        function setLanguageAttribute(lang) {
             htmlElement.setAttribute('lang', lang);
             localStorage.setItem('selectedLanguage', lang);
             console.log('Sprache geändert zu:', lang);
+        }
+        
+        function navigateToLanguagePage(lang) {
+            const page = languagePages[lang];
+            if (page) {
+                window.location.href = page;
+            }
         }
     })();
 
@@ -310,6 +325,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // --- Video thumbnail behaviour: load iframe only on click ---
     const videoThumbButtons = document.querySelectorAll('.video-thumb');
+    const uiElements = document.querySelectorAll('.frame, .menu, .aeroVin, .momentum');
+
     videoThumbButtons.forEach(btn => {
         btn.addEventListener('click', function() {
             const videoBlock = btn.closest('.video');
@@ -324,6 +341,9 @@ document.addEventListener('DOMContentLoaded', function() {
             videoBlock.classList.add('is-playing');
             btn.setAttribute('aria-hidden', 'true');
             btn.setAttribute('tabindex', '-1');
+
+            // Hide UI elements
+            gsap.to(uiElements, { autoAlpha: 0, duration: 0.5 });
         });
     });
 
@@ -351,33 +371,58 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // Reset video in #abschnitt1 when leaving the section (so thumbnail returns)
+    // Reset video when leaving the section (so thumbnail returns)
     (function setupResetOnLeave() {
-        const abs1 = document.getElementById('abschnitt1');
-        if (!abs1 || typeof ScrollTrigger === 'undefined') return;
+        if (typeof ScrollTrigger === 'undefined') return;
 
-        function resetVideo() {
-            const videoBlock = abs1.querySelector('.video');
-            if (!videoBlock) return;
-            const iframe = videoBlock.querySelector('iframe');
-            const thumb = videoBlock.querySelector('.video-thumb');
-            // remove src to stop playback and free resources
-            if (iframe && iframe.getAttribute('src')) {
-                iframe.removeAttribute('src');
-            }
-            videoBlock.classList.remove('is-playing');
-            if (thumb) {
-                thumb.removeAttribute('aria-hidden');
-                thumb.removeAttribute('tabindex');
-            }
-        }
+        const videoSections = gsap.utils.toArray('.abschnitt').filter(s => s.querySelector('.video'));
+        const uiElements = document.querySelectorAll('.frame, .menu, .aeroVin, .momentum');
 
-        ScrollTrigger.create({
-            trigger: abs1,
-            start: 'top top',
-            end: 'bottom top',
-            onLeave: resetVideo,
-            onLeaveBack: resetVideo // also reset if leaving upwards (edge cases)
+        videoSections.forEach(section => {
+            function resetVideo() {
+                const videoBlock = section.querySelector('.video');
+                if (!videoBlock) return;
+                const iframe = videoBlock.querySelector('iframe');
+                const thumb = videoBlock.querySelector('.video-thumb');
+
+                if (videoBlock.classList.contains('is-playing')) {
+                    // remove src to stop playback and free resources
+                    if (iframe && iframe.getAttribute('src')) {
+                        iframe.removeAttribute('src');
+                    }
+                    videoBlock.classList.remove('is-playing');
+                    if (thumb) {
+                        thumb.removeAttribute('aria-hidden');
+                        thumb.removeAttribute('tabindex');
+                    }
+
+                    // Show UI elements again
+                    gsap.to(uiElements, { autoAlpha: 1, duration: 0.5 });
+                }
+            }
+
+            // Wenn die Section horizontal ist und gepinnt wird, müssen wir das Ende des Pinning-Triggers abwarten
+            const isHorizontal = section.classList.contains('abschnitt--horizontal') || section.classList.contains('abschnitt--horizontal-reverse');
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top top',
+                end: () => isHorizontal ? "+=" + (window.innerWidth * (section.querySelectorAll('.content').length - 1) * horizontalSpeedFactor) : 'bottom top',
+                onLeave: resetVideo,
+                onLeaveBack: resetVideo,
+                onEnter: () => {
+                    const videoBlock = section.querySelector('.video');
+                    if (videoBlock && videoBlock.classList.contains('is-playing')) {
+                        gsap.to(uiElements, { autoAlpha: 0, duration: 0.5 });
+                    }
+                },
+                onEnterBack: () => {
+                    const videoBlock = section.querySelector('.video');
+                    if (videoBlock && videoBlock.classList.contains('is-playing')) {
+                        gsap.to(uiElements, { autoAlpha: 0, duration: 0.5 });
+                    }
+                }
+            });
         });
     })();
 

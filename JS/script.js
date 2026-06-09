@@ -326,6 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Video thumbnail behaviour: load iframe only on click ---
     const videoThumbButtons = document.querySelectorAll('.video-thumb');
     const uiElements = document.querySelectorAll('.frame, .menu, .aeroVin, .momentum');
+    let isAutoScrolling = false;
 
     videoThumbButtons.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -335,20 +336,98 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!iframe) return;
             const baseSrc = iframe.getAttribute('data-src');
             if (!baseSrc) return;
-            const joiner = baseSrc.includes('?') ? '&' : '?';
-            const full = baseSrc + joiner + 'autoplay=1&playsinline=1&rel=0&mute=1';
-            if (!iframe.getAttribute('src')) iframe.setAttribute('src', full);
-            videoBlock.classList.add('is-playing');
-            btn.setAttribute('aria-hidden', 'true');
-            btn.setAttribute('tabindex', '-1');
+            const section = videoBlock.closest('.abschnitt');
+            if (!section) return;
 
-            // Hide UI elements
-            gsap.to(uiElements, { autoAlpha: 0, duration: 0.5 });
+            const startVideo = () => {
+                const joiner = baseSrc.includes('?') ? '&' : '?';
+                const full = baseSrc + joiner + 'autoplay=1&playsinline=1&rel=0&mute=1';
+                if (!iframe.getAttribute('src')) iframe.setAttribute('src', full);
+                videoBlock.classList.add('is-playing');
+                btn.setAttribute('aria-hidden', 'true');
+                btn.setAttribute('tabindex', '-1');
+            };
+
+            // Scroll section into view
+            isAutoScrolling = true;
+            const isHorizontal = section.classList.contains('abschnitt--horizontal') || section.classList.contains('abschnitt--horizontal-reverse');
+
+            const onComplete = () => {
+                // Video erst nach dem Scrollen starten (mit kleinem Delay zur Sicherheit)
+                setTimeout(() => {
+                    startVideo();
+                    setTimeout(() => {
+                        isAutoScrolling = false;
+                        ScrollTrigger.refresh();
+                    }, 200);
+                }, 100);
+            };
+
+            if (isHorizontal && typeof ScrollTrigger !== 'undefined') {
+                // For horizontal pinned sections, we need to find the correct scroll position
+                const st = ScrollTrigger.getAll().find(s => s.trigger === section && s.pin === true);
+                if (st) {
+                    // Find which content card the video is in
+                    const contents = gsap.utils.toArray(section.querySelectorAll('.content'));
+                    const videoIndex = contents.findIndex(c => c.contains(videoBlock));
+                    if (videoIndex !== -1) {
+                        const totalWidth = window.innerWidth * (contents.length - 1) * horizontalSpeedFactor;
+                        const progress = videoIndex / (contents.length - 1);
+                        const targetY = st.start + (progress * totalWidth);
+
+                        console.log("Scrolling horizontal zu:", targetY, "Index:", videoIndex);
+
+                        gsap.to(window, {
+                            scrollTo: targetY,
+                            duration: 1.2,
+                            ease: "power2.inOut",
+                            autoKill: false,
+                            onStart: () => {
+                                // UI sofort ausblenden beim Start des Scrolls
+                                gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
+                            },
+                            onComplete: onComplete
+                        });
+                    } else {
+                        console.warn("Video Index nicht gefunden");
+                        isAutoScrolling = false;
+                        startVideo();
+                    }
+                } else {
+                    console.warn("ScrollTrigger für horizontale Sektion nicht gefunden");
+                    isAutoScrolling = false;
+                    startVideo();
+                }
+            } else {
+                // Bei vertikalen Sektionen wollen wir das Video perfekt zentrieren (100vh/100vw Gefühl)
+                // Wir berechnen die absolute Position des Videos auf der Seite
+                const rect = videoBlock.getBoundingClientRect();
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const targetY = rect.top + scrollTop - (window.innerHeight - videoBlock.offsetHeight) / 2;
+
+                console.log("Scrolling vertikal zu:", targetY, "Rect Top:", rect.top, "ScrollTop:", scrollTop);
+
+                gsap.to(window, {
+                    scrollTo: targetY,
+                    duration: 1.2,
+                    ease: "power2.inOut",
+                    autoKill: false,
+                    onStart: () => {
+                        gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
+                    },
+                    onComplete: onComplete
+                });
+            }
         });
     });
 
     // register ScrollTrigger (safe to call even if already registered)
-    if (gsap && gsap.registerPlugin) gsap.registerPlugin(ScrollTrigger);
+    if (gsap && gsap.registerPlugin) {
+        gsap.registerPlugin(ScrollTrigger);
+        if (typeof ScrollToPlugin !== 'undefined') {
+            gsap.registerPlugin(ScrollToPlugin);
+        }
+    }
 
     // Setup animations
     if (typeof setupFrameAndTextBuildAnimation === 'function') setupFrameAndTextBuildAnimation();
@@ -371,22 +450,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // Reset video when leaving the section (so thumbnail returns)
+    // Reset video when leaving the video element (so thumbnail returns)
     (function setupResetOnLeave() {
         if (typeof ScrollTrigger === 'undefined') return;
 
-        const videoSections = gsap.utils.toArray('.abschnitt').filter(s => s.querySelector('.video'));
+        const videoBlocks = gsap.utils.toArray('.video');
         const uiElements = document.querySelectorAll('.frame, .menu, .aeroVin, .momentum');
 
-        videoSections.forEach(section => {
+        videoBlocks.forEach(videoBlock => {
+            const section = videoBlock.closest('.abschnitt');
+            if (!section) return;
+
             function resetVideo() {
-                const videoBlock = section.querySelector('.video');
-                if (!videoBlock) return;
+                if (isAutoScrolling) return;
+
                 const iframe = videoBlock.querySelector('iframe');
                 const thumb = videoBlock.querySelector('.video-thumb');
 
                 if (videoBlock.classList.contains('is-playing')) {
-                    // remove src to stop playback and free resources
                     if (iframe && iframe.getAttribute('src')) {
                         iframe.removeAttribute('src');
                     }
@@ -395,34 +476,69 @@ document.addEventListener('DOMContentLoaded', function() {
                         thumb.removeAttribute('aria-hidden');
                         thumb.removeAttribute('tabindex');
                     }
-
-                    // Show UI elements again
-                    gsap.to(uiElements, { autoAlpha: 1, duration: 0.5 });
                 }
             }
 
-            // Wenn die Section horizontal ist und gepinnt wird, müssen wir das Ende des Pinning-Triggers abwarten
             const isHorizontal = section.classList.contains('abschnitt--horizontal') || section.classList.contains('abschnitt--horizontal-reverse');
 
-            ScrollTrigger.create({
-                trigger: section,
-                start: 'top top',
-                end: () => isHorizontal ? "+=" + (window.innerWidth * (section.querySelectorAll('.content').length - 1) * horizontalSpeedFactor) : 'bottom top',
-                onLeave: resetVideo,
-                onLeaveBack: resetVideo,
-                onEnter: () => {
-                    const videoBlock = section.querySelector('.video');
-                    if (videoBlock && videoBlock.classList.contains('is-playing')) {
-                        gsap.to(uiElements, { autoAlpha: 0, duration: 0.5 });
-                    }
-                },
-                onEnterBack: () => {
-                    const videoBlock = section.querySelector('.video');
-                    if (videoBlock && videoBlock.classList.contains('is-playing')) {
-                        gsap.to(uiElements, { autoAlpha: 0, duration: 0.5 });
-                    }
-                }
-            });
+            if (isHorizontal) {
+                const contents = gsap.utils.toArray(section.querySelectorAll('.content'));
+                const videoIndex = contents.findIndex(c => c.contains(videoBlock));
+
+                ScrollTrigger.create({
+                    trigger: section,
+                    start: () => {
+                        const st = ScrollTrigger.getAll().find(s => s.trigger === section && s.pin === true);
+                        if (!st || videoIndex === -1) return "top top";
+                        const totalScroll = window.innerWidth * (contents.length - 1) * horizontalSpeedFactor;
+                        const cardWidthInScroll = totalScroll / (contents.length - 1);
+                        // videoIndex * cardWidthInScroll ist der Punkt im Scroll-Weg, an dem die Karte im Viewport zentriert ist
+                        const cardCenter = st.start + (videoIndex * cardWidthInScroll);
+                        // Wir verstecken die UI, wenn die Karte zu 25% sichtbar wird
+                        return cardCenter - (window.innerWidth * 0.75);
+                    },
+                    end: () => {
+                        const st = ScrollTrigger.getAll().find(s => s.trigger === section && s.pin === true);
+                        if (!st || videoIndex === -1) return "bottom top";
+                        const totalScroll = window.innerWidth * (contents.length - 1) * horizontalSpeedFactor;
+                        const cardWidthInScroll = totalScroll / (contents.length - 1);
+                        const cardCenter = st.start + (videoIndex * cardWidthInScroll);
+                        // Wir zeigen die UI wieder, wenn die Karte zu 75% den Viewport verlassen hat
+                        return cardCenter + (window.innerWidth * 0.75);
+                    },
+                    onToggle: self => {
+                        if (self.isActive) {
+                            gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
+                        } else {
+                            resetVideo();
+                            // Nur einblenden, wenn kein anderer Video-Trigger aktiv ist
+                            const anyActive = ScrollTrigger.getAll().some(st => st.vars.isUiTrigger && st.isActive);
+                            if (!anyActive) {
+                                gsap.to(uiElements, { autoAlpha: 1, duration: 0.5, overwrite: true });
+                            }
+                        }
+                    },
+                    isUiTrigger: true
+                });
+            } else {
+                ScrollTrigger.create({
+                    trigger: videoBlock,
+                    start: 'top bottom',
+                    end: 'bottom top',
+                    onToggle: self => {
+                        if (self.isActive) {
+                            gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
+                        } else {
+                            resetVideo();
+                            const anyActive = ScrollTrigger.getAll().some(st => st.vars.isUiTrigger && st.isActive);
+                            if (!anyActive) {
+                                gsap.to(uiElements, { autoAlpha: 1, duration: 0.5, overwrite: true });
+                            }
+                        }
+                    },
+                    isUiTrigger: true
+                });
+            }
         });
     })();
 

@@ -500,6 +500,7 @@ body::before {
     max-width: 50%;
     line-height: 3.6rem;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
+    color: white;
 }
 
 .zitat h1{

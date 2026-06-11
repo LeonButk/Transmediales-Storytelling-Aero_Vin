@@ -491,12 +491,26 @@ body::before {
     overflow: visible;
 }
 
+.zitat{
+    position: absolute;
+    top: 6rem;
+    left: 9rem;
+    font-family: "Cormorant", serif;
+    font-size: 2rem;
+    max-width: 50%;
+    line-height: 3.6rem;
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
+}
 
+.zitat h1{
+    font-weight: 300;
+    letter-spacing: -0.05rem;
+}
 
 .infoWrapper{
     position: absolute;
-    top:10vh;
-    left: 8vw;
+    top:9vh;
+    left: 5vw;
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -509,7 +523,6 @@ body::before {
     font-family: "Cormorant", serif;
     color: #fff;
     z-index: 10;
-    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
     max-width: 32vw;
     margin: 0;
     font-weight: 400;
@@ -521,7 +534,6 @@ body::before {
     font-weight: 400;
     font-family: "Inter", serif;
     z-index: 10;
-    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
     margin: 0;
 }
 
@@ -719,6 +731,10 @@ body::before {
     z-index: 1;
 }
 
+.reveal-horizontal-text{
+    padding-top: 4rem;
+}
+
 .abschnitt__card--horizontal p{
     max-width: 60vw;
     margin: 0;
@@ -795,27 +811,30 @@ body::before {
     }
 
     .infoWrapper{
-        top: 18vh;
-        left: 22vh;
+        top: 13vh;
+        left: 16vh;
     }
 
     .titel{
-        font-size: 4.3rem;
+        font-size: 3.5rem;
         line-height: 0.85;
     }
 
     .teaser{
-        font-size: 1.75rem;
-        width: 30vw;
+        font-size: 1.3rem;
+        width: 40vw;
         letter-spacing: 1px;
         padding-left: 5vw;
+        font-weight: 200;
+
     }
 
     .teaser-vertikal{
-        font-size: 1.75rem;
+        font-size: 1.2rem;
         width: 30vw;
         letter-spacing: 1px;
         padding-left: 5vw;
+        font-weight: 300;
     }
 
     .video{

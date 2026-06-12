@@ -253,7 +253,7 @@ span{
     isolation: isolate;
     width: 100%;
     min-height: 100dvh;
-    z-index: 2;
+    z-index: 1;
 }
 
 .video, .bild{
@@ -281,7 +281,7 @@ span{
 .video.is-playing iframe{
     opacity: 1;
     pointer-events: auto;
-    z-index: 1000;
+    z-index: 1;
 }
 
 .video-thumb{
@@ -346,9 +346,9 @@ span{
     transform: scale(1.02);
 }
 
-/* When playing, bring the video above the decorative frames */
+/* When playing, keep the video below the decorative frames */
 .video.is-playing{
-    z-index: 10001;
+    z-index: 1;
     position: relative;
 }
 

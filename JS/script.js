@@ -384,7 +384,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             autoKill: false,
                             onStart: () => {
                                 // UI sofort ausblenden beim Start des Scrolls
-                                gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
+                                // gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
                             },
                             onComplete: onComplete
                         });
@@ -413,7 +413,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ease: "power2.inOut",
                     autoKill: false,
                     onStart: () => {
-                        gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
+                        // gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
                     },
                     onComplete: onComplete
                 });
@@ -508,7 +508,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     },
                     onToggle: self => {
                         if (self.isActive) {
-                            gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
+                            // gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
                         } else {
                             resetVideo();
                             // Nur einblenden, wenn kein anderer Video-Trigger aktiv ist
@@ -527,7 +527,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     end: 'bottom top',
                     onToggle: self => {
                         if (self.isActive) {
-                            gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
+                            // gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
                         } else {
                             resetVideo();
                             const anyActive = ScrollTrigger.getAll().some(st => st.vars.isUiTrigger && st.isActive);

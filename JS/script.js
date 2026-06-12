@@ -206,8 +206,8 @@ document.addEventListener('DOMContentLoaded', function() {
         // Map language codes to page URLs
         const languagePages = {
             'de': 'indexGer.html',
-            'da': 'test.html',
-            'en': 'test.html'
+            'da': 'index.html',
+            'en': 'index.html'
         };
         
         // Get saved language or default to 'de'

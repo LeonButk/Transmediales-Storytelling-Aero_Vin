@@ -98,6 +98,78 @@ body::before {
     transform: translateY(-3px) scale(1.03);
 }
 
+.frame-toggle{
+    position: fixed;
+    top: 6vh;
+    left: 4.75vw;
+    z-index: 20010;
+}
+
+.frame-toggle__toggle{
+    width: 4rem;
+    height: 4rem;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    padding: 0;
+    box-shadow: none;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+    z-index: 20011;
+    --bar-gap: 1rem;
+}
+
+.frame-toggle__toggle:focus-visible{
+    outline: 2px solid rgba(255,255,255,0.12);
+    outline-offset: 4px;
+    border-radius: 4px;
+    transform: translateY(-3px) scale(1.03);
+}
+
+.frame-toggle__toggle span{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    width: 3rem;
+    height: 0.34rem;
+    background: #ffffff;
+    transform-origin: center center;
+    transition: transform 0.28s cubic-bezier(.2,.9,.2,1), opacity 0.18s ease, background 120ms ease;
+    will-change: transform, opacity;
+}
+
+.frame-toggle__toggle span:nth-child(1){ top: calc(50% - var(--bar-gap)); }
+.frame-toggle__toggle span:nth-child(2){ top: 50%; }
+.frame-toggle__toggle span:nth-child(3){ top: calc(50% + var(--bar-gap)); }
+
+.frame-toggle__toggle:hover{
+    transform: translateY(-3px) scale(1.03);
+}
+
+.frame-toggle__toggle:hover span:nth-child(1){
+    transform: translate(-50%, -50%) translateX(6px);
+}
+
+.frame-toggle__toggle:hover span:nth-child(2){
+    transform: translate(-50%, -50%) scaleX(0.98);
+}
+
+.frame-toggle__toggle:hover span:nth-child(3){
+    transform: translate(-50%, -50%) translateX(-6px);
+}
+
+body.frames-hidden .frame{
+    opacity: 0;
+    pointer-events: none;
+}
+
+body.frames-hidden .frame-toggle__toggle span{
+    background: rgba(255,255,255,0.72);
+}
+
 .menu__toggle{
     --bar-gap: 1rem; /* vertical gap from center to first/third bar */
 }
@@ -330,6 +402,7 @@ body::before {
     background-color: white;
     /* raise frames above section content so images sit visually underneath */
     z-index: 2 !important;
+    transition: opacity 0.25s ease;
 }
 
 .frame:nth-of-type(1){

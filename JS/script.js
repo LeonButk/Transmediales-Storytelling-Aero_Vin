@@ -195,6 +195,29 @@ document.addEventListener('DOMContentLoaded', function() {
     const menu = document.querySelector('.menu');
     const menuToggle = document.querySelector('.menu__toggle');
     const menuLinks = document.querySelectorAll('.menu__nav a');
+    const frameToggle = document.querySelector('.frame-toggle__toggle');
+
+    function setFrameVisibility(shouldShowFrames) {
+        const body = document.body;
+        const isHidden = !shouldShowFrames;
+
+        body.classList.toggle('frames-hidden', isHidden);
+
+        if (frameToggle) {
+            frameToggle.setAttribute('aria-pressed', String(shouldShowFrames));
+            frameToggle.setAttribute('aria-label', shouldShowFrames ? 'Rahmen ausblenden' : 'Rahmen einblenden');
+        }
+    }
+
+    if (frameToggle) {
+        const framesAreVisible = !document.body.classList.contains('frames-hidden');
+        setFrameVisibility(framesAreVisible);
+
+        frameToggle.addEventListener('click', () => {
+            const shouldShowFrames = document.body.classList.contains('frames-hidden');
+            setFrameVisibility(shouldShowFrames);
+        });
+    }
 
     // --- Language Selection Setup ---
     (function setupLanguageSelection() {
@@ -450,97 +473,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 
-    // Reset video when leaving the video element (so thumbnail returns)
-    (function setupResetOnLeave() {
-        if (typeof ScrollTrigger === 'undefined') return;
 
-        const videoBlocks = gsap.utils.toArray('.video');
-        const uiElements = document.querySelectorAll('.frame, .menu, .aeroVin, .momentum');
-
-        videoBlocks.forEach(videoBlock => {
-            const section = videoBlock.closest('.abschnitt');
-            if (!section) return;
-
-            function resetVideo() {
-                if (isAutoScrolling) return;
-
-                const iframe = videoBlock.querySelector('iframe');
-                const thumb = videoBlock.querySelector('.video-thumb');
-
-                if (videoBlock.classList.contains('is-playing')) {
-                    if (iframe && iframe.getAttribute('src')) {
-                        iframe.removeAttribute('src');
-                    }
-                    videoBlock.classList.remove('is-playing');
-                    if (thumb) {
-                        thumb.removeAttribute('aria-hidden');
-                        thumb.removeAttribute('tabindex');
-                    }
-                }
-            }
-
-            const isHorizontal = section.classList.contains('abschnitt--horizontal') || section.classList.contains('abschnitt--horizontal-reverse');
-
-            if (isHorizontal) {
-                const contents = gsap.utils.toArray(section.querySelectorAll('.content'));
-                const videoIndex = contents.findIndex(c => c.contains(videoBlock));
-
-                ScrollTrigger.create({
-                    trigger: section,
-                    start: () => {
-                        const st = ScrollTrigger.getAll().find(s => s.trigger === section && s.pin === true);
-                        if (!st || videoIndex === -1) return "top top";
-                        const totalScroll = window.innerWidth * (contents.length - 1) * horizontalSpeedFactor;
-                        const cardWidthInScroll = totalScroll / (contents.length - 1);
-                        // videoIndex * cardWidthInScroll ist der Punkt im Scroll-Weg, an dem die Karte im Viewport zentriert ist
-                        const cardCenter = st.start + (videoIndex * cardWidthInScroll);
-                        // Wir verstecken die UI, wenn die Karte zu 25% sichtbar wird
-                        return cardCenter - (window.innerWidth * 0.75);
-                    },
-                    end: () => {
-                        const st = ScrollTrigger.getAll().find(s => s.trigger === section && s.pin === true);
-                        if (!st || videoIndex === -1) return "bottom top";
-                        const totalScroll = window.innerWidth * (contents.length - 1) * horizontalSpeedFactor;
-                        const cardWidthInScroll = totalScroll / (contents.length - 1);
-                        const cardCenter = st.start + (videoIndex * cardWidthInScroll);
-                        // Wir zeigen die UI wieder, wenn die Karte zu 75% den Viewport verlassen hat
-                        return cardCenter + (window.innerWidth * 0.75);
-                    },
-                    onToggle: self => {
-                        if (self.isActive) {
-                            // gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
-                        } else {
-                            resetVideo();
-                            // Nur einblenden, wenn kein anderer Video-Trigger aktiv ist
-                            const anyActive = ScrollTrigger.getAll().some(st => st.vars.isUiTrigger && st.isActive);
-                            if (!anyActive) {
-                                gsap.to(uiElements, { autoAlpha: 1, duration: 0.5, overwrite: true });
-                            }
-                        }
-                    },
-                    isUiTrigger: true
-                });
-            } else {
-                ScrollTrigger.create({
-                    trigger: videoBlock,
-                    start: 'top bottom',
-                    end: 'bottom top',
-                    onToggle: self => {
-                        if (self.isActive) {
-                            // gsap.to(uiElements, { autoAlpha: 0, duration: 0.5, overwrite: true });
-                        } else {
-                            resetVideo();
-                            const anyActive = ScrollTrigger.getAll().some(st => st.vars.isUiTrigger && st.isActive);
-                            if (!anyActive) {
-                                gsap.to(uiElements, { autoAlpha: 1, duration: 0.5, overwrite: true });
-                            }
-                        }
-                    },
-                    isUiTrigger: true
-                });
-            }
-        });
-    })();
 
 
 });
+
+

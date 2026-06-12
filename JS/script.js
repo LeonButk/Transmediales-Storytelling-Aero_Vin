@@ -472,10 +472,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 250); // Debounce: wait 250ms after resize stops
     });
 
-
-
-
-
 });
 
 

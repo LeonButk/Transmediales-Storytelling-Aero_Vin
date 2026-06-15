@@ -858,7 +858,7 @@ body.frames-hidden .frame-toggle__toggle span{
 
 .NLHeader{
     font-family: "Cormorant", serif;
-    font-size: 6rem;
+    font-size: 3.5rem;
     font-weight: 400;
     position: absolute;
     top: 7vh;
@@ -866,26 +866,25 @@ body.frames-hidden .frame-toggle__toggle span{
 }
 
 .newsletterWrapper{
-    font-size: 3rem;
+    font-size: 2rem;
     font-family: "Inter", serif;
-    width: 65%;
-    letter-spacing: 0.5px;
-    line-height: 96%;
-    font-weight: 300;
+    width: 60%;
+    line-height: 120%;
+    font-weight: 200;
 }
 
 .signup-btn{
+    margin-top: 1rem;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    padding: 0.7rem 1rem 0.7rem 1rem;
+    padding: 0.7rem 2rem 0.7rem 2rem;
     color: #f1f1f1;
     font-family: "Inter", serif;
     font-size: 2.5rem;
-    letter-spacing: 0.5px;
-    font-weight: 400;
+    font-weight: 300;
     background: transparent;
     border: none;
 }
@@ -900,30 +899,34 @@ body.frames-hidden .frame-toggle__toggle span{
     content: "";
     position: absolute;
     top: -0.7vh;
-    left: -1vw;
-    width: 8vw;
-    height: 4vh;
+    left: 0;
+    width: 50%;
+    height: 50%;
 
-    border-top: 0.4rem solid #f1f1f1;
-    border-left: 0.4rem solid #f1f1f1;
+    border-top: 0.3rem solid #f1f1f1;
+    border-left: 0.3rem solid #f1f1f1;
+
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .signup-btn::after {
     content: "";
     position: absolute;
     bottom: -0.7vh;
-    right: -1vw;
-    width: 8vw;
-    height: 4vh;
+    right: 0;
+    width: 50%;
+    height: 50%;
 
-    border-bottom: 0.4rem solid #f1f1f1;
-    border-right: 0.4rem solid #f1f1f1;
+    border-bottom: 0.3rem solid #f1f1f1;
+    border-right: 0.3rem solid #f1f1f1;
+
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 .signup-btn:hover::before, .signup-btn:hover::after {
-    width: 110%;
-    height: 110%;
-    transition: width 0.3s ease, height 0.3s ease;
+    width: calc(100% - 0.3vw);
+    height: calc(100% + 0.7vh);
+    cursor: pointer;
 }
 
 @media (max-width: 1492px){

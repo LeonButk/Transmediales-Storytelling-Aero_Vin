@@ -1,4 +1,4 @@
-const horizontalSpeedFactor = 1.8; // Größer = langsameres horizontales Scrollen
+const horizontalSpeedFactor = 1.5; // Größer = langsameres horizontales Scrollen
 
 // Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante
 function setupHorizontalSections() {

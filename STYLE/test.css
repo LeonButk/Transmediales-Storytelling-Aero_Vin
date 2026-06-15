@@ -876,8 +876,9 @@ body.frames-hidden .frame-toggle__toggle span{
 
 .signup-btn{
     position: relative;
-    display: inline-flex;
+    display: flex;
     align-items: center;
+    justify-content: center;
     gap: 1rem;
     padding: 0.7rem 1rem 0.7rem 1rem;
     color: #f1f1f1;
@@ -885,30 +886,44 @@ body.frames-hidden .frame-toggle__toggle span{
     font-size: 2.5rem;
     letter-spacing: 0.5px;
     font-weight: 400;
+    background: transparent;
+    border: none;
+}
+
+.signup-btn img {
+    height: 2.5rem;
+    width: auto;
+    display: block;
 }
 
 .signup-btn::before {
     content: "";
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 120px;
-    height: 80px;
+    top: -0.7vh;
+    left: -1vw;
+    width: 8vw;
+    height: 4vh;
 
-    border-top: 8px solid white;
-    border-left: 8px solid white;
+    border-top: 0.4rem solid #f1f1f1;
+    border-left: 0.4rem solid #f1f1f1;
 }
 
 .signup-btn::after {
     content: "";
     position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 120px;
-    height: 80px;
+    bottom: -0.7vh;
+    right: -1vw;
+    width: 8vw;
+    height: 4vh;
 
-    border-bottom: 8px solid white;
-    border-right: 8px solid white;
+    border-bottom: 0.4rem solid #f1f1f1;
+    border-right: 0.4rem solid #f1f1f1;
+}
+
+.signup-btn:hover::before, .signup-btn:hover::after {
+    width: 110%;
+    height: 110%;
+    transition: width 0.3s ease, height 0.3s ease;
 }
 
 @media (max-width: 1492px){

@@ -1015,7 +1015,8 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .frame:nth-of-type(1){
-        width: 84vw;
+        width: 76vw;
+        left: 12vw;
     }
 
     .frame:nth-of-type(2){
@@ -1027,7 +1028,8 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .frame:nth-of-type(4){
-        height: 47vh;
+        height: 34vh;
+        top: 18vh;
     }
 
     .unterabschnitt--ueberleitung{

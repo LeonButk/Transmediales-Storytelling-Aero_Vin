@@ -214,6 +214,8 @@ body.frames-hidden .frame-toggle__toggle span{
     display: flex;
     justify-content: center;
     flex-direction: column;
+    font-size: 2rem;
+    padding-top: 2rem;
 }
 
 .page-selector a{
@@ -234,7 +236,6 @@ body.frames-hidden .frame-toggle__toggle span{
     background: #f1f1f1;
     backdrop-filter: blur(8px);
     flex-direction: column;
-    gap: 5rem;
     /* start off-screen to the right */
     transform: translateX(110%);
     transform-origin: top right;
@@ -289,9 +290,7 @@ body.frames-hidden .frame-toggle__toggle span{
     display: flex;
     align-items: center;
     gap: 1rem;
-    margin-bottom: 2rem;
     padding: 0.8rem;
-    border-bottom: 2px solid #232323;
     justify-content: start;
 }
 
@@ -330,15 +329,28 @@ body.frames-hidden .frame-toggle__toggle span{
     padding: 0.5rem;
 }
 
-.subPage-container{
+.link-wrapper{
+    display: flex;
+    align-items: start;
+    gap: 2rem;
+    flex-direction: column;
+    margin: 2rem 0 2rem 0;
     border-top: 2px solid #232323;
-    margin-top: 1.5rem;
+    border-bottom: 2px solid #232323;
+}
+
+.subPage-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 .subPage-container a{
-    color: #9c9c9c;
+    color: #232323;
     font-family: "Inter", serif;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }
 
 .subPage-container a:hover{
@@ -346,11 +358,29 @@ body.frames-hidden .frame-toggle__toggle span{
     transition-duration: 1s;
 }
 
+.externalPages-container{
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    font-size: 2rem;
+    width: 100%;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+
+.externalPages-container a{
+    color: #232323;
+}
+
+.subPage{
+    color: #232323;
+}
+
 .menu__nav a{
 
     text-decoration: none;
     font-family: "Inter", serif;
-    font-size: 2rem;
     padding: 0.45rem 0.6rem;
     border-radius: 0.6rem;
     transition: background-color 0.2s ease, transform 0.2s ease;
@@ -933,7 +963,6 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .language-selector {
         gap: 0.8rem;
-        margin-bottom: 1.5rem;
         padding: 0.6rem;
     }
 

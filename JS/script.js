@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const menu = document.querySelector('.menu');
     const menuToggle = document.querySelector('.menu__toggle');
-    const menuLinks = document.querySelectorAll('.menu__nav a');
+    const menuLinks = document.querySelectorAll('.subPage');
     const frameToggle = document.querySelector('.frame-toggle__toggle');
 
     function setFrameVisibility(shouldShowFrames) {

@@ -196,6 +196,25 @@ document.addEventListener('DOMContentLoaded', function() {
     const menuToggle = document.querySelector('.menu__toggle');
     const menuLinks = document.querySelectorAll('.subPage');
     const frameToggle = document.querySelector('.frame-toggle__toggle');
+    const frameToggleImg = frameToggle?.querySelector('img');
+
+    function updateFrameToggleImage(isHover = false) {
+        if (!frameToggleImg) return;
+
+        const framesVisible = !document.body.classList.contains('frames-hidden');
+
+        if (isHover) {
+            // Beim Hover immer den gegenteiligen Zustand anzeigen
+            frameToggleImg.src = framesVisible
+                ? 'ASSETS/IMAGES/FrameAus.svg'
+                : 'ASSETS/IMAGES/FrameAn.svg';
+        } else {
+            // Aktuellen Zustand anzeigen
+            frameToggleImg.src = framesVisible
+                ? 'ASSETS/IMAGES/FrameAn.svg'
+                : 'ASSETS/IMAGES/FrameAus.svg';
+        }
+    }
 
     function setFrameVisibility(shouldShowFrames) {
         const body = document.body;
@@ -205,8 +224,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (frameToggle) {
             frameToggle.setAttribute('aria-pressed', String(shouldShowFrames));
-            frameToggle.setAttribute('aria-label', shouldShowFrames ? 'Rahmen ausblenden' : 'Rahmen einblenden');
+            frameToggle.setAttribute(
+                'aria-label',
+                shouldShowFrames
+                    ? 'Rahmen ausblenden'
+                    : 'Rahmen einblenden'
+            );
         }
+
+        updateFrameToggleImage();
     }
 
     if (frameToggle) {
@@ -216,6 +242,14 @@ document.addEventListener('DOMContentLoaded', function() {
         frameToggle.addEventListener('click', () => {
             const shouldShowFrames = document.body.classList.contains('frames-hidden');
             setFrameVisibility(shouldShowFrames);
+        });
+
+        frameToggle.addEventListener('mouseenter', () => {
+            updateFrameToggleImage(true);
+        });
+
+        frameToggle.addEventListener('mouseleave', () => {
+            updateFrameToggleImage(false);
         });
     }
 

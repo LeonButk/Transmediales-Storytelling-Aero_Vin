@@ -101,14 +101,15 @@ body::before {
 .frame-toggle{
     position: fixed;
     top: 6vh;
-    left: 4.75vw;
+    left: 4vw;
     z-index: 20010;
+
 }
 
 .frame-toggle__toggle{
-    width: 4rem;
-    height: 4rem;
-    border: 0;
+    width: 5.5rem;
+    height: 5.5rem;
+    border: none;
     border-radius: 0;
     background: transparent;
     position: relative;
@@ -118,7 +119,10 @@ body::before {
     box-shadow: none;
     transition: transform 180ms ease, box-shadow 180ms ease;
     z-index: 20011;
-    --bar-gap: 1rem;
+}
+
+.frame-toggle__toggle:hover{
+    transform: translateY(-3px) scale(1.1);
 }
 
 .frame-toggle__toggle:focus-visible{
@@ -126,39 +130,6 @@ body::before {
     outline-offset: 4px;
     border-radius: 4px;
     transform: translateY(-3px) scale(1.03);
-}
-
-.frame-toggle__toggle span{
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    display: block;
-    width: 3rem;
-    height: 0.34rem;
-    background: #ffffff;
-    transform-origin: center center;
-    transition: transform 0.28s cubic-bezier(.2,.9,.2,1), opacity 0.18s ease, background 120ms ease;
-    will-change: transform, opacity;
-}
-
-.frame-toggle__toggle span:nth-child(1){ top: calc(50% - var(--bar-gap)); }
-.frame-toggle__toggle span:nth-child(2){ top: 50%; }
-.frame-toggle__toggle span:nth-child(3){ top: calc(50% + var(--bar-gap)); }
-
-.frame-toggle__toggle:hover{
-    transform: translateY(-3px) scale(1.03);
-}
-
-.frame-toggle__toggle:hover span:nth-child(1){
-    transform: translate(-50%, -50%) translateX(6px);
-}
-
-.frame-toggle__toggle:hover span:nth-child(2){
-    transform: translate(-50%, -50%) scaleX(0.98);
-}
-
-.frame-toggle__toggle:hover span:nth-child(3){
-    transform: translate(-50%, -50%) translateX(-6px);
 }
 
 body.frames-hidden .frame{
@@ -436,9 +407,9 @@ body.frames-hidden .frame-toggle__toggle span{
 }
 
 .frame:nth-of-type(1){
-    width: 86.5vw;
+    width: 82vw;
     height: 0.9vh;
-    left: 4.5vw;
+    left: 9vw;
     top: 6vh;
 }
 
@@ -458,8 +429,8 @@ body.frames-hidden .frame-toggle__toggle span{
 
 .frame:nth-of-type(4){
     width: 0.9vh;
-    height: 41vh;
-    top: 6vh;
+    height: 32vh;
+    top: 15vh;
     left: 4.5vw;
 }
 

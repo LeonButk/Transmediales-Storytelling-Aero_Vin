@@ -7,7 +7,7 @@
 
     /* 👉 macht die Form optisch dicker */
     stroke: #f1f1f1;
-    stroke-width: 20; /* ≈ wirkt wie +5px außen */
+    stroke-width: 50; /* ≈ wirkt wie +5px außen */
 
     }
   </style>

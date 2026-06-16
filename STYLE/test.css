@@ -8,6 +8,13 @@
     src: url('../ASSETS/FONTS/Inter.ttf');
 }
 
+:root{
+    --infoPosY: 9vh;
+    --infoPosX: 6vw;
+    --col-Schwarz: #232323;
+    --col-Weiß: #f1f1f1;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -100,9 +107,9 @@ body::before {
 
 .frame-toggle{
     position: fixed;
-    top: 6vh;
-    left: 4vw;
-    z-index: 20010;
+    top: 4.5vh;
+    left: 3.5vw;
+    z-index: 10;
 
 }
 
@@ -118,7 +125,7 @@ body::before {
     padding: 0;
     box-shadow: none;
     transition: transform 180ms ease, box-shadow 180ms ease;
-    z-index: 20011;
+    z-index: 10;
 }
 
 .frame-toggle__toggle:hover{
@@ -594,10 +601,12 @@ body.frames-hidden .frame-toggle__toggle span{
     letter-spacing: -0.05rem;
 }
 
+
+
 .infoWrapper{
     position: absolute;
-    top:9vh;
-    left: 5vw;
+    top: var(--infoPosY);
+    left: var(--infoPosX);
     display: flex;
     flex-direction: column;
     align-items: start;
@@ -944,6 +953,11 @@ body.frames-hidden .frame-toggle__toggle span{
 
 @media (max-width: 1492px){
 
+    :root{
+        --infoPosY: 13vh;
+        --infoPosX: 12vw;
+    }
+
     .language-selector {
         gap: 0.8rem;
         padding: 0.6rem;
@@ -972,8 +986,13 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .infoWrapper{
-        top: 13vh;
-        left: 16vh;
+        top: var(--infoPosY);
+        left: var(--infoPosX);
+    }
+
+    .NLHeader{
+        top: var(--infoPosY);
+        left: var(--infoPosX);
     }
 
     .titel{

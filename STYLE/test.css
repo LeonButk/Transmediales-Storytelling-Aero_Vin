@@ -1213,3 +1213,35 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
 }
+
+@media (max-width: 1024px) {
+    .footer__container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer__nav {
+        justify-content: flex-start;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 32px 24px;
+    }
+
+    .footer__info-wrapper {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .footer__title {
+        font-size: 2.25rem;
+        margin-bottom: 24px;
+    }
+
+    .footer__nav {
+        flex-direction: column;
+    }
+}

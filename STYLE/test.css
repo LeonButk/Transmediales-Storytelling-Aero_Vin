@@ -137,6 +137,18 @@ body.frames-hidden .frame{
     pointer-events: none;
 }
 
+body.aeroVin-hidden .aeroVin{
+    opacity: 0;
+    pointer-events: none;
+    display: none !important;
+}
+
+body.momentum-hidden .momentum{
+    opacity: 0;
+    pointer-events: none;
+    display: none !important;
+}
+
 body.frames-hidden .frame-toggle__toggle span{
     background: rgba(255,255,255,0.72);
 }

@@ -221,6 +221,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const isHidden = !shouldShowFrames;
 
         body.classList.toggle('frames-hidden', isHidden);
+        body.classList.toggle('aeroVin-hidden', isHidden);
+        body.classList.toggle('momentum-hidden', isHidden);
 
         if (frameToggle) {
             frameToggle.setAttribute('aria-pressed', String(shouldShowFrames));

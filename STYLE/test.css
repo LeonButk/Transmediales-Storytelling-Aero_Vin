@@ -508,7 +508,7 @@ body.frames-hidden .frame-toggle__toggle span{
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: "Cormorant";
+    font-family: "Cormorant", serif;
     color: var(--col-Weiß);
     font-size: 3.5rem;
     opacity: 1;

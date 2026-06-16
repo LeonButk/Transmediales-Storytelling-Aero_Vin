@@ -419,7 +419,7 @@ body.frames-hidden .frame-toggle__toggle span{
 
 .frame{
     position: fixed;
-    background-color: white;
+    background-color: var(--col-Weiß);
     /* raise frames above section content so images sit visually underneath */
     z-index: 2 !important;
     transition: opacity 0.25s ease;
@@ -500,7 +500,6 @@ body.frames-hidden .frame-toggle__toggle span{
 }
 
 .introText{
-    /* center intro text horizontally and vertically in the viewport */
     position: absolute;
     left: 50%;
     top: 50%;
@@ -510,13 +509,13 @@ body.frames-hidden .frame-toggle__toggle span{
     justify-content: center;
     text-align: center;
     font-family: "Cormorant";
-    color: white;
+    color: var(--col-Weiß);
     font-size: 3.5rem;
     opacity: 1;
-    max-width: 50%; /* limit width relative to viewport for better centering */
+    max-width: 55%;
     width: calc(100% - 10vw);
     line-height: 3.6rem;
-    z-index: 3 !important; /* ensure it's visible above video but below UI if needed */
+    z-index: 3 !important;
 }
 
 .versalien {
@@ -534,7 +533,7 @@ body.frames-hidden .frame-toggle__toggle span{
     align-items: center;
     justify-content: center;
     font-family: "Inter", serif;
-    color: white;
+    color: var(--col-Weiß);
     font-size: 1.5rem;
     opacity: 0;
     margin: 0;
@@ -550,7 +549,7 @@ body.frames-hidden .frame-toggle__toggle span{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--col-Weiß);
     flex-direction: column;
 }
 
@@ -586,22 +585,20 @@ body.frames-hidden .frame-toggle__toggle span{
 
 .zitat{
     position: absolute;
-    top: 6rem;
-    left: 9rem;
+    top: 11vh;
+    left: 13vw;
     font-family: "Cormorant", serif;
     font-size: 2rem;
-    max-width: 50%;
+    max-width: 35%;
     line-height: 3.6rem;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.2));
-    color: white;
+    color: var(--col-Weiß);
 }
 
 .zitat h1{
     font-weight: 300;
     letter-spacing: -0.05rem;
 }
-
-
 
 .infoWrapper{
     position: absolute;
@@ -619,7 +616,7 @@ body.frames-hidden .frame-toggle__toggle span{
     font-family: "Cormorant", serif;
     color: #fff;
     z-index: 1 !important;
-    max-width: 32vw;
+    max-width: 30vw;
     margin: 0;
     font-weight: 400;
 }
@@ -645,6 +642,45 @@ body.frames-hidden .frame-toggle__toggle span{
     flex-direction: column;
 }
 
+.concept--text{
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+}
+
+.partnerWrapper{
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    color: var(--col-Weiß);
+    font-family: 'Inter', serif;
+    gap: 1rem;
+    padding: 0 10vw 0 10vw;
+    width: 100vw;
+    flex-wrap: wrap;
+}
+
+.partnerWrapper img{
+    height: 8vh;
+    width: auto;
+}
+
+.footer{
+    height: 15vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--col-Weiß);
+    color: var(--col-Schwarz);
+    font-family: 'Inter', serif;
+}
+
 .unterabschnitt--media{
     align-items: stretch;
     justify-content: stretch;
@@ -657,7 +693,7 @@ body.frames-hidden .frame-toggle__toggle span{
     font-size: 1.7rem;
     padding: 8vh 10vw;
     text-align: left;
-    color: white;
+    color: var(--col-Weiß);
     letter-spacing: 1.2px;
     font-weight: 200;
     line-height: 1.18;
@@ -671,6 +707,23 @@ body.frames-hidden .frame-toggle__toggle span{
 
 .unterabschnitt--text p,
 .text p{
+    max-width: 40vw;
+    margin: 0;
+    line-height: 1.18;
+}
+.concept--text{
+    font-family: "Inter", serif;
+    font-size: 1.7rem;
+    padding: 8vh 10vw;
+    text-align: left;
+    color: var(--col-Weiß);
+    font-weight: 200;
+    line-height: 1.18;
+    display: flex;
+    flex-direction: column;
+}
+
+.concept--text p{
     max-width: 40vw;
     margin: 0;
     line-height: 1.18;
@@ -802,7 +855,7 @@ body.frames-hidden .frame-toggle__toggle span{
 .abschnitt__horizontal {
     display: flex;
     overflow-x: hidden;
-    color: white;
+    color: var(--col-Weiß);
     font-family: "KuahAyman", sans-serif;
 }
 
@@ -827,7 +880,7 @@ body.frames-hidden .frame-toggle__toggle span{
 }
 
 .abschnitt__card--horizontal p{
-    max-width: 60vw;
+    max-width: 50vw;
     margin: 0;
     line-height: 1.18;
     font-size: 1.7rem;
@@ -853,17 +906,6 @@ body.frames-hidden .frame-toggle__toggle span{
     font-family: "KuahAyman", sans-serif;
     flex-direction: row-reverse;
 }
-
-/* ensure abschnitt2 sits above the horizontal section */
-#abschnitt2{
-    position: relative;
-    overflow: visible;
-}
-
-#abschnitt3{
-    position: relative;
-}
-
 
 .aeroVinText{
     font-family: "Cormorant", serif
@@ -1075,7 +1117,12 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .unterabschnitt--text p,
     .text p{
-        max-width: 60vw;
+        max-width: 50vw;
+        line-height: 1.18;
+    }
+
+    .concept--text p{
+        max-width: 50vw;
         line-height: 1.18;
     }
 

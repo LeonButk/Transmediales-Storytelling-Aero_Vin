@@ -658,24 +658,25 @@ body.frames-hidden .frame-toggle__toggle span{
     width: 100vw;
     align-items: center;
     justify-content: center;
-    padding-bottom: 5vh;
+    margin-bottom: 5vh;
 }
 
 .partnerTitel{
-    font-family: "Cormorant", serif;
+    font-family: "Inter", serif;
     font-size: 4rem;
     width: 80%;
     color: var(--col-Weiß);
 }
 
 .partnerWrapper{
-    height: 30vh;
+
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     color: var(--col-Weiß);
     font-family: 'Inter', serif;
     gap: 1rem;
     width: 80%;
+    padding: 2rem;
 }
 
 .partner{

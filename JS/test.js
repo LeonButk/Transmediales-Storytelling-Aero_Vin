@@ -1,3 +1,7 @@
+ScrollTrigger.defaults({
+    scroller: "#scroll-container"
+});
+
 const horizontalSpeedFactor = 1.5; // Größer = langsameres horizontales Scrollen
 document.documentElement.style.setProperty('--initial-vh', window.innerHeight * 0.01 + 'px');
 // Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante
@@ -350,7 +354,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     ScrollTrigger.refresh();
                     const trigger = ScrollTrigger.getAll().find(st => st.trigger === target && st.pin);
                     if (trigger) {
-                        window.scrollTo({
+                        document.getElementById('scroll-container').scrollTo({
                             top: Math.max(0, trigger.start + 1),
                             behavior: 'smooth'
                         });
@@ -456,7 +460,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                         console.log("Scrolling horizontal zu:", targetY, "Index:", videoIndex);
 
-                        gsap.to(window, {
+                        gsap.to("#scroll-container",  {
                             scrollTo: targetY,
                             duration: 1.2,
                             ease: "power2.inOut",
@@ -486,7 +490,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 console.log("Scrolling vertikal zu:", targetY, "Rect Top:", rect.top, "ScrollTop:", scrollTop);
 
-                gsap.to(window, {
+                gsap.to("#scroll-container", {
                     scrollTo: targetY,
                     duration: 1.2,
                     ease: "power2.inOut",

@@ -68,9 +68,9 @@ function setupHorizontalSections() {
                         pin: true,
 
                         // FIX: nicht komplett aus, sonst Spring-Verhalten
-                        scrub: 0.2,
+                        scrub: 0.1,
 
-                        invalidateOnRefresh: true,
+                        invalidateOnRefresh: false,
 
                         // FIX: stabile Scroll-Länge (WICHTIG!)
                         end: () =>

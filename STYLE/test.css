@@ -1290,17 +1290,73 @@ body.frames-hidden .frame-toggle__toggle span{
     .menu__nav a{
         padding: 0.2rem 0;
     }
+
 }
 
 @media (max-width: 576px) {
 
-    .frame{
+    .frame, .aeroVin, .momentum{
         position: absolute !important;
+    }
+
+    .aeroVin h1{
+        font-size: 3rem;
+        left: 16dvw;
+        bottom: 6dvh;
+    }
+
+    .momentum h1{
+        font-size: 3rem;
+        top: 44dvh;
+        right: 6dvw;
+    }
+
+    .frame:nth-of-type(1){
+        top: 6dvh;
+        left: 7dvw;
+        width: 70dvw;
+        height: 0.7dvh;
+    }
+
+    .frame:nth-of-type(2){
+        bottom: 6dvh;
+        height: 44dvh;
+        right: 7dvw;
+        width: 0.7dvh;
+    }
+
+    .frame:nth-of-type(3){
+        bottom: 6dvh;
+        width: 74dvw;
+        right: 7dvw;
+        height: 0.7dvh;
+    }
+
+    .frame:nth-of-type(4){
+        top: 6dvh;
+        left: 7dvw;
+        height: 61dvh;
+        width: 0.7dvh;
+    }
+
+    .menu{
+        top: 5dvh;
+        right: 5.5dvw;
+    }
+
+    .menu__toggle span{
+        height: 0.7dvh;
+        --bar-gap: 0.9rem;
+        width: 9dvw;
     }
 
     .frame-toggle{
         display: none;
-        content: "";
+    }
+
+    .introText{
+        font-size: 1.8rem;
+        line-height: 1.2;
     }
 
     .partnerWrapper {

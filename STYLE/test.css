@@ -1280,6 +1280,27 @@ body.frames-hidden .frame-toggle__toggle span{
     .partnerWrapper {
         grid-template-columns: repeat(2, 1fr);
     }
+
+    .abschnitt__horizontal,
+    .abschnitt__horizontal--reverse {
+        display: flex;
+        flex-direction: column !important;
+        width: 100% !important;
+        height: auto !important;
+        transform: none !important;
+    }
+
+    .abschnitt__horizontal .content,
+    .abschnitt__horizontal--reverse .content {
+        width: 100% !important;
+        min-height: 100dvh;
+        height: auto !important;
+
+        transform: none !important;
+        position: relative !important;
+        left: auto !important;
+        top: auto !important;
+    }
 }
 
 @media (max-height: 700px){

@@ -56,7 +56,7 @@ function setupHorizontalSections() {
                     transform: "translateZ(0)"
                 });
 
-                gsap.to(container, {
+                gsap.to(contents, {
                     xPercent: isReverse
                         ? 100 * (contents.length - 1)
                         : -100 * (contents.length - 1),
@@ -65,12 +65,16 @@ function setupHorizontalSections() {
 
                     scrollTrigger: {
                         trigger: section,
-                        pin: true,
-                        scrub: 0.2,
-                        anticipatePin: 1,
-                        invalidateOnRefresh: true,
+
+                        start: "top top",
+
                         end: () =>
-                            "+=" + (window.innerWidth * (contents.length - 1) * horizontalSpeedFactor)
+                            "+=" + (window.innerWidth * (contents.length - 1)),
+
+                        pin: true,              // 🔥 WICHTIG: bleibt AN
+                        scrub: 0.2,             // 🔥 smoother ohne lag
+                        anticipatePin: 1,       // 🔥 verhindert Jump beim Eintritt
+                        invalidateOnRefresh: true
                     }
                 });
             });

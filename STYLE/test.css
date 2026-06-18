@@ -1363,13 +1363,19 @@ body.frames-hidden .frame-toggle__toggle span{
         grid-template-columns: 1fr;
     }
 
+    body {
+        margin: 0;
+        position: relative;
+    }
+
     .bg {
         position: fixed;
         inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        z-index: -1;
+        background-image: url("../ASSETS/IMAGES/test.webp");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        z-index: 0;
     }
 
     main, header {

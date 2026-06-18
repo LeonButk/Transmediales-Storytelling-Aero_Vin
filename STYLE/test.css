@@ -32,14 +32,16 @@ body {
     padding: 0;
     font-size: 62.5%;
     min-height: 100dvh;
-    height: auto;
     overflow-x: hidden;
     background-color: var(--col-Weiß);
-    background-image: url('../ASSETS/IMAGES/test.webp');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    background-size: cover;
+}
+
+.bg {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* dim the rest of the page when the menu is open */
@@ -1363,24 +1365,5 @@ body.frames-hidden .frame-toggle__toggle span{
         grid-template-columns: 1fr;
     }
 
-    body {
-        margin: 0;
-        position: relative;
-    }
-
-    .bg {
-        position: fixed;
-        inset: 0;
-        background-image: url("../ASSETS/IMAGES/test.webp");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        z-index: 0;
-    }
-
-    main, header {
-        position: relative;
-        z-index: 1;
-    }
 }
 

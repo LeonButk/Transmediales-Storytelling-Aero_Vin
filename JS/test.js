@@ -8,6 +8,9 @@ function setupHorizontalSections() {
 
     ScrollTrigger.matchMedia({
 
+        // =========================
+        // DESKTOP
+        // =========================
         "(min-width: 768px)": function () {
 
             sections.forEach(section => {
@@ -39,6 +42,9 @@ function setupHorizontalSections() {
             });
         },
 
+        // =========================
+        // MOBILE
+        // =========================
         "(max-width: 767px)": function () {
 
             sections.forEach(section => {
@@ -61,14 +67,14 @@ function setupHorizontalSections() {
                         trigger: section,
                         pin: true,
 
-                        // FIX: scrub aus → verhindert Mobile lag/jitter
-                        scrub: false,
+                        // FIX: nicht komplett aus, sonst Spring-Verhalten
+                        scrub: 0.2,
 
                         invalidateOnRefresh: true,
 
-                        // FIX: stabiler als window.innerWidth
+                        // FIX: stabile Scroll-Länge (WICHTIG!)
                         end: () =>
-                            "+=" + ((contents.length - 1) * section.offsetWidth * 1.2)
+                            "+=" + ((contents.length - 1) * window.innerWidth * 1.2)
                     }
                 });
             });
@@ -173,29 +179,10 @@ function setupFrameAndTextBuildAnimation() {
 
     frameAnimationTimeline = gsap.timeline();
 
-    frameAnimationTimeline.from(frames[0], {
-        width: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
-
-    frameAnimationTimeline.from(frames[1], {
-        height: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
-
-    frameAnimationTimeline.from(frames[2], {
-        width: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
-
-    frameAnimationTimeline.from(frames[3], {
-        height: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
+    frameAnimationTimeline.from(frames[0], { width: 0, duration: 2, ease: 'power2.out' }, 0);
+    frameAnimationTimeline.from(frames[1], { height: 0, duration: 2, ease: 'power2.out' }, 0);
+    frameAnimationTimeline.from(frames[2], { width: 0, duration: 2, ease: 'power2.out' }, 0);
+    frameAnimationTimeline.from(frames[3], { height: 0, duration: 2, ease: 'power2.out' }, 0);
 
     frameAnimationTimeline.from([bigLeft, bigRight], {
         autoAlpha: 0,
@@ -205,7 +192,7 @@ function setupFrameAndTextBuildAnimation() {
 }
 
 // =========================
-// MAIN INIT
+// INIT
 // =========================
 document.addEventListener('DOMContentLoaded', function () {
 
@@ -225,26 +212,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const framesVisible = !document.body.classList.contains('frames-hidden');
 
-        if (isHover) {
-            frameToggleImg.src = framesVisible
-                ? 'ASSETS/IMAGES/FrameAus.svg'
-                : 'ASSETS/IMAGES/FrameAn.svg';
-        } else {
-            frameToggleImg.src = framesVisible
-                ? 'ASSETS/IMAGES/FrameAn.svg'
-                : 'ASSETS/IMAGES/FrameAus.svg';
-        }
+        frameToggleImg.src = isHover
+            ? (framesVisible ? 'ASSETS/IMAGES/FrameAus.svg' : 'ASSETS/IMAGES/FrameAn.svg')
+            : (framesVisible ? 'ASSETS/IMAGES/FrameAn.svg' : 'ASSETS/IMAGES/FrameAus.svg');
     }
 
-    function setFrameVisibility(shouldShowFrames) {
-        const isHidden = !shouldShowFrames;
+    function setFrameVisibility(shouldShow) {
+        const isHidden = !shouldShow;
 
         document.body.classList.toggle('frames-hidden', isHidden);
         document.body.classList.toggle('aeroVin-hidden', isHidden);
         document.body.classList.toggle('momentum-hidden', isHidden);
 
         if (frameToggle) {
-            frameToggle.setAttribute('aria-pressed', String(shouldShowFrames));
+            frameToggle.setAttribute('aria-pressed', String(shouldShow));
         }
 
         updateFrameToggleImage();
@@ -261,35 +242,6 @@ document.addEventListener('DOMContentLoaded', function () {
         frameToggle.addEventListener('mouseenter', () => updateFrameToggleImage(true));
         frameToggle.addEventListener('mouseleave', () => updateFrameToggleImage(false));
     }
-
-    // =========================
-    // LANGUAGE
-    // =========================
-    (function setupLanguageSelection() {
-        const languageSelect = document.getElementById('language-select');
-        if (!languageSelect) return;
-
-        const languagePages = {
-            'de': 'indexGer.html',
-            'da': 'index.html',
-            'en': 'index.html'
-        };
-
-        const saved = localStorage.getItem('selectedLanguage') || 'de';
-        languageSelect.value = saved;
-
-        document.documentElement.setAttribute('lang', saved);
-
-        languageSelect.addEventListener('change', function () {
-            const lang = this.value;
-            localStorage.setItem('selectedLanguage', lang);
-            document.documentElement.setAttribute('lang', lang);
-
-            if (languagePages[lang]) {
-                window.location.href = languagePages[lang];
-            }
-        });
-    })();
 
     // =========================
     // MENU
@@ -319,7 +271,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     target.classList.contains('abschnitt--horizontal') ||
                     target.classList.contains('abschnitt--horizontal-reverse');
 
-                if (isHorizontal) {
+                if (isHorizontal && typeof ScrollTrigger !== 'undefined') {
                     ScrollTrigger.refresh();
                 }
 
@@ -341,7 +293,7 @@ document.addEventListener('DOMContentLoaded', function () {
     revealIntroText();
 
     // =========================
-    // REFRESH (stabilisiert mobile scroll)
+    // REFRESH
     // =========================
     let resizeTimeout;
     window.addEventListener('resize', () => {

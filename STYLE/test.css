@@ -1084,6 +1084,11 @@ body.frames-hidden .frame-toggle__toggle span{
     cursor: pointer;
 }
 
+.footer {
+    position: relative;
+    z-index: 10;
+}
+
 
 @media (max-width: 1492px){
 
@@ -1454,11 +1459,6 @@ body.frames-hidden .frame-toggle__toggle span{
     .signup-btn:after{
         border-bottom: 0.2rem solid #f1f1f1;
         border-right: 0.2rem solid #f1f1f1;
-    }
-
-    .footer {
-        position: relative;
-        z-index: 10;
     }
 
 }

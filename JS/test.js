@@ -1,4 +1,4 @@
-const horizontalSpeedFactor = 1.5;
+const horizontalSpeedFactor = 1.4;
 
 // =========================
 // HORIZONTAL SECTIONS
@@ -56,7 +56,7 @@ function setupHorizontalSections() {
                     transform: "translateZ(0)"
                 });
 
-                gsap.to(contents, {
+                gsap.to(container, {
                     xPercent: isReverse
                         ? 100 * (contents.length - 1)
                         : -100 * (contents.length - 1),
@@ -65,16 +65,12 @@ function setupHorizontalSections() {
 
                     scrollTrigger: {
                         trigger: section,
-
-                        start: "top top",
-
+                        pin: true,
+                        scrub: 0.2,
+                        anticipatePin: 1,
+                        invalidateOnRefresh: true,
                         end: () =>
-                            "+=" + (window.innerWidth * (contents.length - 1)),
-
-                        pin: true,              // 🔥 WICHTIG: bleibt AN
-                        scrub: 0.2,             // 🔥 smoother ohne lag
-                        anticipatePin: 1,       // 🔥 verhindert Jump beim Eintritt
-                        invalidateOnRefresh: true
+                            "+=" + (window.innerWidth * (contents.length - 1) * horizontalSpeedFactor)
                     }
                 });
             });

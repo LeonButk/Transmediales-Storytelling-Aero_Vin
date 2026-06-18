@@ -1449,5 +1449,16 @@ body.frames-hidden .frame-toggle__toggle span{
     .abschnitt__horizontal {
         will-change: transform;
     }
+
+    html, body {
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .abschnitt__horizontal,
+    .abschnitt__horizontal .content {
+        will-change: transform;
+        transform: translate3d(0,0,0);
+        backface-visibility: hidden;
+    }
 }
 

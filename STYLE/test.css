@@ -1277,7 +1277,7 @@ body.frames-hidden .frame-toggle__toggle span{
         flex-direction: column;
     }
 
-    .partnersWrapper {
+    .partnerWrapper {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -1365,5 +1365,79 @@ body.frames-hidden .frame-toggle__toggle span{
         grid-template-columns: 1fr;
     }
 
+    .concept--text{
+        font-size: 0.9rem;
+    }
+
+    .einruecker{
+        padding-left: 1.5rem;
+    }
+
+    .zitat{
+        max-width: 70dvw;
+    }
+
+    .zitat h1{
+        font-size: 3rem;
+        line-height: 1.18;
+    }
+
+    .infoWrapper{
+        gap: 0.5rem;
+    }
+
+    .titel{
+        font-size: 2rem;
+        max-width: 70dvw;
+    }
+
+    .teaser, .teaser-vertikal{
+        font-size: 0.9rem;
+        max-width: 70dvw;
+        padding-left: 3dvw;
+        width: 100%;
+    }
+
+    .abschnitt__card--horizontal p{
+        max-width: 70dvw;
+        line-height: 1.3;
+        font-size: 1.2rem;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        max-width: 70dvw;
+        line-height: 1.3;
+        font-size: 1.9rem;
+    }
+
+    .unterabschnitt--text p{
+        max-width: 70dvw;
+        line-height: 1.3;
+        font-size: 1.2rem;
+    }
+
+    .newsletterWrapper{
+        font-size: 1.3rem;
+    }
+
+    .signup-btn{
+        font-size: 1.3rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .signup-btn:before{
+        border-top: 0.2rem solid #f1f1f1;
+        border-left: 0.2rem solid #f1f1f1;
+    }
+
+    .signup-btn:after{
+        border-bottom: 0.2rem solid #f1f1f1;
+        border-right: 0.2rem solid #f1f1f1;
+    }
+
+    .footer {
+        position: relative;
+        z-index: 10;
+    }
 }
 

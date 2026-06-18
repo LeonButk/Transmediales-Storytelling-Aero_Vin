@@ -1439,5 +1439,15 @@ body.frames-hidden .frame-toggle__toggle span{
         position: relative;
         z-index: 10;
     }
+
+    .content {
+        will-change: transform;
+        transform: translateZ(0);
+        backface-visibility: hidden;
+    }
+
+    .abschnitt__horizontal {
+        will-change: transform;
+    }
 }
 

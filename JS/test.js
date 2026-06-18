@@ -9,7 +9,7 @@ function setupHorizontalSections() {
     ScrollTrigger.matchMedia({
 
         // =========================
-        // DESKTOP
+        // DESKTOP (UNCHANGED)
         // =========================
         "(min-width: 768px)": function () {
 
@@ -22,28 +22,23 @@ function setupHorizontalSections() {
 
                 const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
 
-                const xPercentValue = isReverse
-                    ? 100 * (contents.length - 1)
-                    : -100 * (contents.length - 1);
-
                 gsap.to(contents, {
-                    xPercent: xPercentValue,
-                    ease: 'none',
+                    xPercent: isReverse ? 100 * (contents.length - 1) : -100 * (contents.length - 1),
+                    ease: "none",
                     scrollTrigger: {
                         trigger: section,
                         pin: true,
                         scrub: 0.5,
                         invalidateOnRefresh: true,
-
                         end: () =>
-                            "+=" + ((contents.length - 1) * window.innerWidth * horizontalSpeedFactor)
+                            "+=" + (window.innerWidth * (contents.length - 1) * horizontalSpeedFactor)
                     }
                 });
             });
         },
 
         // =========================
-        // MOBILE
+        // MOBILE (STABLE APPLE-SMOOTH MODE)
         // =========================
         "(max-width: 767px)": function () {
 
@@ -56,32 +51,35 @@ function setupHorizontalSections() {
 
                 const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
 
-                const xPercentValue = isReverse
-                    ? 100 * (contents.length - 1)
-                    : -100 * (contents.length - 1);
+                gsap.set(contents, {
+                    willChange: "transform",
+                    transform: "translateZ(0)"
+                });
 
                 gsap.to(contents, {
-                    xPercent: xPercentValue,
-                    ease: 'none',
+                    xPercent: isReverse
+                        ? 100 * (contents.length - 1)
+                        : -100 * (contents.length - 1),
+
+                    ease: "none",
+
                     scrollTrigger: {
                         trigger: section,
-                        pin: true,
 
-                        // FIX: nicht komplett aus, sonst Spring-Verhalten
-                        scrub: 0.1,
+                        start: "top top",
 
-                        invalidateOnRefresh: false,
-
-                        // FIX: stabile Scroll-Länge (WICHTIG!)
                         end: () =>
-                            "+=" + ((contents.length - 1) * window.innerWidth * 1.2)
+                            "+=" + (window.innerWidth * (contents.length - 1)),
+
+                        pin: true,              // 🔥 WICHTIG: bleibt AN
+                        scrub: 0.2,             // 🔥 smoother ohne lag
+                        anticipatePin: 1,       // 🔥 verhindert Jump beim Eintritt
+                        invalidateOnRefresh: true
                     }
                 });
             });
         }
     });
-
-    setupRevealType();
 }
 
 // =========================

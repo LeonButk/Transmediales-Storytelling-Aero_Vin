@@ -43,40 +43,25 @@ function setupHorizontalSections() {
         "(max-width: 767px)": function () {
 
             sections.forEach(section => {
+
                 const container = section.querySelector('.abschnitt__horizontal');
                 if (!container) return;
 
                 const contents = gsap.utils.toArray(container.querySelectorAll('.content'));
                 if (!contents.length) return;
 
-                const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
+                // 🔥 WICHTIG: ALLES RESETTEN
+                gsap.set(container, { clearProps: "all" });
+                gsap.set(contents, { clearProps: "all" });
 
-                gsap.set(contents, {
-                    willChange: "transform",
-                    transform: "translateZ(0)"
+                // 🔥 ScrollTrigger deaktivieren (falls vorher existiert)
+                ScrollTrigger.getAll().forEach(st => {
+                    if (st.trigger === section) st.kill();
                 });
 
-                gsap.to(contents, {
-                    xPercent: isReverse
-                        ? 100 * (contents.length - 1)
-                        : -100 * (contents.length - 1),
-
-                    ease: "none",
-
-                    scrollTrigger: {
-                        trigger: section,
-
-                        start: "top top",
-
-                        end: () =>
-                            "+=" + (window.innerWidth * (contents.length - 1)),
-
-                        pin: true,              // 🔥 WICHTIG: bleibt AN
-                        scrub: 0.2,             // 🔥 smoother ohne lag
-                        anticipatePin: 1,       // 🔥 verhindert Jump beim Eintritt
-                        invalidateOnRefresh: true
-                    }
-                });
+                // Optional: sicherstellen dass nichts pinned bleibt
+                section.style.height = "auto";
+                section.style.overflow = "visible";
             });
         }
     });

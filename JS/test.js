@@ -46,53 +46,53 @@ function setupHorizontalSections() {
         });
     });
 }
-    /*
+/*
 snap: {
-			snapTo:	1 / (contentsRechts.length - 1),
-			duration: 0.5,
-			ease: "power1.in",
-		},
-		end: "+=3500",
+        snapTo:	1 / (contentsRechts.length - 1),
+        duration: 0.5,
+        ease: "power1.in",
+    },
+    end: "+=3500",
+*/
+
+
+
+/*
+snap: {
+            snapTo:	1 / (contentsLinks.length - 1),
+            duration: 0.5,
+            ease: "power1.in",
+        },
+        end: "+=3500",
  */
 
+// Simple fade-in reveal for elements with .reveal-type
+function setupRevealType() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-
-    /*
-    snap: {
-                snapTo:	1 / (contentsLinks.length - 1),
-                duration: 0.5,
-                ease: "power1.in",
-            },
-            end: "+=3500",
-     */
-
-    // Simple fade-in reveal for elements with .reveal-type
-    function setupRevealType() {
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-        const revealEls = document.querySelectorAll('.reveal-type');
-        revealEls.forEach(el => {
-            gsap.from(el, {
-                autoAlpha: 0,
-                duration: 3,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 50%',
-                    end: 'center',
-                    scrub: 0.5,
-                    toggleActions: 'play play reverse reverse',
-                    markers: false
-                }
-            });
+    const revealEls = document.querySelectorAll('.reveal-type');
+    revealEls.forEach(el => {
+        gsap.from(el, {
+            autoAlpha: 0,
+            duration: 3,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 50%',
+                end: 'center',
+                scrub: 0.5,
+                toggleActions: 'play play reverse reverse',
+                markers: false
+            }
         });
-    }
+    });
+}
 
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupRevealType);
-    } else {
-        setupRevealType();
-    }
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupRevealType);
+} else {
+    setupRevealType();
+}
 
 
 
@@ -529,5 +529,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
-
-

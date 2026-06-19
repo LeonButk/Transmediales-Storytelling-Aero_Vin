@@ -1046,6 +1046,8 @@ body.frames-hidden .frame-toggle__toggle span{
 }
 
 .newsletterWrapper{
+    display: flex;
+    flex-direction: column;
     font-size: 2rem;
     font-family: "Inter", serif;
     width: 60%;
@@ -1658,7 +1660,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .concept--text p{
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .bigLabel{
@@ -1670,7 +1672,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .zitat h1{
-        font-size: 2rem;
+        font-size: 1.7rem;
     }
 
     .abschnitt__card--horizontal p, .unterabschnitt--text p{
@@ -1678,11 +1680,12 @@ body.frames-hidden .frame-toggle__toggle span{
         line-height: 1.3;
         font-weight: 200;
         max-width: 75dvw;
-        letter-spacing: 1px;
+
     }
 
     .titel{
         font-size: 1.5rem;
+        line-height: 1.1;
     }
 
     :root{
@@ -1704,6 +1707,76 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .unterabschnitt--ueberleitung p{
         font-size: 1.2rem;
+    }
+
+    .NLHeader{
+        font-size: 2rem;
+        max-width: 70dvw;
+    }
+
+    .newsletterWrapper{
+        font-size: 1rem;
+        gap: 1.5rem;
+    }
+
+    .newsletterWrapper p, .newsletterWrapper button {
+        margin: 0;
+    }
+
+    .newsletterWrapper button{
+        font-size: 1.3rem;
+    }
+
+    .signup-btn{
+        padding: 0.5rem 0.4rem;
+    }
+
+    .signup-btn::before{
+        left: 5.5dvw;
+    }
+
+    .signup-btn::after{
+        right: 5.5dvw;
+    }
+
+    .signup-btn img{
+        height: 2rem;
+    }
+
+    .partnerTitel{
+        font-size: 2rem;
+    }
+
+    .partnerWrapper{
+        gap: 1.5rem;
+    }
+
+    .footer{
+        padding: 1.5rem 1.5rem
+    }
+
+    .footer__container{
+        gap: 1.5rem;
+    }
+
+    .footer__info-wrapper{
+        gap: 0.5rem;
+    }
+
+    .footer_titel{
+        font-size: 2rem;
+    }
+
+    .footer__info p{
+        font-size: 1rem;
+    }
+
+    .footer__nav{
+        gap: 0.5rem;
+    }
+
+    .footer__nav a{
+        font-size: 1rem;
     }
 
 }

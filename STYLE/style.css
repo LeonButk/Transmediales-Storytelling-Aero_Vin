@@ -39,14 +39,6 @@ body {
 
 }
 
-.tester{
-    background-image: src("../ASSETS/IMAGES/test.webp");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-}
-
 .bg{
     position: fixed;
 

@@ -4,7 +4,6 @@ const horizontalSpeedFactor = 1.5;
 // HORIZONTAL SECTIONS
 // ---------------------------
 function setupHorizontalSections() {
-
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const sections = gsap.utils.toArray(
@@ -15,10 +14,7 @@ function setupHorizontalSections() {
         const container = section.querySelector('.abschnitt__horizontal');
         if (!container) return;
 
-        const contents = gsap.utils.toArray(
-            container.querySelectorAll('.content')
-        );
-
+        const contents = gsap.utils.toArray(container.querySelectorAll('.content'));
         if (!contents.length) return;
 
         const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
@@ -48,18 +44,18 @@ function setupHorizontalSections() {
 // ---------------------------
 // INTRO TEXT
 // ---------------------------
-function revealIntroText(){
+function revealIntroText() {
     const introText = document.querySelector('.introText');
     if (!introText) return;
 
     gsap.killTweensOf(introText);
-    gsap.set(introText, {autoAlpha: 0});
+    gsap.set(introText, { autoAlpha: 0 });
 
     gsap.to(introText, {
         autoAlpha: 1,
         duration: 1.2,
-        ease: 'power2.out',
-        delay: 2
+        delay: 2,
+        ease: "power2.out"
     });
 }
 
@@ -68,7 +64,7 @@ function revealIntroText(){
 // VERTICAL REVEAL
 // ---------------------------
 function setupVerticalClassReveal() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+    if (!gsap || !ScrollTrigger) return;
 
     gsap.utils.toArray('.reveal-vertical-text').forEach(el => {
         const section = el.closest('.abschnitt');
@@ -78,11 +74,11 @@ function setupVerticalClassReveal() {
             y: 36,
             autoAlpha: 0,
             duration: 0.8,
-            ease: 'power2.out',
+            ease: "power2.out",
             scrollTrigger: {
                 trigger: section,
-                start: 'top 80%',
-                toggleActions: 'play none none reset'
+                start: "top 80%",
+                toggleActions: "play none none reset"
             }
         });
     });
@@ -95,7 +91,7 @@ function setupVerticalClassReveal() {
 let frameAnimationTimeline = null;
 
 function setupFrameAndTextBuildAnimation() {
-    if (typeof gsap === 'undefined') return;
+    if (!gsap) return;
 
     if (frameAnimationTimeline) frameAnimationTimeline.kill();
 
@@ -106,8 +102,8 @@ function setupFrameAndTextBuildAnimation() {
     if (frames.length < 4 || !bigLeft || !bigRight) return;
 
     frames.forEach(f => {
-        f.style.removeProperty('width');
-        f.style.removeProperty('height');
+        f.style.removeProperty("width");
+        f.style.removeProperty("height");
     });
 
     document.body.offsetHeight;
@@ -127,94 +123,77 @@ function setupFrameAndTextBuildAnimation() {
 
 
 // ---------------------------
-// FRAME TOGGLE (WIEDERHERGESTELLT)
+// FRAME TOGGLE
 // ---------------------------
 function setupFrameToggle() {
     const frameToggle = document.querySelector('.frame-toggle__toggle');
     const frameToggleImg = frameToggle?.querySelector('img');
 
-    function updateFrameToggleImage(isHover = false) {
-        if (!frameToggleImg) return;
-
-        const framesVisible = !document.body.classList.contains('frames-hidden');
-
-        if (isHover) {
-            frameToggleImg.src = framesVisible
-                ? 'ASSETS/IMAGES/FrameAus.svg'
-                : 'ASSETS/IMAGES/FrameAn.svg';
-        } else {
-            frameToggleImg.src = framesVisible
-                ? 'ASSETS/IMAGES/FrameAn.svg'
-                : 'ASSETS/IMAGES/FrameAus.svg';
-        }
-    }
-
-    function setFrameVisibility(shouldShow) {
-        const isHidden = !shouldShow;
-
-        document.body.classList.toggle('frames-hidden', isHidden);
-        document.body.classList.toggle('aeroVin-hidden', isHidden);
-        document.body.classList.toggle('momentum-hidden', isHidden);
-
-        if (frameToggle) {
-            frameToggle.setAttribute('aria-pressed', String(shouldShow));
-            frameToggle.setAttribute(
-                'aria-label',
-                shouldShow ? 'Rahmen ausblenden' : 'Rahmen einblenden'
-            );
-        }
-
-        updateFrameToggleImage();
-    }
-
     if (!frameToggle) return;
 
-    const initialVisible = !document.body.classList.contains('frames-hidden');
-    setFrameVisibility(initialVisible);
+    function update(isHover = false) {
+        const visible = !document.body.classList.contains('frames-hidden');
+
+        if (!frameToggleImg) return;
+
+        frameToggleImg.src = isHover
+            ? (visible ? 'ASSETS/IMAGES/FrameAus.svg' : 'ASSETS/IMAGES/FrameAn.svg')
+            : (visible ? 'ASSETS/IMAGES/FrameAn.svg' : 'ASSETS/IMAGES/FrameAus.svg');
+    }
+
+    function setVisible(show) {
+        document.body.classList.toggle('frames-hidden', !show);
+        document.body.classList.toggle('aeroVin-hidden', !show);
+        document.body.classList.toggle('momentum-hidden', !show);
+
+        frameToggle.setAttribute("aria-pressed", String(show));
+        update();
+    }
+
+    setVisible(!document.body.classList.contains('frames-hidden'));
 
     frameToggle.addEventListener('click', () => {
-        const shouldShow = document.body.classList.contains('frames-hidden');
-        setFrameVisibility(shouldShow);
+        const show = document.body.classList.contains('frames-hidden');
+        setVisible(show);
     });
 
-    frameToggle.addEventListener('mouseenter', () => updateFrameToggleImage(true));
-    frameToggle.addEventListener('mouseleave', () => updateFrameToggleImage(false));
+    frameToggle.addEventListener('mouseenter', () => update(true));
+    frameToggle.addEventListener('mouseleave', () => update(false));
 }
 
 
 // ---------------------------
-// MENU SYSTEM
+// MENU
 // ---------------------------
 function setupMenu() {
-
     const menu = document.querySelector('.menu');
-    const menuToggle = document.querySelector('.menu__toggle');
-    const menuLinks = document.querySelectorAll('.subPage');
+    const toggle = document.querySelector('.menu__toggle');
+    const links = document.querySelectorAll('.subPage');
 
-    function closeMenu() {
-        menu?.classList.remove('is-open');
+    if (!menu || !toggle) return;
+
+    const close = () => {
+        menu.classList.remove('is-open');
         document.body.classList.remove('menu-open');
-        menuToggle?.setAttribute('aria-expanded', 'false');
-    }
+        toggle.setAttribute('aria-expanded', 'false');
+    };
 
-    if (!menu || !menuToggle) return;
-
-    menuToggle.addEventListener('click', () => {
-        const isOpen = menu.classList.toggle('is-open');
-        document.body.classList.toggle('menu-open', isOpen);
-        menuToggle.setAttribute('aria-expanded', String(isOpen));
+    toggle.addEventListener('click', () => {
+        const open = menu.classList.toggle('is-open');
+        document.body.classList.toggle('menu-open', open);
+        toggle.setAttribute('aria-expanded', String(open));
     });
 
-    document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target)) closeMenu();
+    document.addEventListener('click', e => {
+        if (!menu.contains(e.target)) close();
     });
 
-    menuLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
+    links.forEach(l => {
+        l.addEventListener('click', e => {
             e.preventDefault();
-            const target = document.querySelector(link.getAttribute('href'));
-            closeMenu();
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
+            const target = document.querySelector(l.getAttribute('href'));
+            close();
+            target?.scrollIntoView({ behavior: 'smooth' });
         });
     });
 }
@@ -224,32 +203,57 @@ function setupMenu() {
 // VIDEO SYSTEM (MOBILE FIX)
 // ---------------------------
 function setupVideos() {
+    const buttons = document.querySelectorAll('.video-thumb');
 
-    const videoThumbButtons = document.querySelectorAll('.video-thumb');
-
-    function startVideo(btn) {
-        const videoBlock = btn.closest('.video');
-        const iframe = videoBlock?.querySelector('iframe');
+    function play(btn) {
+        const block = btn.closest('.video');
+        const iframe = block?.querySelector('iframe');
         if (!iframe) return;
 
-        const baseSrc = iframe.getAttribute('data-src');
-        if (!baseSrc) return;
+        const base = iframe.dataset.src;
+        const url = base + (base.includes('?') ? '&' : '?') +
+            'autoplay=1&playsinline=1&mute=1&rel=0';
 
-        const joiner = baseSrc.includes('?') ? '&' : '?';
-        const full = baseSrc + joiner + 'autoplay=1&playsinline=1&mute=1&rel=0';
+        if (!iframe.src) iframe.src = url;
 
-        if (!iframe.getAttribute('src')) {
-            iframe.setAttribute('src', full);
-        }
-
-        videoBlock.classList.add('is-playing');
-        btn.setAttribute('aria-hidden', 'true');
-        btn.setAttribute('tabindex', '-1');
+        block.classList.add('is-playing');
     }
 
-    videoThumbButtons.forEach(btn => {
-        btn.addEventListener('click', () => startVideo(btn));
-        btn.addEventListener('touchend', () => startVideo(btn), { passive: true });
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => play(btn));
+        btn.addEventListener('touchend', () => play(btn), { passive: true });
+    });
+}
+
+
+// ---------------------------
+// 🌍 LANGUAGE SWITCH (WIEDER DRIN)
+// ---------------------------
+function setupLanguageSelection() {
+    const select = document.getElementById('language-select');
+    const html = document.documentElement;
+
+    if (!select) return;
+
+    const pages = {
+        de: "indexDE.html",
+        en: "index.html",
+        da: "indexDA.html"
+    };
+
+    const saved = localStorage.getItem("selectedLanguage") || "de";
+
+    select.value = saved;
+    html.setAttribute("lang", saved);
+
+    select.addEventListener("change", function () {
+        const lang = this.value;
+
+        localStorage.setItem("selectedLanguage", lang);
+        html.setAttribute("lang", lang);
+
+        const page = pages[lang];
+        if (page) window.location.href = page;
     });
 }
 
@@ -257,29 +261,25 @@ function setupVideos() {
 // ---------------------------
 // INIT
 // ---------------------------
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
 
-    if (typeof gsap === 'undefined') {
-        console.warn('GSAP fehlt');
-        return;
-    }
-
-    if (gsap.registerPlugin) {
+    if (gsap?.registerPlugin) {
         gsap.registerPlugin(ScrollTrigger);
     }
 
-    setupFrameAndTextBuildAnimation();
     setupHorizontalSections();
     setupVerticalClassReveal();
+    setupFrameAndTextBuildAnimation();
     revealIntroText();
 
     setupMenu();
     setupFrameToggle();
     setupVideos();
+    setupLanguageSelection();
 
     window.addEventListener('resize', () => {
-        clearTimeout(window.__resizeTimer);
-        window.__resizeTimer = setTimeout(() => {
+        clearTimeout(window.__t);
+        window.__t = setTimeout(() => {
             setupFrameAndTextBuildAnimation();
             revealIntroText();
         }, 250);

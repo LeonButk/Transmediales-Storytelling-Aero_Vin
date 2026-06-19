@@ -1418,9 +1418,6 @@ body.frames-hidden .frame-toggle__toggle span{
         max-width: 95dvw;
 
         padding: 1.5rem;
-
-        transform: translateX(110%);
-        transition: transform 0.38s cubic-bezier(.2,.9,.2,1);
     }
 
     .menu__nav .menu__close{
@@ -1537,6 +1534,176 @@ body.frames-hidden .frame-toggle__toggle span{
     .signup-btn::after{
         border-bottom: 0.2rem solid #f1f1f1;
         border-right: 0.2rem solid #f1f1f1;
+    }
+
+}
+
+@media (max-width: 320px) {
+
+    .frame:nth-of-type(1), .frame:nth-of-type(3){
+        height: 0.2rem;
+    }
+
+    .frame:nth-of-type(2), .frame:nth-of-type(4){
+        width: 0.2rem;
+    }
+
+    .frame:nth-of-type(2), .frame:nth-of-type(3){
+        right: 9dvw;
+    }
+
+    .frame:nth-of-type(4), .frame:nth-of-type(1){
+        left: 9dvw;
+    }
+
+    .frame:nth-of-type(1){
+        width: 66dvw;
+    }
+
+    .frame:nth-of-type(2){
+        height: 42dvh;
+    }
+
+    .frame:nth-of-type(3){
+        width: 65dvw;
+    }
+
+    .frame:nth-of-type(4){
+        height: 54dvh;
+    }
+
+    .aeroVin h1{
+        font-size: 2.5rem;
+        left: 20dvw;
+    }
+
+    .momentum h1{
+        font-size: 2rem;
+        top: 44dvh;
+        right: 8dvw;
+    }
+
+    .introText p{
+        font-size: 1rem;
+        max-width: 70dvw;
+    }
+
+    .versalien{
+        font-size: 1.5rem;
+    }
+
+    .menu{
+        right: 4.5dvw;
+        top: 3.5dvh;
+    }
+
+    .menu__toggle span{
+        height: 0.2rem;
+        width: 1.6rem;
+        --bar-gap: 0.6rem;
+    }
+
+    .menu__nav{
+        width: min(80dvw, 550px);
+        max-width: 95dvw;
+
+        padding: 1.5rem;
+    }
+
+    .arrow-svg{
+        height: 7dvh;
+        width: 8dvw;
+    }
+
+    .scrollInfoText p{
+        font-size: 1rem;
+    }
+
+    .menu__nav a{
+        font-size: 0.95rem;
+    }
+
+    .language-label{
+        font-size: 0.8rem;
+    }
+
+    .language-select{
+        font-size: 0.8rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .link-wrapper{
+        gap: 0.2rem;
+    }
+
+    .page-selector, .externalPages-container{
+        gap: 0.1rem;
+    }
+
+    .externalPages-container{
+        padding: 1rem 0 0 0;
+    }
+
+    .menu__nav .menu__close{
+        top: 3.5dvh;
+    }
+
+    .menu__nav .menu__close span{
+        height: 0.2rem;
+        width: 2rem;
+    }
+
+    .concept--text{
+        line-height: 0.7;
+    }
+
+    .concept--text p{
+        font-size: 0.8rem;
+    }
+
+    .bigLabel{
+        font-size: 1rem;
+    }
+
+    .aeroVinText{
+        font-size: 1rem;
+    }
+
+    .zitat h1{
+        font-size: 2rem;
+    }
+
+    .abschnitt__card--horizontal p, .unterabschnitt--text p{
+        font-size: 0.9rem;
+        line-height: 1.3;
+        font-weight: 200;
+        max-width: 75dvw;
+        letter-spacing: 1px;
+    }
+
+    .titel{
+        font-size: 1.5rem;
+    }
+
+    :root{
+        --infoPosY: 10dvh;
+        --infoPosX: 12dvw;
+    }
+
+    .video-thumb-play{
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .video-thumb-play::before{
+        left: 6dvw;
+        border-top: 0.9rem solid transparent;
+        border-bottom: 0.9rem solid transparent;
+        border-left: 1.6rem solid #f1f1f1;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        font-size: 1.2rem;
     }
 
 }

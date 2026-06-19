@@ -1,10 +1,531 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AERO VIN - Momentum</title>
+    <link rel="stylesheet" href="STYLE/style.css">
 </head>
 <body>
-<p>Krasser Text</p>
+
+<img src="ASSETS/IMAGES/test.webp" alt="bild" class="bg">
+
+
+
+<div class="frame"></div>
+<div class="frame"></div>
+<div class="frame"></div>
+<div class="frame"></div>
+
+<div class="frame-toggle">
+    <button class="frame-toggle__toggle" type="button" aria-label="Rahmen ausblenden" aria-pressed="true">
+        <img src="ASSETS/IMAGES/FrameAn.svg" alt="Rahmen Einstellung">
+    </button>
+</div>
+
+<div class="menu">
+    <button class="menu__toggle" type="button" aria-label="Menü öffnen" aria-expanded="false" aria-controls="section-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <nav class="menu__nav" id="section-nav" aria-label="Abschnitte">
+        <div class="language-selector">
+            <label for="language-select" class="language-label">Sprache:</label>
+            <select id="language-select" class="language-select">
+                <option value="de">DE</option>
+                <option value="da">DK</option>
+                <option value="en">EN</option>
+            </select>
+        </div>
+
+        <div class="link-wrapper">
+
+            <div class="page-selector">
+                <a href="#abschnitt1" class="subPage"><span>Start</span><span class="menu__arrow" aria-hidden="true">→</span></a>
+                <a href="#abschnitt3" class="subPage"><span>Vom Filmemacher zum Winzer</span><span class="menu__arrow"
+                                                                                                      aria-hidden="true">→</span></a>
+                <a href="#abschnitt5" class="subPage"><span>Eine Insel kann alles verändern</span><span class="menu__arrow"
+                                                                                                        aria-hidden="true">→</span></a>
+                <a href="#abschnitt7" class="subPage"><span>Der Mentor des dänischen Weins</span><span class="menu__arrow"
+                                                                                                   aria-hidden="true">→</span></a>
+                <a href="#abschnitt9" class="subPage"><span>Klimasegler</span><span class="menu__arrow"
+                                                                                       aria-hidden="true">→</span></a>
+                <a href="#abschnitt11" class="subPage"><span>Wein trifft auf Cool Climate</span><span class="menu__arrow" aria-hidden="true">→</span></a>
+                <a href="#abschnitt13" class="subPage"><span>Erschaffe dein eigenes MOMENTUM</span><span class="menu__arrow"
+                                                                                               aria-hidden="true">→</span></a>
+            </div>
+
+            <div class="externalPages-container">
+                <a href="https://de.aeroe-vin.com/" target="_blank">ÆRØ VIN Homepage<span class="menu__arrow" aria-hidden="true">→</span></a>
+                <a href="https://www.aeroe-vin.com/trail-welcome01" target="_blank">ÆRØ VIN Trail<span class="menu__arrow" aria-hidden="true">→</span></a>
+                <a href="mailto:news@aeroe-vin.com?subject=Newsletter%20Subscription&body=I%20want%20to%20join%20your%20newsletter%20and%20stay%20up%20to%20date.">Newsletter<span class="menu__arrow" aria-hidden="true">→</span></a>
+
+            </div>
+
+        </div>
+
+        <div class="subPage-container">
+            <a href="companyInfo.html" target="_blank">Impressum</a>
+            <a href="#contact" class="subPage">Kontakt</a>
+        </div>
+    </nav>
+</div>
+
+<div class="aeroVin">
+    <h1>ÆRØ VIN</h1>
+</div>
+
+<div class="momentum">
+    <h1>MOMENTUM</h1>
+</div>
+
+
+<div class="abschnitt abschnitt--intro" id="abschnitt1" data-titel=" " data-teaser=" " data-animation-direction="top">
+    <div class="unterabschnitt unterabschnitt--media">
+        <div class="videoIntro">
+            <div class="introText">
+                <p><span class="versalien">MOMENTUM</span> Chancen und neue Perspektiven ergreifen, die sich aus Veränderungen und dem Klimawandel ergeben.</p>
+            </div>
+            <div class="scrollInfo">
+                <div class="scrollInfoText">
+                    <p>scrollen</p>
+                </div>
+                <svg class="arrow-svg" width="40" height="40" viewBox="0 0 24 24">
+                    <path d="M2 8l10 10 10-10" stroke="#fff" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <video class="video__content" autoplay muted loop>
+                <source src="ASSETS/IMAGES/introNew.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div class="unterabschnitt concept--text reveal-type">
+        <p><span class="bigLabel">MOMENTUM</span><span class="firstSentence"> kombiniert digitale Komponenten mit Natur. Der Klimawandel steht hierbei im Mittelpunkt. Wir erforschen die vom Klimawandel gebotenen Möglichkeiten sowie die von ihm beeinflussten Lebensaspekte. Unser Paradebeispiel bildet Weinanbau in Dänemark.</span></p>
+        <br>
+        <p class="einruecker">Diese transmediale Kampagne für <span class="aeroVinText">ÆRØ VIN</span> setzt sich zusammen aus einer Reihe an Dokumentationen über vom Klimawandel beeinflusste Lebensaspekte sowie dem <span class="aeroVinText">ÆRØ VIN TRAIL</span>, ein interaktiver Weinlehrpfad, gefüllt mit Informationen über Weinanbau in Dänemark.</p>
+        <br>
+        <p class="einruecker">Erlebe unsere Geschichten in deinem eigenen Tempo!
+            Scrolle durch die nachfolgende Website und besuche <span class="aeroVinText">ÆRØ VIN</span>, wo du den <span class="aeroVinText">ÆRØ VIN TRAIL</span> selbst erleben kannst!</p>
+    </div>
+</div>
+
+<div class="abschnitt abschnitt--horizontal" id="abschnitt3" data-titel="Film1" data-teaser="Silvia erklärt uns, wie Sie zu dem Weinberg kamen" data-animation-direction="left">
+    <div class="abschnitt__horizontal">
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="zitat">
+                <h1>„Ich brauche hier eine neue Identität. Hier bin ich nicht Guido, der Filmemacher. Wer bin ich hier auf der Insel?“</h1>
+            </div>
+
+            <img src="ASSETS/IMAGES/Film_B.jpeg" alt="">
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="infoWrapper">
+                <h1 class="titel">Vom Filmemacher zum Winzer</h1>
+
+                <h1 class="teaser" >Zwischen Selbstfindung und Fuß fassen auf Ærø nimmt sich Guido einem waghalsigen Projekt in einem fremden Land an.</h1>
+            </div>
+
+            <p class="reveal-horizontal-text">
+                Das Leben als Weinmacher hätte für Guido noch vor 10 Jahren nicht absurder klingen können. Trotz verwandten Weinmachern kam Guido nie in Kontakt mit dem Weinanbau und Weinherstellung.
+                Heute betreibt er sein eigenes Weingut. Guido kniet zwischen Reben, erntet ihre Trauben und pflegt die Biodiversität auf seinem Weinberg.
+                Sich selbst neu zu erfinden muss nicht perfekt oder geplant sein, es muss lediglich vom Herzen kommen.
+            </p>
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+            <div class="video">
+                <button type="button" class="video-thumb" aria-label="Video abspielen"
+                        data-video-trigger>
+                    <img src="ASSETS/IMAGES/Film_B_1.jpg" alt="Video-Vorschau von AERO VIN">
+                    <span class="video-thumb-play" aria-hidden="true"></span>
+                </button>
+
+                <iframe data-src="https://www.youtube-nocookie.com/embed/EHAWqbqa6Ok?si=Lhm98Tu9M1elDxF8"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="abschnitt" id="abschnitt4" data-titel=" " data-teaser=" " data-animation-direction="top">
+    <div class="unterabschnitt unterabschnitt--ueberleitung reveal-type">
+        <p>Hochhäuser gegen Meer und Land zu tauschen klingt traumhaft.
+            Doch das Zusammenspiel mit der Natur mussten Silvia und Guido Weihermüller erst lernen…
+        </p>
+    </div>
+</div>
+
+<div class="abschnitt abschnitt--horizontal-reverse" id="abschnitt5" data-titel="Film2" data-teaser="Guido vermittelt seine Vision vom Weinberg" data-animation-direction="right">
+    <div class="abschnitt__horizontal abschnitt__horizontal--reverse">
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="zitat">
+                <h1>„Perfekt gibt es nicht. Fang an, Schritt für Schritt.“</h1>
+            </div>
+
+            <img src="ASSETS/IMAGES/Film_A.JPG" alt="">
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="infoWrapper">
+                <h1 class="titel" >Eine Insel kann alles verändern</h1>
+
+                <h1 class="teaser" >Mit neuem Ansporn starten Silvia und Guido auf Ærø durch. Sie entdecken sowohl Natur als auch sich selbst neu.</h1>
+            </div>
+
+            <p class="reveal-horizontal-text">Ursprünglich konnten sich die Weihermüllers ein Leben fernab der Filmindustrie auf einer kleinen dänischen Insel nicht vorstellen.
+                Ihr hektischer Alltag wurde von Corona pausiert. Dies zeigte ihnen, dass nichts ewig hält. Also wieso nicht etwas Neues probieren? Dem Stress der Filmindustrie entkommen und ein neues Leben starten?
+                Zusammen glaubten sie an ihr Vorhaben und haben ihr <span class="bigLabel">MOMENTUM</span> auf Ærø gefunden.
+            </p>
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+            <div class="video">
+                <button type="button" class="video-thumb" aria-label="Video abspielen"
+                        data-video-trigger>
+                    <img src="ASSETS/IMAGES/Film_A_1.jpg" alt="Video-Vorschau von AERO VIN">
+                    <span class="video-thumb-play" aria-hidden="true"></span>
+                </button>
+
+                <iframe data-src="https://www.youtube-nocookie.com/embed/tXaZeWKnE3A?si=grgH3vUZkSXjJQVw"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="abschnitt" id="abschnitt6" data-titel=" " data-teaser=" " data-animation-direction="top">
+    <div class="unterabschnitt unterabschnitt--ueberleitung reveal-type">
+        <p>Gemeinsam an einem Strang ziehen ist das A und O im gemeinsamen Leben. Weitere Hilfe anzunehmen ist jedoch genauso wichtig…</p>
+    </div>
+</div>
+
+<div class="abschnitt" id="abschnitt7" data-titel="Film3" data-teaser="Wie baut man richtig Wein an" data-animation-direction="top">
+
+    <div class="unterabschnitt unterabschnitt--image">
+
+        <div class="zitat">
+            <h1>„Die Natur steuert was draußen vorgeht, die entscheidet, ob es hagelt, Frost gibt, stürmt, schneit, Starkregen. Sobald man erntet, hat man die Traube im Keller. [...] Zum ersten Mal hat man so richtig die Kontrolle darüber, was passiert damit.“</h1>
+        </div>
+
+        <img src="ASSETS/IMAGES/Film_C_1.png" alt="">
+    </div>
+
+    <div class="unterabschnitt unterabschnitt--text">
+
+        <div class="infoWrapper">
+            <h1 class="titel" >Der Mentor des dänischen Weins</h1>
+
+            <h1 class="teaser-vertikal" >Der erste Schritt zum Erfolg liegt vielleicht in der helfenden Hand eines Freundes</h1>
+        </div>
+
+        <p class="reveal-vertical-text">Ben Viehl, Inhaber des Weinguts Skærsøgaard Vin, hat sich der Rolle als Guidos Mentor angenommen.
+            Er erzählt von seiner Hilfsbereitschaft anderen Winzern gegenüber und beleuchtet seine Beziehung zu seinem Freund Guido.
+            Beide hatten ihre eigenen Schwierigkeiten, in der Welt des Weins Fuß zu fassen. Ben zieht einen Vergleich zwischen ihm und Guidos Ankunft in Dänemark und ihrer Entdeckung des Potenzials ihrer Weinberge.
+        </p>
+    </div>
+
+    <div class="unterabschnitt unterabschnitt--media">
+        <div class="video">
+            <button type="button" class="video-thumb" aria-label="Video abspielen"
+                    data-video-trigger>
+                <img src="ASSETS/IMAGES/Film_C_2.png" alt="Video-Vorschau von AERO VIN">
+                <span class="video-thumb-play" aria-hidden="true"></span>
+            </button>
+
+            <iframe data-src="https://www.youtube-nocookie.com/embed/VUzwIQUiqGY?si=AQVAV3_4D0Aj6Ibb"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<div class="abschnitt" id="NewsletterSection">
+    <div class="unterabschnitt newsletterSection">
+        <h1 class="NLHeader">Join Our Newsletter</h1>
+        <div class="newsletterWrapper">
+            <p>Du möchtest keine Events und Fortschritte von ÆRØ VIN verpassen?
+                Sei unter den Ersten, die von exklusiven Angeboten erfahren!
+                Abonniere jetzt unseren Newsletter!
+            </p>
+            <button class="signup-btn" type="button"
+                    onclick="window.location.href='mailto:news@aeroe-vin.com?subject=Newsletter%20Subscriptions&body=I%20want%20to%20join%20your%20newsletter%20and%20stay%20up%20to%20date.'">
+                <span><img src="ASSETS/IMAGES/mailIcon.svg" alt="mailIcon"></span>
+                <span>Anmelden</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="abschnitt" id="abschnitt8" data-titel=" " data-teaser=" " data-animation-direction="top">
+    <div class="unterabschnitt unterabschnitt--ueberleitung reveal-type">
+        <p>Das dänische Cool Climate wirkt sich nicht nur auf die Qualität des Weins aus. Es beeinflusst sowohl Land und Meer und auch die Klimaarbeit muss kontinuierlich darauf abgestimmt werden…</p>
+    </div>
+</div>
+
+<div class="abschnitt abschnitt--horizontal-reverse" id="abschnitt9" data-titel="Film4" data-teaser="Guido vermittelt seine Vision vom Weinberg" data-animation-direction="right">
+    <div class="abschnitt__horizontal abschnitt__horizontal--reverse">
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="zitat">
+                <h1>„Es gibt einen Handlungsdruck, ich muss selber was verändern. Ich kann nicht einfach zugucken, dass es alles so weiterläuft.“</h1>
+            </div>
+
+            <img src="ASSETS/IMAGES/Film_D_1.png" alt="">
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="infoWrapper">
+                <h1 class="titel" >Klimasegler</h1>
+
+                <h1 class="teaser" >Vom Klimasegeln und wegweisenden Projekten</h1>
+            </div>
+
+            <p class="reveal-horizontal-text">Der Klimasegler Matthias Berg ist es gewohnt, sich in kürzester Zeit an neue Verhältnisse anzupassen. Immerhin muss auf die offene See gehört werden. Beim Klimawandel sieht es nicht anders aus, auch wenn die Gesellschaft selten zeitnah reagiert.
+                Zwischen seinem Leben an Deck und seinem Aktivismus zum Klimawandel zieht Matthias einen Vergleich zwischen dem sich stets verändernden Meer und den Umweltveränderungen. Teil seiner Arbeit ist die Installation von Wetterstationen. Diese helfen Daten zur Verbesserung von Landwirtschaft auszulesen, so wie für den Weinberg seiner Freunde Guido und Silvia. Laut Matthias müssen Klima und Natur verstanden werden, nicht kontrolliert.
+            </p>
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+            <div class="video">
+                <button type="button" class="video-thumb" aria-label="Video abspielen"
+                        data-video-trigger>
+                    <img src="ASSETS/IMAGES/Film_D_2.png" alt="Video-Vorschau von AERO VIN">
+                    <span class="video-thumb-play" aria-hidden="true"></span>
+                </button>
+
+                <iframe data-src="https://www.youtube-nocookie.com/embed/SoWt2GqOcIg?si=Sdoq7NRX5QYPULag"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="abschnitt" id="abschnitt10" data-titel=" " data-teaser=" " data-animation-direction="top">
+    <div class="unterabschnitt unterabschnitt--ueberleitung reveal-type">
+        <p>Sich nicht durch Idylle und Staunen von seiner Klimaarbeit ablenken zu lassen ist besonders auf Weinbergen von hoher Bedeutsamkeit…</p>
+    </div>
+</div>
+
+<div class="abschnitt" id="abschnitt11" data-titel="Film5" data-teaser="Wie baut man richtig Wein an" data-animation-direction="top">
+
+    <div class="unterabschnitt unterabschnitt--image">
+
+        <div class="zitat">
+            <h1>„[Bei dänischen Winzern,] da war dieser Pioniergeist, das war alles unorganisiert, das war abenteuerlich, das waren Rebsorten, die keiner kennt.“</h1>
+        </div>
+
+        <img src="ASSETS/IMAGES/Film_E_1.jpg" alt="">
+    </div>
+
+    <div class="unterabschnitt unterabschnitt--text">
+
+        <div class="infoWrapper">
+            <h1 class="titel" >Wein trifft auf Cool Climate</h1>
+
+            <p class="teaser-vertikal" >Ein Einblick in das Konzept Cool Climate Wine und der Chance des Weinbaus in Dänemark</p>
+        </div>
+
+        <p class="reveal-vertical-text">Vor wenigen Jahrzehnten wirkte der Gedanke an Weinanbau in Dänemark noch unvorstellbar. Heute gehört Dänemark zu den offiziellen Weinbau Regionen der EU.
+            Cool Climate Experte Jan Eggers bietet einen Einblick in die Bedeutsamkeit der richtigen Standortwahl und spricht von ersten Weinanbau-Experimenten sowie der Geschichte des Cool Climates.
+            Im Zuge seiner Arbeit besucht Jan viele Weinberge. Auf diesen bietet er seine Meinung und Ratschläge für neuere Winzer an. Guido ist einer von ihnen.
+        </p>
+    </div>
+
+    <div class="unterabschnitt unterabschnitt--media">
+        <div class="video">
+            <button type="button" class="video-thumb" aria-label="Video abspielen"
+                    data-video-trigger>
+                <img src="ASSETS/IMAGES/Film_E_2.jpg" alt="Video-Vorschau von AERO VIN">
+                <span class="video-thumb-play" aria-hidden="true"></span>
+            </button>
+
+            <iframe data-src="https://www.youtube-nocookie.com/embed/VUzwIQUiqGY?si=AQVAV3_4D0Aj6Ibb"
+                    title="YouTube video player"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+<div class="abschnitt" id="abschnitt12" data-titel=" " data-teaser=" " data-animation-direction="top">
+    <div class="unterabschnitt unterabschnitt--ueberleitung reveal-type">
+        <p>Schweiß, Freude und Probleme gehören alle zum Leben eines Winzers. Beim Wein wird die Leidenschaft zur Eigenkreation für jeden deutlich…</p>
+    </div>
+</div>
+
+<div class="abschnitt abschnitt--horizontal" id="abschnitt13" data-titel="Film6" data-teaser="Silvia erklärt uns, wie Sie zu dem Weinberg kamen" data-animation-direction="left">
+    <div class="abschnitt__horizontal">
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="zitat">
+                <h1>„Jeder hat die Chance, etwas für sich mitzunehmen, was für ihn etwas bedeutet.“</h1>
+            </div>
+
+
+            <img src="ASSETS/IMAGES/Film_F_1.jpg" alt="">
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+
+            <div class="infoWrapper">
+                <h1 class="titel">Erschaffe dein eigenes MOMENTUM</h1>
+
+                <p class="teaser">Alles geben, um sich selbst neu zu finden.</p>
+            </div>
+
+            <p class="reveal-horizontal-text">Guido und Silvia Weihermüller haben ihr <span class="bigLabel">MOMENTUM</span> auf Ærø gefunden. Ihr neues Leben, samt Haus, Garten und Weinberg, bereitet ihnen viel Freude. Laut ihnen muss dieses Gefühl mit der Welt geteilt werden.
+                Heute bietet <span class="aeroVinText">ÆRØ VIN</span>s Weinberg Raum für jede*n, sein / ihr eigenes <span class="bigLabel">MOMENTUM</span> zu finden.
+                Natürlich ist dies mit viel Arbeit für die beiden verbunden. Doch sowohl die Erfahrung als auch das Endprodukt zeigen ihnen immer wieder auf, wie bereichernd ihre Arbeit ist.
+            </p>
+        </div>
+
+        <div class="content abschnitt__card--horizontal">
+            <div class="video">
+                <button type="button" class="video-thumb" aria-label="Video abspielen"
+                        data-video-trigger>
+                    <img src="ASSETS/IMAGES/Film_F_2.jpg" alt="Video-Vorschau von AERO VIN">
+                    <span class="video-thumb-play" aria-hidden="true"></span>
+                </button>
+
+                <iframe data-src="https://www.youtube-nocookie.com/embed/DDhPUDZ4yhE?si=WKz9f9Mo9k4xCLDa"
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin"
+                        allowfullscreen></iframe>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="abschnitt abschnitt--intro" id="outro" data-titel=" " data-teaser=" " data-animation-direction="top">
+    <div class="concept--text">
+        <p><span class="bigLabel">MOMENTUM</span><span class="firstSentence"> handelt nicht ausschließlich vom Klimawandel. Es geht darum, sich selbst zu finden. Möglichkeiten zu ergreifen. Neue Perspektiven zu finden.</span></p>
+        <br>
+        <p class="einruecker">Wir wünschen uns, dass ihr euch inspiriert fühlt, euer eigenes <span class="bigLabel">MOMENTUM</span> zu suchen.</p>
+        <br>
+        <p class="einruecker">Ihr seid herzlich eingeladen, unseren <span class="aeroVinText">ÆRØ VIN TRAIL</span> im Søby Landevej 20 zu besuchen.
+            Besucht zudem gerne die <span class="aeroVinText">ÆRØ VINs</span> Weingut Website unter aeroe-vin.com.
+        </p>
+    </div>
+
+    <div class="partnerSection">
+
+        <div class="partnerTitel">Our Partners</div>
+
+        <div class="partnerWrapper">
+            <div class="partner">
+                <a href="https://www.ostfalia.de/hochschule/campus-einrichtungen/standorte/salzgitter"
+                   target="_blank"><img src="ASSETS/IMAGES/PARTNER/OstfaliaLogo.webp" alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://www.geoparkoehavet.dk" target="_blank"><img src="ASSETS/IMAGES/PARTNER/geopark.jpg"
+                                                                             alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://www.geoparkoehavet.dk/nuna" target="_blank"><img src="ASSETS/IMAGES/PARTNER/nuna.jpg"
+                                                                                  alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://www.klimasegler.de/" target="_blank"><img src="ASSETS/IMAGES/PARTNER/klimasegler.png"
+                                                                           alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://www.coolclimatesummit.com/" target="_blank"><img
+                        src="ASSETS/IMAGES/PARTNER/wineSummit.png" alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://dansk-vin.dk/" target="_blank"><img src="ASSETS/IMAGES/PARTNER/skaersogaard.webp"
+                                                                     alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://www.bresser.de/" target="_blank"><img src="ASSETS/IMAGES/PARTNER/bresser.png"
+                                                                       alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://www.visitaeroe.dk/" target="_blank"><img src="ASSETS/IMAGES/PARTNER/aero-turist.png"
+                                                                          alt="bild"></a>
+            </div>
+            <div class="partner">
+                <a href="https://www.farmersmarket-aeroe.com/" target="_blank"><img
+                        src="ASSETS/IMAGES/PARTNER/farmersMarket.png" alt="bild"></a>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="footer" id="contact">
+    <div class="footer__container">
+
+        <div class="footer__contact">
+            <h2 class="footer__title">Contact</h2>
+
+            <div class="footer__info-wrapper">
+
+                <div class="footer__info">
+                    <p>AERO VIN</p>
+                    <p>Guido Weihermüller</p>
+                    <p>Soby Landveje 20</p>
+                    <p>5985 Søby, Ærø</p>
+                    <p>Denmark</p>
+                </div>
+
+                <div class="footer__info">
+                    <p>CVR: 42840793</p>
+                    <p>Email: hej@aero-vin.com</p>
+                    <p>Phone: +45 30 47 60 61</p>
+                </div>
+
+            </div>
+        </div>
+
+        <nav class="footer__nav">
+            <a href="privacyPolicy.html" target="_blank">Privacy Policy</a>
+            <a href="cookiePolicy.html" target="_blank">Cookie Policy</a>
+            <a href="terms_conditions.html" target="_blank">Term & Conditions</a>
+            <a href="companyInfo.html" target="_blank">Company Info / Legal Notice</a>
+        </nav>
+
+    </div>
+</div>
+
+
+
+
+<script src="JS/gsap.min.js"></script>
+<script src="JS/ScrollTrigger.min.js"></script>
+<script src="JS/test.js" defer></script>
+
 </body>
 </html>

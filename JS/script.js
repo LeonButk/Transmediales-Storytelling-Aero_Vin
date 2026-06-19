@@ -1,13 +1,11 @@
 const horizontalSpeedFactor = 1.5;
 
-// -----------------------------
+// ---------------------------
 // HORIZONTAL SECTIONS
-// -----------------------------
+// ---------------------------
 function setupHorizontalSections() {
 
-    if (window.matchMedia("(pointer: coarse)").matches) {
-        return;
-    }
+    if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const sections = gsap.utils.toArray(
         '.abschnitt--horizontal, .abschnitt--horizontal-reverse'
@@ -23,9 +21,7 @@ function setupHorizontalSections() {
 
         if (!contents.length) return;
 
-        const isReverse = section.classList.contains(
-            'abschnitt--horizontal-reverse'
-        );
+        const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
 
         const xPercentValue = isReverse
             ? 100 * (contents.length - 1)
@@ -48,38 +44,16 @@ function setupHorizontalSections() {
     });
 }
 
-// -----------------------------
-// REVEAL TYPE
-// -----------------------------
-function setupRevealType() {
-    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    const revealEls = document.querySelectorAll('.reveal-type');
-
-    revealEls.forEach(el => {
-        gsap.from(el, {
-            autoAlpha: 0,
-            duration: 3,
-            ease: 'power2.out',
-            scrollTrigger: {
-                trigger: el,
-                start: 'top 50%',
-                scrub: 0.5,
-                toggleActions: 'play play reverse reverse'
-            }
-        });
-    });
-}
-
-// -----------------------------
+// ---------------------------
 // INTRO TEXT
-// -----------------------------
-function revealIntroText() {
+// ---------------------------
+function revealIntroText(){
     const introText = document.querySelector('.introText');
     if (!introText) return;
 
     gsap.killTweensOf(introText);
-    gsap.set(introText, { autoAlpha: 0 });
+    gsap.set(introText, {autoAlpha: 0});
 
     gsap.to(introText, {
         autoAlpha: 1,
@@ -89,15 +63,14 @@ function revealIntroText() {
     });
 }
 
-// -----------------------------
+
+// ---------------------------
 // VERTICAL REVEAL
-// -----------------------------
+// ---------------------------
 function setupVerticalClassReveal() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    const els = gsap.utils.toArray('.reveal-vertical-text');
-
-    els.forEach(el => {
+    gsap.utils.toArray('.reveal-vertical-text').forEach(el => {
         const section = el.closest('.abschnitt');
         if (!section) return;
 
@@ -115,17 +88,16 @@ function setupVerticalClassReveal() {
     });
 }
 
-// -----------------------------
+
+// ---------------------------
 // FRAME ANIMATION
-// -----------------------------
+// ---------------------------
 let frameAnimationTimeline = null;
 
 function setupFrameAndTextBuildAnimation() {
     if (typeof gsap === 'undefined') return;
 
-    if (frameAnimationTimeline) {
-        frameAnimationTimeline.kill();
-    }
+    if (frameAnimationTimeline) frameAnimationTimeline.kill();
 
     const frames = gsap.utils.toArray('.frame');
     const bigLeft = document.querySelector('.aeroVin');
@@ -153,138 +125,161 @@ function setupFrameAndTextBuildAnimation() {
     }, 1.5);
 }
 
-// -----------------------------
-// MENU SYSTEM (FIXED + STABLE CLOSE BUTTON)
-// -----------------------------
-function initMenuSystem() {
+
+// ---------------------------
+// FRAME TOGGLE (WIEDERHERGESTELLT)
+// ---------------------------
+function setupFrameToggle() {
+    const frameToggle = document.querySelector('.frame-toggle__toggle');
+    const frameToggleImg = frameToggle?.querySelector('img');
+
+    function updateFrameToggleImage(isHover = false) {
+        if (!frameToggleImg) return;
+
+        const framesVisible = !document.body.classList.contains('frames-hidden');
+
+        if (isHover) {
+            frameToggleImg.src = framesVisible
+                ? 'ASSETS/IMAGES/FrameAus.svg'
+                : 'ASSETS/IMAGES/FrameAn.svg';
+        } else {
+            frameToggleImg.src = framesVisible
+                ? 'ASSETS/IMAGES/FrameAn.svg'
+                : 'ASSETS/IMAGES/FrameAus.svg';
+        }
+    }
+
+    function setFrameVisibility(shouldShow) {
+        const isHidden = !shouldShow;
+
+        document.body.classList.toggle('frames-hidden', isHidden);
+        document.body.classList.toggle('aeroVin-hidden', isHidden);
+        document.body.classList.toggle('momentum-hidden', isHidden);
+
+        if (frameToggle) {
+            frameToggle.setAttribute('aria-pressed', String(shouldShow));
+            frameToggle.setAttribute(
+                'aria-label',
+                shouldShow ? 'Rahmen ausblenden' : 'Rahmen einblenden'
+            );
+        }
+
+        updateFrameToggleImage();
+    }
+
+    if (!frameToggle) return;
+
+    const initialVisible = !document.body.classList.contains('frames-hidden');
+    setFrameVisibility(initialVisible);
+
+    frameToggle.addEventListener('click', () => {
+        const shouldShow = document.body.classList.contains('frames-hidden');
+        setFrameVisibility(shouldShow);
+    });
+
+    frameToggle.addEventListener('mouseenter', () => updateFrameToggleImage(true));
+    frameToggle.addEventListener('mouseleave', () => updateFrameToggleImage(false));
+}
+
+
+// ---------------------------
+// MENU SYSTEM
+// ---------------------------
+function setupMenu() {
 
     const menu = document.querySelector('.menu');
     const menuToggle = document.querySelector('.menu__toggle');
+    const menuLinks = document.querySelectorAll('.subPage');
+
+    function closeMenu() {
+        menu?.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+    }
 
     if (!menu || !menuToggle) return;
 
-    function closeMenu() {
-        menu.classList.remove('is-open');
-        document.body.classList.remove('menu-open');
-        menuToggle.setAttribute('aria-expanded', 'false');
-    }
-
-    function openMenu() {
-        menu.classList.add('is-open');
-        document.body.classList.add('menu-open');
-        menuToggle.setAttribute('aria-expanded', 'true');
-    }
-
-    // toggle button
     menuToggle.addEventListener('click', () => {
-        const isOpen = menu.classList.contains('is-open');
-        isOpen ? closeMenu() : openMenu();
+        const isOpen = menu.classList.toggle('is-open');
+        document.body.classList.toggle('menu-open', isOpen);
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // outside click
     document.addEventListener('click', (e) => {
-        if (!menu.contains(e.target)) {
-            closeMenu();
-        }
+        if (!menu.contains(e.target)) closeMenu();
     });
 
-    // -----------------------------
-    // IMPORTANT FIX:
-    // ensure close button ALWAYS exists
-    // -----------------------------
-    function ensureCloseButton() {
-
-        const nav = document.querySelector('.menu__nav');
-        if (!nav) return;
-
-        let btn = nav.querySelector('.menu__close');
-
-        if (!btn) {
-            btn = document.createElement('button');
-            btn.className = 'menu__close';
-            btn.type = 'button';
-            btn.setAttribute('aria-label', 'Menü schließen');
-
-            for (let i = 0; i < 3; i++) {
-                const span = document.createElement('span');
-                btn.appendChild(span);
-            }
-
-            nav.appendChild(btn);
-        }
-
-        btn.addEventListener('click', (e) => {
-            e.stopPropagation();
+    menuLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
             closeMenu();
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
         });
-    }
-
-    ensureCloseButton();
+    });
 }
 
-// -----------------------------
-// VIDEO (NO AUTO SCROLL ANYMORE)
-// -----------------------------
-function initVideo() {
+
+// ---------------------------
+// VIDEO SYSTEM (MOBILE FIX)
+// ---------------------------
+function setupVideos() {
 
     const videoThumbButtons = document.querySelectorAll('.video-thumb');
 
+    function startVideo(btn) {
+        const videoBlock = btn.closest('.video');
+        const iframe = videoBlock?.querySelector('iframe');
+        if (!iframe) return;
+
+        const baseSrc = iframe.getAttribute('data-src');
+        if (!baseSrc) return;
+
+        const joiner = baseSrc.includes('?') ? '&' : '?';
+        const full = baseSrc + joiner + 'autoplay=1&playsinline=1&mute=1&rel=0';
+
+        if (!iframe.getAttribute('src')) {
+            iframe.setAttribute('src', full);
+        }
+
+        videoBlock.classList.add('is-playing');
+        btn.setAttribute('aria-hidden', 'true');
+        btn.setAttribute('tabindex', '-1');
+    }
+
     videoThumbButtons.forEach(btn => {
-
-        btn.addEventListener('click', () => {
-
-            const videoBlock = btn.closest('.video');
-            if (!videoBlock) return;
-
-            const iframe = videoBlock.querySelector('iframe');
-            if (!iframe) return;
-
-            const baseSrc = iframe.getAttribute('data-src');
-            if (!baseSrc) return;
-
-            const startVideo = () => {
-
-                const joiner = baseSrc.includes('?') ? '&' : '?';
-                const full = baseSrc + joiner + 'autoplay=1&playsinline=1&rel=0&mute=1';
-
-                if (!iframe.getAttribute('src')) {
-                    iframe.setAttribute('src', full);
-                }
-
-                videoBlock.classList.add('is-playing');
-
-                btn.setAttribute('aria-hidden', 'true');
-                btn.setAttribute('tabindex', '-1');
-            };
-
-            // ❌ NO SCROLL ANYMORE
-            startVideo();
-        });
+        btn.addEventListener('click', () => startVideo(btn));
+        btn.addEventListener('touchend', () => startVideo(btn), { passive: true });
     });
 }
 
-// -----------------------------
+
+// ---------------------------
 // INIT
-// -----------------------------
-document.addEventListener('DOMContentLoaded', () => {
+// ---------------------------
+document.addEventListener('DOMContentLoaded', function() {
 
     if (typeof gsap === 'undefined') {
         console.warn('GSAP fehlt');
         return;
     }
 
-    gsap.registerPlugin(ScrollTrigger);
+    if (gsap.registerPlugin) {
+        gsap.registerPlugin(ScrollTrigger);
+    }
 
     setupFrameAndTextBuildAnimation();
     setupHorizontalSections();
     setupVerticalClassReveal();
     revealIntroText();
 
-    initMenuSystem();
-    initVideo();
+    setupMenu();
+    setupFrameToggle();
+    setupVideos();
 
     window.addEventListener('resize', () => {
-        setTimeout(() => {
+        clearTimeout(window.__resizeTimer);
+        window.__resizeTimer = setTimeout(() => {
             setupFrameAndTextBuildAnimation();
             revealIntroText();
         }, 250);

@@ -1162,7 +1162,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .video{
-        position: absolute;
+        position: relative;
     }
 
     .video iframe{

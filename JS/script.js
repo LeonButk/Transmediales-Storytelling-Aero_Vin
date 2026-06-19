@@ -2,79 +2,99 @@ const horizontalSpeedFactor = 1.5; // Größer = langsameres horizontales Scroll
 
 // Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante
 function setupHorizontalSections() {
-    const sections = gsap.utils.toArray('.abschnitt--horizontal, .abschnitt--horizontal-reverse');
+
+    // Mobile Geräte: horizontale Animation deaktivieren
+    if (window.matchMedia("(pointer: coarse)").matches) {
+        return;
+    }
+
+    const sections = gsap.utils.toArray(
+        '.abschnitt--horizontal, .abschnitt--horizontal-reverse'
+    );
 
     sections.forEach(section => {
         const container = section.querySelector('.abschnitt__horizontal');
         if (!container) return;
 
-        const contents = gsap.utils.toArray(container.querySelectorAll('.content'));
+        const contents = gsap.utils.toArray(
+            container.querySelectorAll('.content')
+        );
+
         if (!contents.length) return;
 
-        const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
-        const xPercentValue = isReverse ? 100 * (contents.length - 1) : -100 * (contents.length - 1);
+        const isReverse = section.classList.contains(
+            'abschnitt--horizontal-reverse'
+        );
+
+        const xPercentValue = isReverse
+            ? 100 * (contents.length - 1)
+            : -100 * (contents.length - 1);
 
         gsap.to(contents, {
             xPercent: xPercentValue,
-            ease: 'none',
+            ease: "none",
             scrollTrigger: {
                 trigger: section,
                 pin: true,
                 scrub: 0.5,
-                end: () => "+=" + (window.innerWidth * (contents.length - 1) * horizontalSpeedFactor)
+                end: () =>
+                    "+=" +
+                    (window.innerWidth *
+                        (contents.length - 1) *
+                        horizontalSpeedFactor)
             }
         });
     });
-
-    /*
+}
+/*
 snap: {
-			snapTo:	1 / (contentsRechts.length - 1),
-			duration: 0.5,
-			ease: "power1.in",
-		},
-		end: "+=3500",
+        snapTo:	1 / (contentsRechts.length - 1),
+        duration: 0.5,
+        ease: "power1.in",
+    },
+    end: "+=3500",
+*/
+
+
+
+/*
+snap: {
+            snapTo:	1 / (contentsLinks.length - 1),
+            duration: 0.5,
+            ease: "power1.in",
+        },
+        end: "+=3500",
  */
 
+// Simple fade-in reveal for elements with .reveal-type
+function setupRevealType() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-
-    /*
-    snap: {
-                snapTo:	1 / (contentsLinks.length - 1),
-                duration: 0.5,
-                ease: "power1.in",
-            },
-            end: "+=3500",
-     */
-
-    // Simple fade-in reveal for elements with .reveal-type
-    function setupRevealType() {
-        if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
-
-        const revealEls = document.querySelectorAll('.reveal-type');
-        revealEls.forEach(el => {
-            gsap.from(el, {
-                autoAlpha: 0,
-                duration: 3,
-                ease: 'power2.out',
-                scrollTrigger: {
-                    trigger: el,
-                    start: 'top 50%',
-                    end: 'center',
-                    scrub: 0.5,
-                    toggleActions: 'play play reverse reverse',
-                    markers: false
-                }
-            });
+    const revealEls = document.querySelectorAll('.reveal-type');
+    revealEls.forEach(el => {
+        gsap.from(el, {
+            autoAlpha: 0,
+            duration: 3,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 50%',
+                end: 'center',
+                scrub: 0.5,
+                toggleActions: 'play play reverse reverse',
+                markers: false
+            }
         });
-    }
-
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupRevealType);
-    } else {
-        setupRevealType();
-    }
-
+    });
 }
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupRevealType);
+} else {
+    setupRevealType();
+}
+
+
 
 function revealIntroText(){
     const introText = document.querySelector('.introText');
@@ -259,36 +279,36 @@ document.addEventListener('DOMContentLoaded', function() {
     (function setupLanguageSelection() {
         const languageSelect = document.getElementById('language-select');
         const htmlElement = document.documentElement;
-        
+
         if (!languageSelect) return;
-        
+
         // Map language codes to page URLs
         const languagePages = {
             'de': 'indexDE.html',
-            'da': 'index.html',
+            'da': 'indexDA.html',
             'en': 'index.html'
         };
-        
+
         // Get saved language or default to 'de'
         const savedLanguage = localStorage.getItem('selectedLanguage') || 'de';
-        
+
         // Set initial language select value
         languageSelect.value = savedLanguage;
         setLanguageAttribute(savedLanguage);
-        
+
         // Add change listener to select
         languageSelect.addEventListener('change', function() {
             const lang = this.value;
             setLanguageAttribute(lang);
             navigateToLanguagePage(lang);
         });
-        
+
         function setLanguageAttribute(lang) {
             htmlElement.setAttribute('lang', lang);
             localStorage.setItem('selectedLanguage', lang);
             console.log('Sprache geändert zu:', lang);
         }
-        
+
         function navigateToLanguagePage(lang) {
             const page = languagePages[lang];
             if (page) {
@@ -509,5 +529,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
-
-

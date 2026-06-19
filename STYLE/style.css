@@ -42,9 +42,13 @@ body {
     position: fixed;
 
     top: calc(env(safe-area-inset-top) * -1);
-    left: 0;
+    left: calc(env(safe-area-inset-left) * -1);
 
-    width: 100vw;
+    width: calc(
+            100vw +
+            env(safe-area-inset-left) +
+            env(safe-area-inset-right)
+    );
 
     height: calc(
             100dvh +
@@ -53,6 +57,9 @@ body {
     );
 
     object-fit: cover;
+    z-index: -1;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
 }
 
 /* dim the rest of the page when the menu is open */

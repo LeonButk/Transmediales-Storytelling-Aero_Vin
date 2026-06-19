@@ -4,6 +4,7 @@ const horizontalSpeedFactor = 1.5;
 // HORIZONTAL SECTIONS
 // ---------------------------
 function setupHorizontalSections() {
+
     if (window.matchMedia("(pointer: coarse)").matches) return;
 
     const sections = gsap.utils.toArray(
@@ -88,12 +89,12 @@ function setupVerticalClassReveal() {
 // ---------------------------
 // FRAME ANIMATION
 // ---------------------------
-let frameAnimationTimeline = null;
+let frameTimeline = null;
 
 function setupFrameAndTextBuildAnimation() {
     if (!gsap) return;
 
-    if (frameAnimationTimeline) frameAnimationTimeline.kill();
+    if (frameTimeline) frameTimeline.kill();
 
     const frames = gsap.utils.toArray('.frame');
     const bigLeft = document.querySelector('.aeroVin');
@@ -108,14 +109,14 @@ function setupFrameAndTextBuildAnimation() {
 
     document.body.offsetHeight;
 
-    frameAnimationTimeline = gsap.timeline();
+    frameTimeline = gsap.timeline();
 
-    frameAnimationTimeline.from(frames[0], { width: 0, duration: 2 }, 0);
-    frameAnimationTimeline.from(frames[1], { height: 0, duration: 2 }, 0);
-    frameAnimationTimeline.from(frames[2], { width: 0, duration: 2 }, 0);
-    frameAnimationTimeline.from(frames[3], { height: 0, duration: 2 }, 0);
+    frameTimeline.from(frames[0], { width: 0, duration: 2 }, 0);
+    frameTimeline.from(frames[1], { height: 0, duration: 2 }, 0);
+    frameTimeline.from(frames[2], { width: 0, duration: 2 }, 0);
+    frameTimeline.from(frames[3], { height: 0, duration: 2 }, 0);
 
-    frameAnimationTimeline.from([bigLeft, bigRight], {
+    frameTimeline.from([bigLeft, bigRight], {
         autoAlpha: 0,
         duration: 1
     }, 1.5);
@@ -126,17 +127,18 @@ function setupFrameAndTextBuildAnimation() {
 // FRAME TOGGLE
 // ---------------------------
 function setupFrameToggle() {
-    const frameToggle = document.querySelector('.frame-toggle__toggle');
-    const frameToggleImg = frameToggle?.querySelector('img');
 
-    if (!frameToggle) return;
+    const btn = document.querySelector('.frame-toggle__toggle');
+    const img = btn?.querySelector('img');
+
+    if (!btn) return;
 
     function update(isHover = false) {
         const visible = !document.body.classList.contains('frames-hidden');
 
-        if (!frameToggleImg) return;
+        if (!img) return;
 
-        frameToggleImg.src = isHover
+        img.src = isHover
             ? (visible ? 'ASSETS/IMAGES/FrameAus.svg' : 'ASSETS/IMAGES/FrameAn.svg')
             : (visible ? 'ASSETS/IMAGES/FrameAn.svg' : 'ASSETS/IMAGES/FrameAus.svg');
     }
@@ -146,33 +148,34 @@ function setupFrameToggle() {
         document.body.classList.toggle('aeroVin-hidden', !show);
         document.body.classList.toggle('momentum-hidden', !show);
 
-        frameToggle.setAttribute("aria-pressed", String(show));
+        btn.setAttribute("aria-pressed", String(show));
         update();
     }
 
     setVisible(!document.body.classList.contains('frames-hidden'));
 
-    frameToggle.addEventListener('click', () => {
+    btn.addEventListener('click', () => {
         const show = document.body.classList.contains('frames-hidden');
         setVisible(show);
     });
 
-    frameToggle.addEventListener('mouseenter', () => update(true));
-    frameToggle.addEventListener('mouseleave', () => update(false));
+    btn.addEventListener('mouseenter', () => update(true));
+    btn.addEventListener('mouseleave', () => update(false));
 }
 
 
 // ---------------------------
-// MENU
+// MENU SYSTEM (FIXED HORIZONTAL JUMP)
 // ---------------------------
 function setupMenu() {
+
     const menu = document.querySelector('.menu');
     const toggle = document.querySelector('.menu__toggle');
     const links = document.querySelectorAll('.subPage');
 
     if (!menu || !toggle) return;
 
-    const close = () => {
+    const closeMenu = () => {
         menu.classList.remove('is-open');
         document.body.classList.remove('menu-open');
         toggle.setAttribute('aria-expanded', 'false');
@@ -185,24 +188,53 @@ function setupMenu() {
     });
 
     document.addEventListener('click', e => {
-        if (!menu.contains(e.target)) close();
+        if (!menu.contains(e.target)) closeMenu();
     });
 
-    links.forEach(l => {
-        l.addEventListener('click', e => {
+    links.forEach(link => {
+        link.addEventListener('click', e => {
             e.preventDefault();
-            const target = document.querySelector(l.getAttribute('href'));
-            close();
-            target?.scrollIntoView({ behavior: 'smooth' });
+
+            const target = document.querySelector(link.getAttribute('href'));
+            closeMenu();
+
+            if (!target) return;
+
+            const isHorizontal =
+                target.classList.contains('abschnitt--horizontal') ||
+                target.classList.contains('abschnitt--horizontal-reverse');
+
+            // 🔥 FIX: correct landing on pinned GSAP sections
+            if (isHorizontal && typeof ScrollTrigger !== 'undefined') {
+
+                ScrollTrigger.refresh();
+
+                const st = ScrollTrigger.getAll()
+                    .find(t => t.trigger === target && t.pin);
+
+                if (st) {
+                    window.scrollTo({
+                        top: st.start + 2,
+                        behavior: 'smooth'
+                    });
+                    return;
+                }
+            }
+
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         });
     });
 }
 
 
 // ---------------------------
-// VIDEO SYSTEM (MOBILE FIX)
+// VIDEO SYSTEM (NO SCROLL + MOBILE FIX)
 // ---------------------------
 function setupVideos() {
+
     const buttons = document.querySelectorAll('.video-thumb');
 
     function play(btn) {
@@ -227,9 +259,10 @@ function setupVideos() {
 
 
 // ---------------------------
-// 🌍 LANGUAGE SWITCH (WIEDER DRIN)
+// LANGUAGE SWITCH (RESTORED)
 // ---------------------------
 function setupLanguageSelection() {
+
     const select = document.getElementById('language-select');
     const html = document.documentElement;
 

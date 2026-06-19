@@ -1420,10 +1420,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .teaser, .teaser-vertikal{
-        font-size: 0.9rem;
-        max-width: 70dvw;
-        padding-left: 3dvw;
-        width: 100%;
+        display: none;
     }
 
     .abschnitt__card--horizontal p{

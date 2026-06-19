@@ -1,9 +1,10 @@
-const horizontalSpeedFactor = 1.5; // Größer = langsameres horizontales Scrollen
+const horizontalSpeedFactor = 1.5;
 
-// Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante
+// -----------------------------
+// HORIZONTAL SECTIONS
+// -----------------------------
 function setupHorizontalSections() {
 
-    // Mobile Geräte: horizontale Animation deaktivieren
     if (window.matchMedia("(pointer: coarse)").matches) {
         return;
     }
@@ -46,31 +47,15 @@ function setupHorizontalSections() {
         });
     });
 }
-/*
-snap: {
-        snapTo:	1 / (contentsRechts.length - 1),
-        duration: 0.5,
-        ease: "power1.in",
-    },
-    end: "+=3500",
-*/
 
-
-
-/*
-snap: {
-            snapTo:	1 / (contentsLinks.length - 1),
-            duration: 0.5,
-            ease: "power1.in",
-        },
-        end: "+=3500",
- */
-
-// Simple fade-in reveal for elements with .reveal-type
+// -----------------------------
+// REVEAL TYPE
+// -----------------------------
 function setupRevealType() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
     const revealEls = document.querySelectorAll('.reveal-type');
+
     revealEls.forEach(el => {
         gsap.from(el, {
             autoAlpha: 0,
@@ -79,46 +64,39 @@ function setupRevealType() {
             scrollTrigger: {
                 trigger: el,
                 start: 'top 50%',
-                end: 'center',
                 scrub: 0.5,
-                toggleActions: 'play play reverse reverse',
-                markers: false
+                toggleActions: 'play play reverse reverse'
             }
         });
     });
 }
 
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', setupRevealType);
-} else {
-    setupRevealType();
-}
-
-
-
-function revealIntroText(){
+// -----------------------------
+// INTRO TEXT
+// -----------------------------
+function revealIntroText() {
     const introText = document.querySelector('.introText');
-
     if (!introText) return;
 
-    // Ensure any previous tweens are removed and set the element to hidden
     gsap.killTweensOf(introText);
-    gsap.set(introText, {autoAlpha: 0});
+    gsap.set(introText, { autoAlpha: 0 });
 
-    // Fade in the introText after the frame animation completes (2 seconds)
     gsap.to(introText, {
         autoAlpha: 1,
         duration: 1.2,
         ease: 'power2.out',
-        delay: 2 // Startet nach der Frame-Animation
+        delay: 2
     });
 }
 
-// New: class-based reveal for vertical text paragraphs
+// -----------------------------
+// VERTICAL REVEAL
+// -----------------------------
 function setupVerticalClassReveal() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
     const els = gsap.utils.toArray('.reveal-vertical-text');
+
     els.forEach(el => {
         const section = el.closest('.abschnitt');
         if (!section) return;
@@ -131,21 +109,20 @@ function setupVerticalClassReveal() {
             scrollTrigger: {
                 trigger: section,
                 start: 'top 80%',
-                toggleActions: 'play none none reset',
-                markers: false
+                toggleActions: 'play none none reset'
             }
         });
     });
 }
 
-// Store timeline globally to kill it on resize
+// -----------------------------
+// FRAME ANIMATION
+// -----------------------------
 let frameAnimationTimeline = null;
 
-// New: Setup frame build animation and text fade-in
 function setupFrameAndTextBuildAnimation() {
     if (typeof gsap === 'undefined') return;
 
-    // Kill previous timeline if it exists
     if (frameAnimationTimeline) {
         frameAnimationTimeline.kill();
     }
@@ -156,376 +133,160 @@ function setupFrameAndTextBuildAnimation() {
 
     if (frames.length < 4 || !bigLeft || !bigRight) return;
 
-    // Remove any inline width/height left from previous runs so computed (CSS) values
-    // reflect the current viewport. This avoids animating to stale px-values.
     frames.forEach(f => {
         f.style.removeProperty('width');
         f.style.removeProperty('height');
     });
 
-    // Force reflow so computed styles are up-to-date
-    // eslint-disable-next-line no-unused-expressions
     document.body.offsetHeight;
 
-    // Create a fresh timeline that animates FROM 0 to the element's current computed size
     frameAnimationTimeline = gsap.timeline();
 
-    // Frame 1 (top horizontal) - grow width from 0 to the CSS-sized width
-    frameAnimationTimeline.from(frames[0], {
-        width: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
+    frameAnimationTimeline.from(frames[0], { width: 0, duration: 2 }, 0);
+    frameAnimationTimeline.from(frames[1], { height: 0, duration: 2 }, 0);
+    frameAnimationTimeline.from(frames[2], { width: 0, duration: 2 }, 0);
+    frameAnimationTimeline.from(frames[3], { height: 0, duration: 2 }, 0);
 
-    // Frame 2 (right vertical) - grow height from 0 to the CSS-sized height
-    frameAnimationTimeline.from(frames[1], {
-        height: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
-
-    // Frame 3 (bottom horizontal) - grow width
-    frameAnimationTimeline.from(frames[2], {
-        width: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
-
-    // Frame 4 (left vertical) - grow height
-    frameAnimationTimeline.from(frames[3], {
-        height: 0,
-        duration: 2,
-        ease: 'power2.out'
-    }, 0);
-
-    // After frames finish, fade in bigLeft and bigRight
     frameAnimationTimeline.from([bigLeft, bigRight], {
         autoAlpha: 0,
-        duration: 1,
-        ease: 'power2.out'
+        duration: 1
     }, 1.5);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    if (typeof gsap === 'undefined') {
-        console.warn('GSAP nicht geladen — Animationen werden nicht ausgeführt.');
-        return;
-    }
+// -----------------------------
+// MENU SYSTEM (FIXED + STABLE CLOSE BUTTON)
+// -----------------------------
+function initMenuSystem() {
 
     const menu = document.querySelector('.menu');
     const menuToggle = document.querySelector('.menu__toggle');
-    const menuLinks = document.querySelectorAll('.subPage');
-    const frameToggle = document.querySelector('.frame-toggle__toggle');
-    const frameToggleImg = frameToggle?.querySelector('img');
 
-    function updateFrameToggleImage(isHover = false) {
-        if (!frameToggleImg) return;
+    if (!menu || !menuToggle) return;
 
-        const framesVisible = !document.body.classList.contains('frames-hidden');
-
-        if (isHover) {
-            // Beim Hover immer den gegenteiligen Zustand anzeigen
-            frameToggleImg.src = framesVisible
-                ? 'ASSETS/IMAGES/FrameAus.svg'
-                : 'ASSETS/IMAGES/FrameAn.svg';
-        } else {
-            // Aktuellen Zustand anzeigen
-            frameToggleImg.src = framesVisible
-                ? 'ASSETS/IMAGES/FrameAn.svg'
-                : 'ASSETS/IMAGES/FrameAus.svg';
-        }
+    function closeMenu() {
+        menu.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
     }
 
-    function setFrameVisibility(shouldShowFrames) {
-        const body = document.body;
-        const isHidden = !shouldShowFrames;
-
-        body.classList.toggle('frames-hidden', isHidden);
-        body.classList.toggle('aeroVin-hidden', isHidden);
-        body.classList.toggle('momentum-hidden', isHidden);
-
-        if (frameToggle) {
-            frameToggle.setAttribute('aria-pressed', String(shouldShowFrames));
-            frameToggle.setAttribute(
-                'aria-label',
-                shouldShowFrames
-                    ? 'Rahmen ausblenden'
-                    : 'Rahmen einblenden'
-            );
-        }
-
-        updateFrameToggleImage();
+    function openMenu() {
+        menu.classList.add('is-open');
+        document.body.classList.add('menu-open');
+        menuToggle.setAttribute('aria-expanded', 'true');
     }
 
-    if (frameToggle) {
-        const framesAreVisible = !document.body.classList.contains('frames-hidden');
-        setFrameVisibility(framesAreVisible);
+    // toggle button
+    menuToggle.addEventListener('click', () => {
+        const isOpen = menu.classList.contains('is-open');
+        isOpen ? closeMenu() : openMenu();
+    });
 
-        frameToggle.addEventListener('click', () => {
-            const shouldShowFrames = document.body.classList.contains('frames-hidden');
-            setFrameVisibility(shouldShowFrames);
-        });
-
-        frameToggle.addEventListener('mouseenter', () => {
-            updateFrameToggleImage(true);
-        });
-
-        frameToggle.addEventListener('mouseleave', () => {
-            updateFrameToggleImage(false);
-        });
-    }
-
-    // --- Language Selection Setup ---
-    (function setupLanguageSelection() {
-        const languageSelect = document.getElementById('language-select');
-        const htmlElement = document.documentElement;
-
-        if (!languageSelect) return;
-
-        // Map language codes to page URLs
-        const languagePages = {
-            'de': 'indexDE.html',
-            'da': 'indexDA.html',
-            'en': 'index.html'
-        };
-
-        // Get saved language or default to 'de'
-        const savedLanguage = localStorage.getItem('selectedLanguage') || 'de';
-
-        // Set initial language select value
-        languageSelect.value = savedLanguage;
-        setLanguageAttribute(savedLanguage);
-
-        // Add change listener to select
-        languageSelect.addEventListener('change', function() {
-            const lang = this.value;
-            setLanguageAttribute(lang);
-            navigateToLanguagePage(lang);
-        });
-
-        function setLanguageAttribute(lang) {
-            htmlElement.setAttribute('lang', lang);
-            localStorage.setItem('selectedLanguage', lang);
-            console.log('Sprache geändert zu:', lang);
+    // outside click
+    document.addEventListener('click', (e) => {
+        if (!menu.contains(e.target)) {
+            closeMenu();
         }
+    });
 
-        function navigateToLanguagePage(lang) {
-            const page = languagePages[lang];
-            if (page) {
-                window.location.href = page;
-            }
-        }
-    })();
+    // -----------------------------
+    // IMPORTANT FIX:
+    // ensure close button ALWAYS exists
+    // -----------------------------
+    function ensureCloseButton() {
 
-    if (menu && menuToggle) {
-        const closeMenu = () => {
-            menu.classList.remove('is-open');
-            document.body.classList.remove('menu-open');
-            menuToggle.setAttribute('aria-expanded', 'false');
-        };
-
-        menuToggle.addEventListener('click', () => {
-            const isOpen = menu.classList.toggle('is-open');
-            document.body.classList.toggle('menu-open', isOpen);
-            menuToggle.setAttribute('aria-expanded', String(isOpen));
-        });
-
-        menuLinks.forEach(link => {
-            link.addEventListener('click', (event) => {
-                event.preventDefault();
-                const targetId = link.getAttribute('href');
-                const target = targetId ? document.querySelector(targetId) : null;
-
-                closeMenu();
-
-                if (!target) return;
-
-                // For GSAP-pinned horizontal sections, jump to the ScrollTrigger start
-                // so navigation always opens on the first panel/card.
-                const isHorizontalSection =
-                    target.classList.contains('abschnitt--horizontal') ||
-                    target.classList.contains('abschnitt--horizontal-reverse');
-
-                if (isHorizontalSection && typeof ScrollTrigger !== 'undefined') {
-                    ScrollTrigger.refresh();
-                    const trigger = ScrollTrigger.getAll().find(st => st.trigger === target && st.pin);
-                    if (trigger) {
-                        window.scrollTo({
-                            top: Math.max(0, trigger.start + 1),
-                            behavior: 'smooth'
-                        });
-                        return;
-                    }
-                }
-
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-
-        document.addEventListener('click', (event) => {
-            if (!menu.contains(event.target)) closeMenu();
-        });
-    }
-
-    // Insert a close button inside the sliding panel (.menu__nav) that mirrors the
-    // three-span X from the toggle and closes the menu when clicked.
-    (function insertPanelCloseButton(){
         const nav = document.querySelector('.menu__nav');
         if (!nav) return;
 
-        // create button only if it doesn't exist
-        if (nav.querySelector('.menu__close')) return;
+        let btn = nav.querySelector('.menu__close');
 
-        const btn = document.createElement('button');
-        btn.className = 'menu__close';
-        btn.type = 'button';
-        btn.setAttribute('aria-label', 'Menü schließen');
+        if (!btn) {
+            btn = document.createElement('button');
+            btn.className = 'menu__close';
+            btn.type = 'button';
+            btn.setAttribute('aria-label', 'Menü schließen');
 
-        // create three spans to form the hamburger/X
-        for (let i=0;i<3;i++){
-            const s = document.createElement('span');
-            btn.appendChild(s);
+            for (let i = 0; i < 3; i++) {
+                const span = document.createElement('span');
+                btn.appendChild(span);
+            }
+
+            nav.appendChild(btn);
         }
 
-        nav.appendChild(btn);
-
-        btn.addEventListener('click', function(e){
+        btn.addEventListener('click', (e) => {
             e.stopPropagation();
-            // close the menu by removing class
-            const menuEl = document.querySelector('.menu');
-            if (menuEl) {
-                menuEl.classList.remove('is-open');
-                document.body.classList.remove('menu-open');
-                const toggle = menuEl.querySelector('.menu__toggle');
-                if (toggle) toggle.setAttribute('aria-expanded', 'false');
-            }
+            closeMenu();
         });
-    })();
+    }
 
-    // --- Video thumbnail behaviour: load iframe only on click ---
+    ensureCloseButton();
+}
+
+// -----------------------------
+// VIDEO (NO AUTO SCROLL ANYMORE)
+// -----------------------------
+function initVideo() {
+
     const videoThumbButtons = document.querySelectorAll('.video-thumb');
-    const uiElements = document.querySelectorAll('.frame, .menu, .aeroVin, .momentum');
-    let isAutoScrolling = false;
 
     videoThumbButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
+
+        btn.addEventListener('click', () => {
+
             const videoBlock = btn.closest('.video');
             if (!videoBlock) return;
+
             const iframe = videoBlock.querySelector('iframe');
             if (!iframe) return;
+
             const baseSrc = iframe.getAttribute('data-src');
             if (!baseSrc) return;
-            const section = videoBlock.closest('.abschnitt');
-            if (!section) return;
 
             const startVideo = () => {
+
                 const joiner = baseSrc.includes('?') ? '&' : '?';
                 const full = baseSrc + joiner + 'autoplay=1&playsinline=1&rel=0&mute=1';
-                if (!iframe.getAttribute('src')) iframe.setAttribute('src', full);
+
+                if (!iframe.getAttribute('src')) {
+                    iframe.setAttribute('src', full);
+                }
+
                 videoBlock.classList.add('is-playing');
+
                 btn.setAttribute('aria-hidden', 'true');
                 btn.setAttribute('tabindex', '-1');
             };
 
-            // Scroll section into view
-            isAutoScrolling = true;
-            const isHorizontal = section.classList.contains('abschnitt--horizontal') || section.classList.contains('abschnitt--horizontal-reverse');
-
-            const onComplete = () => {
-                // Video erst nach dem Scrollen starten (mit kleinem Delay zur Sicherheit)
-                setTimeout(() => {
-                    startVideo();
-                    setTimeout(() => {
-                        isAutoScrolling = false;
-                        ScrollTrigger.refresh();
-                    }, 200);
-                }, 100);
-            };
-
-            if (isHorizontal && typeof ScrollTrigger !== 'undefined') {
-                // For horizontal pinned sections, we need to find the correct scroll position
-                const st = ScrollTrigger.getAll().find(s => s.trigger === section && s.pin === true);
-                if (st) {
-                    // Find which content card the video is in
-                    const contents = gsap.utils.toArray(section.querySelectorAll('.content'));
-                    const videoIndex = contents.findIndex(c => c.contains(videoBlock));
-                    if (videoIndex !== -1) {
-                        const totalWidth = window.innerWidth * (contents.length - 1) * horizontalSpeedFactor;
-                        const progress = videoIndex / (contents.length - 1);
-                        const targetY = st.start + (progress * totalWidth);
-
-                        console.log("Scrolling horizontal zu:", targetY, "Index:", videoIndex);
-
-                        gsap.to(window, {
-                            scrollTo: targetY,
-                            duration: 1.2,
-                            ease: "power2.inOut",
-                            autoKill: false,
-                            onStart: () => {
-                                // UI sofort ausblenden beim Start des Scrolls
-                                // gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
-                            },
-                            onComplete: onComplete
-                        });
-                    } else {
-                        console.warn("Video Index nicht gefunden");
-                        isAutoScrolling = false;
-                        startVideo();
-                    }
-                } else {
-                    console.warn("ScrollTrigger für horizontale Sektion nicht gefunden");
-                    isAutoScrolling = false;
-                    startVideo();
-                }
-            } else {
-                // Bei vertikalen Sektionen wollen wir das Video perfekt zentrieren (100vh/100vw Gefühl)
-                // Wir berechnen die absolute Position des Videos auf der Seite
-                const rect = videoBlock.getBoundingClientRect();
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                const targetY = rect.top + scrollTop - (window.innerHeight - videoBlock.offsetHeight) / 2;
-
-                console.log("Scrolling vertikal zu:", targetY, "Rect Top:", rect.top, "ScrollTop:", scrollTop);
-
-                gsap.to(window, {
-                    scrollTo: targetY,
-                    duration: 1.2,
-                    ease: "power2.inOut",
-                    autoKill: false,
-                    onStart: () => {
-                        // gsap.to(uiElements, { autoAlpha: 0, duration: 0.3, overwrite: true });
-                    },
-                    onComplete: onComplete
-                });
-            }
+            // ❌ NO SCROLL ANYMORE
+            startVideo();
         });
     });
+}
 
-    // register ScrollTrigger (safe to call even if already registered)
-    if (gsap && gsap.registerPlugin) {
-        gsap.registerPlugin(ScrollTrigger);
-        if (typeof ScrollToPlugin !== 'undefined') {
-            gsap.registerPlugin(ScrollToPlugin);
-        }
+// -----------------------------
+// INIT
+// -----------------------------
+document.addEventListener('DOMContentLoaded', () => {
+
+    if (typeof gsap === 'undefined') {
+        console.warn('GSAP fehlt');
+        return;
     }
 
-    // Setup animations
-    if (typeof setupFrameAndTextBuildAnimation === 'function') setupFrameAndTextBuildAnimation();
-    if (typeof setupHorizontalSections === 'function') setupHorizontalSections();
-    if (typeof setupVerticalClassReveal === 'function') setupVerticalClassReveal();
-    if (typeof revealIntroText === 'function') revealIntroText();
+    gsap.registerPlugin(ScrollTrigger);
 
-    // Add resize listener to rebuild frame animation on window resize
-    let resizeTimeout;
+    setupFrameAndTextBuildAnimation();
+    setupHorizontalSections();
+    setupVerticalClassReveal();
+    revealIntroText();
+
+    initMenuSystem();
+    initVideo();
+
     window.addEventListener('resize', () => {
-        clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => {
-            if (typeof setupFrameAndTextBuildAnimation === 'function') {
-                setupFrameAndTextBuildAnimation();
-            }
-            if (typeof revealIntroText === 'function') {
-                revealIntroText();
-            }
-        }, 250); // Debounce: wait 250ms after resize stops
+        setTimeout(() => {
+            setupFrameAndTextBuildAnimation();
+            revealIntroText();
+        }, 250);
     });
-
 });

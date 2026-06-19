@@ -264,7 +264,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Map language codes to page URLs
         const languagePages = {
-            'de': 'indexGer.html',
+            'de': 'indexDE.html',
             'da': 'index.html',
             'en': 'index.html'
         };

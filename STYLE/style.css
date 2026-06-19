@@ -1466,4 +1466,25 @@ body.frames-hidden .frame-toggle__toggle span{
         border-right: 0.2rem solid #f1f1f1;
     }
 
+    .abschnitt__horizontal,
+    .abschnitt__horizontal--reverse {
+        display: flex;
+        flex-direction: column !important;
+        width: 100%;
+        height: auto;
+    }
+
+    .abschnitt__horizontal .content,
+    .abschnitt__horizontal--reverse .content {
+        width: 100%;
+        min-height: 100dvh;
+        height: auto;
+
+        position: relative;
+        left: auto;
+        top: auto;
+
+        transform: none;
+    }
+
 }

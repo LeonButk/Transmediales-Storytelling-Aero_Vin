@@ -28,9 +28,6 @@ html {
     background-color: #000;
 }
 
-.videoIntro, .video {
-    height: calc(var(--initial-vh, 1dvh) * 100);
-}
 
 body {
     margin: 0;

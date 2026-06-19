@@ -1542,6 +1542,15 @@ body.frames-hidden .frame-toggle__toggle span{
 
 @media (max-width: 375px){
 
+    .aeroVin h1{
+        font-size: 2.9rem;
+        left: 18dvw;
+    }
+
+    .momentum h1{
+        font-size: 2.5rem;
+    }
+
 }
 
 @media (max-width: 320px) {

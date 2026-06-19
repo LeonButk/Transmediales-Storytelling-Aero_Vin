@@ -1,5 +1,5 @@
 const horizontalSpeedFactor = 1.5; // Größer = langsameres horizontales Scrollen
-document.documentElement.style.setProperty('--initial-vh', window.innerHeight * 0.01 + 'px');
+
 // Unterstütze mehrere horizontale Bereiche (.abschnitt--horizontal) und ihre "reverse" Variante
 function setupHorizontalSections() {
 

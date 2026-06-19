@@ -1,8 +1,8 @@
 const horizontalSpeedFactor = 1.5;
 
-// ---------------------------
-// HORIZONTAL SECTIONS
-// ---------------------------
+/* ---------------------------
+   HORIZONTAL SECTIONS
+---------------------------- */
 function setupHorizontalSections() {
 
     if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -32,19 +32,36 @@ function setupHorizontalSections() {
                 pin: true,
                 scrub: 0.5,
                 end: () =>
-                    "+=" +
-                    (window.innerWidth *
-                        (contents.length - 1) *
-                        horizontalSpeedFactor)
+                    "+=" + (window.innerWidth * (contents.length - 1) * horizontalSpeedFactor)
             }
         });
     });
 }
 
+/* ---------------------------
+   REVEAL TYPE
+---------------------------- */
+function setupRevealType() {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-// ---------------------------
-// INTRO TEXT
-// ---------------------------
+    document.querySelectorAll('.reveal-type').forEach(el => {
+        gsap.from(el, {
+            autoAlpha: 0,
+            duration: 3,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: el,
+                start: 'top 50%',
+                end: 'center',
+                scrub: 0.5
+            }
+        });
+    });
+}
+
+/* ---------------------------
+   INTRO TEXT
+---------------------------- */
 function revealIntroText() {
     const introText = document.querySelector('.introText');
     if (!introText) return;
@@ -55,17 +72,16 @@ function revealIntroText() {
     gsap.to(introText, {
         autoAlpha: 1,
         duration: 1.2,
-        delay: 2,
-        ease: "power2.out"
+        ease: 'power2.out',
+        delay: 2
     });
 }
 
-
-// ---------------------------
-// VERTICAL REVEAL
-// ---------------------------
+/* ---------------------------
+   VERTICAL REVEAL
+---------------------------- */
 function setupVerticalClassReveal() {
-    if (!gsap || !ScrollTrigger) return;
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
     gsap.utils.toArray('.reveal-vertical-text').forEach(el => {
         const section = el.closest('.abschnitt');
@@ -75,26 +91,25 @@ function setupVerticalClassReveal() {
             y: 36,
             autoAlpha: 0,
             duration: 0.8,
-            ease: "power2.out",
+            ease: 'power2.out',
             scrollTrigger: {
                 trigger: section,
-                start: "top 80%",
-                toggleActions: "play none none reset"
+                start: 'top 80%',
+                toggleActions: 'play none none reset'
             }
         });
     });
 }
 
-
-// ---------------------------
-// FRAME ANIMATION
-// ---------------------------
-let frameTimeline = null;
+/* ---------------------------
+   FRAME ANIMATION
+---------------------------- */
+let frameAnimationTimeline = null;
 
 function setupFrameAndTextBuildAnimation() {
-    if (!gsap) return;
+    if (typeof gsap === 'undefined') return;
 
-    if (frameTimeline) frameTimeline.kill();
+    if (frameAnimationTimeline) frameAnimationTimeline.kill();
 
     const frames = gsap.utils.toArray('.frame');
     const bigLeft = document.querySelector('.aeroVin');
@@ -103,216 +118,231 @@ function setupFrameAndTextBuildAnimation() {
     if (frames.length < 4 || !bigLeft || !bigRight) return;
 
     frames.forEach(f => {
-        f.style.removeProperty("width");
-        f.style.removeProperty("height");
+        f.style.removeProperty('width');
+        f.style.removeProperty('height');
     });
 
     document.body.offsetHeight;
 
-    frameTimeline = gsap.timeline();
+    frameAnimationTimeline = gsap.timeline();
 
-    frameTimeline.from(frames[0], { width: 0, duration: 2 }, 0);
-    frameTimeline.from(frames[1], { height: 0, duration: 2 }, 0);
-    frameTimeline.from(frames[2], { width: 0, duration: 2 }, 0);
-    frameTimeline.from(frames[3], { height: 0, duration: 2 }, 0);
+    frameAnimationTimeline.from(frames[0], { width: 0, duration: 2, ease: 'power2.out' }, 0);
+    frameAnimationTimeline.from(frames[1], { height: 0, duration: 2, ease: 'power2.out' }, 0);
+    frameAnimationTimeline.from(frames[2], { width: 0, duration: 2, ease: 'power2.out' }, 0);
+    frameAnimationTimeline.from(frames[3], { height: 0, duration: 2, ease: 'power2.out' }, 0);
 
-    frameTimeline.from([bigLeft, bigRight], {
+    frameAnimationTimeline.from([bigLeft, bigRight], {
         autoAlpha: 0,
-        duration: 1
+        duration: 1,
+        ease: 'power2.out'
     }, 1.5);
 }
 
+/* ---------------------------
+   MENU CLOSE BUTTON (X FIX)
+---------------------------- */
+function insertPanelCloseButton() {
+    const nav = document.querySelector('.menu__nav');
+    if (!nav || nav.querySelector('.menu__close')) return;
 
-// ---------------------------
-// FRAME TOGGLE
-// ---------------------------
-function setupFrameToggle() {
+    const btn = document.createElement('button');
+    btn.className = 'menu__close';
+    btn.type = 'button';
+    btn.setAttribute('aria-label', 'Menü schließen');
 
-    const btn = document.querySelector('.frame-toggle__toggle');
-    const img = btn?.querySelector('img');
+    for (let i = 0; i < 3; i++) {
+        btn.appendChild(document.createElement('span'));
+    }
 
-    if (!btn) return;
+    nav.appendChild(btn);
 
-    function update(isHover = false) {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        const menu = document.querySelector('.menu');
+        if (!menu) return;
+
+        menu.classList.remove('is-open');
+        document.body.classList.remove('menu-open');
+
+        const toggle = menu.querySelector('.menu__toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'false');
+    });
+}
+
+/* ---------------------------
+   MAIN INIT
+---------------------------- */
+document.addEventListener('DOMContentLoaded', function () {
+
+    if (typeof gsap === 'undefined') return;
+
+    const menu = document.querySelector('.menu');
+    const menuToggle = document.querySelector('.menu__toggle');
+    const menuLinks = document.querySelectorAll('.subPage');
+
+    const frameToggle = document.querySelector('.frame-toggle__toggle');
+    const frameToggleImg = frameToggle?.querySelector('img');
+
+    /* ---------------------------
+       FRAME TOGGLE
+    ---------------------------- */
+    function updateFrameToggleImage(isHover = false) {
+        if (!frameToggleImg) return;
+
         const visible = !document.body.classList.contains('frames-hidden');
 
-        if (!img) return;
-
-        img.src = isHover
+        frameToggleImg.src = isHover
             ? (visible ? 'ASSETS/IMAGES/FrameAus.svg' : 'ASSETS/IMAGES/FrameAn.svg')
             : (visible ? 'ASSETS/IMAGES/FrameAn.svg' : 'ASSETS/IMAGES/FrameAus.svg');
     }
 
-    function setVisible(show) {
-        document.body.classList.toggle('frames-hidden', !show);
-        document.body.classList.toggle('aeroVin-hidden', !show);
-        document.body.classList.toggle('momentum-hidden', !show);
+    function setFrameVisibility(show) {
+        const hidden = !show;
 
-        btn.setAttribute("aria-pressed", String(show));
-        update();
+        document.body.classList.toggle('frames-hidden', hidden);
+        document.body.classList.toggle('aeroVin-hidden', hidden);
+        document.body.classList.toggle('momentum-hidden', hidden);
+
+        if (frameToggle) {
+            frameToggle.setAttribute('aria-pressed', String(show));
+        }
+
+        updateFrameToggleImage();
     }
 
-    setVisible(!document.body.classList.contains('frames-hidden'));
+    if (frameToggle) {
+        setFrameVisibility(true);
 
-    btn.addEventListener('click', () => {
-        const show = document.body.classList.contains('frames-hidden');
-        setVisible(show);
-    });
+        frameToggle.addEventListener('click', () => {
+            const show = document.body.classList.contains('frames-hidden');
+            setFrameVisibility(show);
+        });
 
-    btn.addEventListener('mouseenter', () => update(true));
-    btn.addEventListener('mouseleave', () => update(false));
-}
+        frameToggle.addEventListener('mouseenter', () => updateFrameToggleImage(true));
+        frameToggle.addEventListener('mouseleave', () => updateFrameToggleImage(false));
+    }
 
+    /* ---------------------------
+       LANGUAGE SWITCH
+    ---------------------------- */
+    (function setupLanguageSelection() {
+        const select = document.getElementById('language-select');
+        if (!select) return;
 
-// ---------------------------
-// MENU SYSTEM (FIXED HORIZONTAL JUMP)
-// ---------------------------
-function setupMenu() {
+        const pages = {
+            de: 'indexDE.html',
+            da: 'indexDA.html',
+            en: 'index.html'
+        };
 
-    const menu = document.querySelector('.menu');
-    const toggle = document.querySelector('.menu__toggle');
-    const links = document.querySelectorAll('.subPage');
+        const saved = localStorage.getItem('selectedLanguage') || 'de';
 
-    if (!menu || !toggle) return;
+        select.value = saved;
+        document.documentElement.setAttribute('lang', saved);
 
-    const closeMenu = () => {
-        menu.classList.remove('is-open');
-        document.body.classList.remove('menu-open');
-        toggle.setAttribute('aria-expanded', 'false');
-    };
+        select.addEventListener('change', function () {
+            const lang = this.value;
+            localStorage.setItem('selectedLanguage', lang);
+            document.documentElement.setAttribute('lang', lang);
 
-    toggle.addEventListener('click', () => {
-        const open = menu.classList.toggle('is-open');
-        document.body.classList.toggle('menu-open', open);
-        toggle.setAttribute('aria-expanded', String(open));
-    });
+            if (pages[lang]) window.location.href = pages[lang];
+        });
+    })();
 
-    document.addEventListener('click', e => {
-        if (!menu.contains(e.target)) closeMenu();
-    });
+    /* ---------------------------
+       MENU BEHAVIOR
+    ---------------------------- */
+    if (menu && menuToggle) {
 
-    links.forEach(link => {
-        link.addEventListener('click', e => {
-            e.preventDefault();
+        const closeMenu = () => {
+            menu.classList.remove('is-open');
+            document.body.classList.remove('menu-open');
+            menuToggle.setAttribute('aria-expanded', 'false');
+        };
 
-            const target = document.querySelector(link.getAttribute('href'));
-            closeMenu();
+        menuToggle.addEventListener('click', () => {
+            const open = menu.classList.toggle('is-open');
+            document.body.classList.toggle('menu-open', open);
+            menuToggle.setAttribute('aria-expanded', String(open));
+        });
 
-            if (!target) return;
+        menuLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
 
-            const isHorizontal =
-                target.classList.contains('abschnitt--horizontal') ||
-                target.classList.contains('abschnitt--horizontal-reverse');
+                const target = document.querySelector(link.getAttribute('href'));
+                closeMenu();
 
-            // 🔥 FIX: correct landing on pinned GSAP sections
-            if (isHorizontal && typeof ScrollTrigger !== 'undefined') {
+                if (!target) return;
 
-                ScrollTrigger.refresh();
+                const isHorizontal =
+                    target.classList.contains('abschnitt--horizontal') ||
+                    target.classList.contains('abschnitt--horizontal-reverse');
 
-                const st = ScrollTrigger.getAll()
-                    .find(t => t.trigger === target && t.pin);
+                if (isHorizontal && typeof ScrollTrigger !== 'undefined') {
+                    ScrollTrigger.refresh();
 
-                if (st) {
-                    window.scrollTo({
-                        top: st.start + 2,
-                        behavior: 'smooth'
-                    });
-                    return;
+                    const st = ScrollTrigger.getAll()
+                        .find(s => s.trigger === target && s.pin);
+
+                    if (st) {
+                        window.scrollTo({
+                            top: Math.max(0, st.start + 1),
+                            behavior: 'smooth'
+                        });
+                        return;
+                    }
                 }
-            }
 
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-    });
-}
 
-
-// ---------------------------
-// VIDEO SYSTEM (NO SCROLL + MOBILE FIX)
-// ---------------------------
-function setupVideos() {
-
-    const buttons = document.querySelectorAll('.video-thumb');
-
-    function play(btn) {
-        const block = btn.closest('.video');
-        const iframe = block?.querySelector('iframe');
-        if (!iframe) return;
-
-        const base = iframe.dataset.src;
-        const url = base + (base.includes('?') ? '&' : '?') +
-            'autoplay=1&playsinline=1&mute=1&rel=0';
-
-        if (!iframe.src) iframe.src = url;
-
-        block.classList.add('is-playing');
+        document.addEventListener('click', (e) => {
+            if (!menu.contains(e.target)) closeMenu();
+        });
     }
 
-    buttons.forEach(btn => {
-        btn.addEventListener('click', () => play(btn));
-        btn.addEventListener('touchend', () => play(btn), { passive: true });
+    /* ---------------------------
+       CLOSE BUTTON INSERT
+    ---------------------------- */
+    insertPanelCloseButton();
+
+    /* ---------------------------
+       VIDEO (NO SCROLL)
+    ---------------------------- */
+    document.querySelectorAll('.video-thumb').forEach(btn => {
+        btn.addEventListener('click', () => {
+
+            const video = btn.closest('.video');
+            const iframe = video?.querySelector('iframe');
+
+            if (!iframe) return;
+
+            const src = iframe.getAttribute('data-src');
+            if (!src) return;
+
+            if (!iframe.src) {
+                iframe.src = src + '?autoplay=1&playsinline=1&rel=0&mute=1';
+            }
+
+            video.classList.add('is-playing');
+            btn.setAttribute('aria-hidden', 'true');
+        });
     });
-}
 
-
-// ---------------------------
-// LANGUAGE SWITCH (RESTORED)
-// ---------------------------
-function setupLanguageSelection() {
-
-    const select = document.getElementById('language-select');
-    const html = document.documentElement;
-
-    if (!select) return;
-
-    const pages = {
-        de: "indexDE.html",
-        en: "index.html",
-        da: "indexDA.html"
-    };
-
-    const saved = localStorage.getItem("selectedLanguage") || "de";
-
-    select.value = saved;
-    html.setAttribute("lang", saved);
-
-    select.addEventListener("change", function () {
-        const lang = this.value;
-
-        localStorage.setItem("selectedLanguage", lang);
-        html.setAttribute("lang", lang);
-
-        const page = pages[lang];
-        if (page) window.location.href = page;
-    });
-}
-
-
-// ---------------------------
-// INIT
-// ---------------------------
-document.addEventListener('DOMContentLoaded', () => {
-
-    if (gsap?.registerPlugin) {
-        gsap.registerPlugin(ScrollTrigger);
-    }
-
-    setupHorizontalSections();
-    setupVerticalClassReveal();
-    setupFrameAndTextBuildAnimation();
-    revealIntroText();
-
-    setupMenu();
-    setupFrameToggle();
-    setupVideos();
-    setupLanguageSelection();
+    /* ---------------------------
+       INIT ANIMATIONS
+    ---------------------------- */
+    if (typeof setupFrameAndTextBuildAnimation === 'function') setupFrameAndTextBuildAnimation();
+    if (typeof setupHorizontalSections === 'function') setupHorizontalSections();
+    if (typeof setupVerticalClassReveal === 'function') setupVerticalClassReveal();
+    if (typeof revealIntroText === 'function') revealIntroText();
 
     window.addEventListener('resize', () => {
-        clearTimeout(window.__t);
-        window.__t = setTimeout(() => {
+        clearTimeout(window._resizeT);
+        window._resizeT = setTimeout(() => {
             setupFrameAndTextBuildAnimation();
             revealIntroText();
         }, 250);

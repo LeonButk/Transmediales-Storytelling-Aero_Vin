@@ -23,9 +23,7 @@ function setupHorizontalSections() {
 
         if (!contents.length) return;
 
-        const isReverse = section.classList.contains(
-            'abschnitt--horizontal-reverse'
-        );
+        const isReverse = section.classList.contains('abschnitt--horizontal-reverse');
 
         const xPercentValue = isReverse
             ? 100 * (contents.length - 1)
@@ -54,9 +52,7 @@ function setupHorizontalSections() {
 function setupRevealType() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    const revealEls = document.querySelectorAll('.reveal-type');
-
-    revealEls.forEach(el => {
+    document.querySelectorAll('.reveal-type').forEach(el => {
         gsap.from(el, {
             autoAlpha: 0,
             duration: 3,
@@ -95,9 +91,7 @@ function revealIntroText() {
 function setupVerticalClassReveal() {
     if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
 
-    const els = gsap.utils.toArray('.reveal-vertical-text');
-
-    els.forEach(el => {
+    gsap.utils.toArray('.reveal-vertical-text').forEach(el => {
         const section = el.closest('.abschnitt');
         if (!section) return;
 
@@ -123,9 +117,7 @@ let frameAnimationTimeline = null;
 function setupFrameAndTextBuildAnimation() {
     if (typeof gsap === 'undefined') return;
 
-    if (frameAnimationTimeline) {
-        frameAnimationTimeline.kill();
-    }
+    if (frameAnimationTimeline) frameAnimationTimeline.kill();
 
     const frames = gsap.utils.toArray('.frame');
     const bigLeft = document.querySelector('.aeroVin');
@@ -154,7 +146,7 @@ function setupFrameAndTextBuildAnimation() {
 }
 
 // -----------------------------
-// MENU SYSTEM (FIXED + STABLE CLOSE BUTTON)
+// MENU SYSTEM (STABLE)
 // -----------------------------
 function initMenuSystem() {
 
@@ -163,70 +155,57 @@ function initMenuSystem() {
 
     if (!menu || !menuToggle) return;
 
-    function closeMenu() {
+    const closeMenu = () => {
         menu.classList.remove('is-open');
         document.body.classList.remove('menu-open');
         menuToggle.setAttribute('aria-expanded', 'false');
-    }
+    };
 
-    function openMenu() {
+    const openMenu = () => {
         menu.classList.add('is-open');
         document.body.classList.add('menu-open');
         menuToggle.setAttribute('aria-expanded', 'true');
-    }
+    };
 
-    // toggle button
     menuToggle.addEventListener('click', () => {
         const isOpen = menu.classList.contains('is-open');
         isOpen ? closeMenu() : openMenu();
     });
 
-    // outside click
     document.addEventListener('click', (e) => {
         if (!menu.contains(e.target)) {
             closeMenu();
         }
     });
 
-    // -----------------------------
-    // IMPORTANT FIX:
-    // ensure close button ALWAYS exists
-    // -----------------------------
-    function ensureCloseButton() {
+    // ensure close button exists ALWAYS
+    const nav = document.querySelector('.menu__nav');
 
-        const nav = document.querySelector('.menu__nav');
-        if (!nav) return;
+    if (nav && !nav.querySelector('.menu__close')) {
+        const btn = document.createElement('button');
+        btn.className = 'menu__close';
+        btn.type = 'button';
+        btn.setAttribute('aria-label', 'Menü schließen');
 
-        let btn = nav.querySelector('.menu__close');
-
-        if (!btn) {
-            btn = document.createElement('button');
-            btn.className = 'menu__close';
-            btn.type = 'button';
-            btn.setAttribute('aria-label', 'Menü schließen');
-
-            for (let i = 0; i < 3; i++) {
-                const span = document.createElement('span');
-                btn.appendChild(span);
-            }
-
-            nav.appendChild(btn);
+        for (let i = 0; i < 3; i++) {
+            btn.appendChild(document.createElement('span'));
         }
+
+        nav.appendChild(btn);
 
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
             closeMenu();
         });
     }
-
-    ensureCloseButton();
 }
 
 // -----------------------------
-// VIDEO (NO AUTO SCROLL ANYMORE)
+// VIDEO (MOBILE AUTOPLAY FIX + NO SCROLL)
 // -----------------------------
 function initVideo() {
 
+    const isMobile = window.matchMedia("(pointer: coarse)").matches;
     const videoThumbButtons = document.querySelectorAll('.video-thumb');
 
     videoThumbButtons.forEach(btn => {
@@ -247,8 +226,16 @@ function initVideo() {
                 const joiner = baseSrc.includes('?') ? '&' : '?';
                 const full = baseSrc + joiner + 'autoplay=1&playsinline=1&rel=0&mute=1';
 
-                if (!iframe.getAttribute('src')) {
-                    iframe.setAttribute('src', full);
+                // MOBILE FIX (iOS + Android reliable reload)
+                if (isMobile) {
+                    iframe.src = "";
+                    setTimeout(() => {
+                        iframe.src = full;
+                    }, 50);
+                } else {
+                    if (!iframe.getAttribute('src')) {
+                        iframe.setAttribute('src', full);
+                    }
                 }
 
                 videoBlock.classList.add('is-playing');
@@ -257,7 +244,7 @@ function initVideo() {
                 btn.setAttribute('tabindex', '-1');
             };
 
-            // ❌ NO SCROLL ANYMORE
+            // NO SCROLL ANYMORE
             startVideo();
         });
     });
@@ -268,10 +255,7 @@ function initVideo() {
 // -----------------------------
 document.addEventListener('DOMContentLoaded', () => {
 
-    if (typeof gsap === 'undefined') {
-        console.warn('GSAP fehlt');
-        return;
-    }
+    if (typeof gsap === 'undefined') return;
 
     gsap.registerPlugin(ScrollTrigger);
 

@@ -35,14 +35,23 @@ body {
     font-size: 62.5%;
     min-height: 100dvh;
     overflow-x: hidden;
-    background-color: var(--col-Weiß);
+    background-color: transparent;
 }
 
 .bg {
     position: fixed;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+
+    top: calc(env(safe-area-inset-top) * -1);
+    left: 0;
+
+    width: 100vw;
+
+    height: calc(
+            100dvh +
+            env(safe-area-inset-top) +
+            env(safe-area-inset-bottom)
+    );
+
     object-fit: cover;
 }
 

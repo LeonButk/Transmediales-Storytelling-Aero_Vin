@@ -1589,11 +1589,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .scrollInfoText p{
-        font-size: 1rem;
+        font-size: 1.5rem;
     }
 
     .menu__nav{
-        width: min(80dvw, 550px);
+        width: min(70dvw, 550px);
         max-width: 95dvw;
 
         padding: 1.5rem;
@@ -1634,34 +1634,35 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .concept--text{
-        line-height: 0.7;
+        line-height: 1;
     }
 
     .concept--text p{
-        font-size: 1rem;
+        font-size: 1.15rem;
     }
 
     .bigLabel{
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .aeroVinText{
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .zitat h1{
-        font-size: 2.1rem;
+        font-size: 2.3rem;
     }
 
     .abschnitt__card--horizontal p, .unterabschnitt--text p{
-        font-size: 1.1rem;
-        line-height: 1.3;
+        font-size: 1.2rem;
+        line-height: 1.25;
         font-weight: 200;
         max-width: 75dvw;
     }
 
     .titel{
-        font-size: 1.8rem;
+        font-size: 1.9rem;
+        line-height: 1.1;
     }
 
     .unterabschnitt--ueberleitung p{
@@ -1670,14 +1671,8 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .NLHeader{
-        font-size: 2.2rem;
+        font-size: 2.5rem;
         max-width: 70dvw;
-    }
-
-    .newsletterWrapper{
-        font-size: 1.3rem;
-        gap: 1.5rem;
-        width: 75dvw;
     }
 
     .newsletterWrapper p, .newsletterWrapper button {
@@ -1685,7 +1680,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .newsletterWrapper button{
-        font-size: 1.3rem;
+        font-size: 1.5rem;
     }
 
     .signup-btn{
@@ -1705,9 +1700,10 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .newsletterWrapper{
-        font-size: 1.2rem;
+        font-size: 1.5rem;
         line-height: 1.2;
         gap: 2rem;
+        width: 75%
     }
 
     .signup-btn{

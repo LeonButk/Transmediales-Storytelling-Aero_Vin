@@ -1520,6 +1520,259 @@ body.frames-hidden .frame-toggle__toggle span{
 
 }
 
+@media (max-width: 425px){
+
+    .aeroVin h1{
+        font-size: 3.2rem;
+        left: 19dvw;
+    }
+
+    .momentum h1{
+        font-size: 2.5rem;
+        top: 45dvh;
+    }
+
+    .frame:nth-of-type(1), .frame:nth-of-type(3){
+        height: 0.3rem;
+    }
+
+    .frame:nth-of-type(2), .frame:nth-of-type(4){
+        width: 0.3rem;
+    }
+
+    .frame:nth-of-type(2), .frame:nth-of-type(3){
+        right: 9dvw;
+    }
+
+    .frame:nth-of-type(4), .frame:nth-of-type(1){
+        left: 9dvw;
+    }
+
+    .frame:nth-of-type(1){
+        width: 68dvw;
+    }
+
+    .frame:nth-of-type(2){
+        height: 41dvh;
+    }
+
+    .frame:nth-of-type(3){
+        width: 67dvw;
+    }
+
+    .frame:nth-of-type(4){
+        height: 52dvh;
+    }
+
+    .menu{
+        top: 4dvh;
+        right: 4dvw;
+    }
+
+    .menu__toggle span{
+        height: 0.3rem;
+        width: 2.2rem;
+        --bar-gap: 0.7rem;
+    }
+
+    .introText p{
+        max-width: 70dvw;
+    }
+
+    .versalien{
+        font-size: 2.5rem;
+    }
+
+    .arrow-svg{
+        height: 7dvh;
+        width: 8dvw;
+    }
+
+    .scrollInfoText p{
+        font-size: 1rem;
+    }
+
+    .menu__nav{
+        width: min(80dvw, 550px);
+        max-width: 95dvw;
+
+        padding: 1.5rem;
+    }
+
+    .menu__nav a{
+        font-size: 1.2rem;
+    }
+
+    .language-label{
+        font-size: 1.2rem;
+    }
+
+    .language-select{
+        font-size: 1rem;
+        padding: 0.2rem 0.4rem;
+    }
+
+    .link-wrapper{
+        gap: 1rem;
+    }
+
+    .page-selector, .externalPages-container{
+        gap: 0.1rem;
+    }
+
+    .externalPages-container{
+        padding: 1rem 0 0 0;
+    }
+
+    .menu__nav .menu__close{
+        top: 3.5dvh;
+    }
+
+    .menu__nav .menu__close span{
+        height: 0.25rem;
+        width: 2rem;
+    }
+
+    .concept--text{
+        line-height: 0.7;
+    }
+
+    .concept--text p{
+        font-size: 1rem;
+    }
+
+    .bigLabel{
+        font-size: 1rem;
+    }
+
+    .aeroVinText{
+        font-size: 1rem;
+    }
+
+    .zitat h1{
+        font-size: 2.1rem;
+    }
+
+    .abschnitt__card--horizontal p, .unterabschnitt--text p{
+        font-size: 1.1rem;
+        line-height: 1.3;
+        font-weight: 200;
+        max-width: 75dvw;
+    }
+
+    .titel{
+        font-size: 1.8rem;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        max-width: 70dvw;
+        font-size: 1.5rem;
+    }
+
+    .NLHeader{
+        font-size: 2.2rem;
+        max-width: 70dvw;
+    }
+
+    .newsletterWrapper{
+        font-size: 1.3rem;
+        gap: 1.5rem;
+        width: 75dvw;
+    }
+
+    .newsletterWrapper p, .newsletterWrapper button {
+        margin: 0;
+    }
+
+    .newsletterWrapper button{
+        font-size: 1.3rem;
+    }
+
+    .signup-btn{
+        padding: 0.5rem 0.4rem;
+    }
+
+    .signup-btn::before{
+        left: 16dvw;
+    }
+
+    .signup-btn::after{
+        right: 16dvw;
+    }
+
+    .signup-btn img{
+        height: 2rem;
+    }
+
+    .newsletterWrapper{
+        font-size: 1.2rem;
+        line-height: 1.2;
+        gap: 2rem;
+    }
+
+    .signup-btn{
+        font-size: 1.5rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .signup-btn::before{
+        border-top: 0.2rem solid #f1f1f1;
+        border-left: 0.2rem solid #f1f1f1;
+    }
+
+    .signup-btn::after{
+        border-bottom: 0.2rem solid #f1f1f1;
+        border-right: 0.2rem solid #f1f1f1;
+    }
+
+    .signup-btn:hover::before, .signup-btn:hover::after {
+        width: 50%;
+        height: 60%;
+        cursor: pointer;
+    }
+
+    :root{
+        --infoPosY: 9dvh;
+    }
+
+    .partnerTitel{
+        font-size: 2.5rem;
+    }
+
+    .partnerWrapper{
+        gap: 1.5rem;
+    }
+
+    .footer{
+        padding: 1.5rem 1.5rem
+    }
+
+    .footer__container{
+        gap: 1.5rem;
+    }
+
+    .footer__info-wrapper{
+        gap: 0.5rem;
+    }
+
+    .footer_titel{
+        font-size: 2rem;
+    }
+
+    .footer__info p{
+        font-size: 1rem;
+    }
+
+    .footer__nav{
+        gap: 0.5rem;
+    }
+
+    .footer__nav a{
+        font-size: 1rem;
+    }
+
+}
+
 @media (max-width: 375px){
 
     .aeroVin h1{

@@ -632,7 +632,7 @@ body.frames-hidden .frame-toggle__toggle span{
     font-size: 2rem;
     max-width: 35%;
     line-height: 3.6rem;
-    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 1));
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.75));
     color: var(--col-Weiß);
 }
 
@@ -1312,6 +1312,175 @@ body.frames-hidden .frame-toggle__toggle span{
 }
 
 @media (max-width: 768px) {
+
+    :root{
+        --infoPosY: 14dvh;
+        --infoPosX: 16dvw;
+    }
+
+    .aeroVin h1{
+        font-size: 5rem;
+        left: 16dvw;
+        bottom: 6dvh;
+    }
+
+    .momentum h1{
+        font-size: 4.25rem;
+        top: 49vh;
+        right: 6dvw;
+    }
+
+    .frame:nth-of-type(1){
+        top: 6dvh;
+        left: 20dvw;
+        width: 60dvw;
+        height: 0.7dvh;
+    }
+
+    .frame:nth-of-type(2){
+        bottom: 6dvh;
+        height: 37dvh;
+        right: 7dvw;
+        width: 0.7dvh;
+    }
+
+    .frame:nth-of-type(3){
+        bottom: 6dvh;
+        width: 74dvw;
+        right: 7dvw;
+        height: 0.7dvh;
+    }
+
+    .frame:nth-of-type(4){
+        top: 15dvh;
+        left: 7dvw;
+        height: 43dvh;
+        width: 0.7dvh;
+    }
+
+    .frame-toggle{
+        top: 4.5dvh;
+        left: 5dvw;
+    }
+
+    .menu__nav{
+        width: min(70dvw, 550px);
+        max-width: 95dvw;
+
+        padding: 1.5rem;
+    }
+
+    .menu__nav .menu__close{
+        top: 3dvh;
+    }
+
+    .menu__nav .menu__close span{
+        background: var(--col-Schwarz);
+    }
+
+    .menu{
+        top: 5dvh;
+        right: 7dvw;
+    }
+
+    .menu__toggle span{
+        height: 0.7dvh;
+        --bar-gap: 1rem;
+        width: 7dvw;
+    }
+
+    .menu__nav a{
+        font-size: 2rem;
+    }
+
+    .language-label{
+        font-size: 2rem;
+    }
+
+    .language-select{
+        font-size: 1.5rem;
+    }
+
+    .link-wrapper{
+        gap: 2rem;
+    }
+
+    .introText{
+        font-size: 2.75rem;
+        line-height: 1.1;
+        max-width: 50dvw;
+    }
+
+    .versalien{
+        font-size: 4rem;
+    }
+
+    .arrow-svg{
+        height: 7dvh;
+        width: 8dvw;
+    }
+
+    .scrollInfoText p{
+        font-size: 2rem;
+    }
+
+    .concept--text{
+        font-size: 1.6rem;
+        line-height: 1;
+    }
+
+    .concept--text p{
+        max-width: 60dvw;
+    }
+
+    .zitat{
+        font-size: 1.75rem;
+        max-width: 60dvw;
+    }
+
+    .titel{
+        max-width: 60dvw;
+    }
+
+    .teaser, .teaser-vertikal{
+        display: none;
+    }
+
+    .abschnitt__card--horizontal p, .unterabschnitt--text p{
+        max-width: 55dvw;
+        font-size: 1.8rem;
+    }
+
+    .unterabschnitt--ueberleitung{
+        font-size: 2.5rem;
+    }
+
+    .newsletterWrapper{
+        line-height: 1.2;
+        gap: 2rem;
+    }
+
+    .signup-btn::before, .signup-btn::after{
+        width: 20%;
+    }
+
+    .signup-btn:hover::before, .signup-btn:hover::after {
+        width: 50%;
+        height: 60%;
+    }
+
+    .signup-btn::before{
+        left: 13dvw;
+    }
+
+    .signup-btn::after{
+        right: 13dvw;
+    }
+
+    .signup-btn img{
+        height: 3rem;
+    }
+
     .footer {
         padding: 32px 24px;
     }
@@ -1331,7 +1500,8 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .partnerWrapper {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
+        gap: 2rem;
     }
 
     .abschnitt__horizontal,
@@ -1454,11 +1624,6 @@ body.frames-hidden .frame-toggle__toggle span{
         line-height: 1.2;
     }
 
-    .partnerWrapper {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
     .abschnitt--intro p{
         font-size: 1.5rem;
     }
@@ -1499,7 +1664,7 @@ body.frames-hidden .frame-toggle__toggle span{
         display: none;
     }
 
-    .abschnitt__card--horizontal p{
+    .abschnitt__card--horizontal p, .unterabschnitt--text p{
         max-width: 65dvw;
         line-height: 1.25;
         font-size: 1.4rem;
@@ -1510,12 +1675,6 @@ body.frames-hidden .frame-toggle__toggle span{
         max-width: 70dvw;
         line-height: 1.3;
         font-size: 1.9rem;
-    }
-
-    .unterabschnitt--text p{
-        max-width: 70dvw;
-        line-height: 1.3;
-        font-size: 1.2rem;
     }
 
 }
@@ -1635,10 +1794,24 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .concept--text{
         line-height: 1;
+        font-size: 1.8rem;
+        letter-spacing: 1.2px;
+    }
+
+    #video2Thumbnail{
+        object-position: right 30% top 50%;
+    }
+
+    #video4ZitatBild{
+        object-position: right 20% top 50%;
+    }
+
+    #video5Thumbnail{
+        object-position: left 20% top 50%;
     }
 
     .concept--text p{
-        font-size: 1.15rem;
+        font-size: 1rem;
     }
 
     .bigLabel{
@@ -1658,6 +1831,7 @@ body.frames-hidden .frame-toggle__toggle span{
         line-height: 1.25;
         font-weight: 200;
         max-width: 75dvw;
+        letter-spacing: 1.2px;
     }
 
     .titel{
@@ -1667,7 +1841,7 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .unterabschnitt--ueberleitung p{
         max-width: 70dvw;
-        font-size: 1.5rem;
+        font-size: 1.7rem;
     }
 
     .NLHeader{
@@ -1729,6 +1903,7 @@ body.frames-hidden .frame-toggle__toggle span{
 
     :root{
         --infoPosY: 9dvh;
+        --infoPosX: 9dvw;
     }
 
     .partnerTitel{
@@ -1882,20 +2057,17 @@ body.frames-hidden .frame-toggle__toggle span{
         width: 2rem;
     }
 
-    .concept--text{
-        line-height: 0.7;
-    }
-
     .concept--text p{
         font-size: 1rem;
+        line-height: 1;
     }
 
     .bigLabel{
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
 
     .aeroVinText{
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
 
     .zitat h1{
@@ -2137,12 +2309,9 @@ body.frames-hidden .frame-toggle__toggle span{
         width: 2rem;
     }
 
-    .concept--text{
-        line-height: 0.7;
-    }
-
     .concept--text p{
         font-size: 0.9rem;
+        line-height: 1.1;
     }
 
     .bigLabel{
@@ -2214,11 +2383,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 5.5dvw;
+        left: 13dvw;
     }
 
     .signup-btn::after{
-        right: 5.5dvw;
+        right: 13dvw;
     }
 
     .signup-btn img{

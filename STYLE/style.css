@@ -1069,6 +1069,7 @@ body.frames-hidden .frame-toggle__toggle span{
     font-weight: 300;
     background: transparent;
     border: none;
+    width: 30%;
 }
 
 .signup-btn img {
@@ -1276,6 +1277,102 @@ body.frames-hidden .frame-toggle__toggle span{
         line-height: 1.18;
     }
 
+
+}
+
+@media (max-width: 1440px){
+
+    .momentum h1{
+        top: 52dvh;
+    }
+
+    .frame:nth-of-type(2){
+        height: 32dvh;
+    }
+
+    .frame:nth-of-type(4){
+        top: 16dvh;
+        height: 40dvh;
+    }
+
+    .introText p{
+        font-size: 4rem;
+    }
+
+    .versalien{
+        font-size: 4rem;
+    }
+
+    .scrollInfoText{
+        font-size: 2rem;
+    }
+
+    .scrollInfo svg{
+        width: auto;
+        height: 4rem;
+    }
+
+    .menu a{
+        font-size: 2rem;
+    }
+
+    .language-label {
+        font-size: 2rem;
+    }
+
+    .concept--text p{
+        font-size: 2rem;
+    }
+
+    .bigLabel{
+        font-size: 2.2rem;
+    }
+
+    .aeroVinText{
+        font-size: 2.2rem;
+    }
+
+    .reveal-horizontal-text{
+        padding-top: 0;
+    }
+
+    .teaser, .teaser-vertikal{
+        font-size: 1.6rem;
+        width: 50dvw;
+    }
+
+    .zitat{
+        max-width: 55dvw;
+    }
+
+    .abschnitt__card--horizontal p, .unterabschnitt--text p{
+        font-size: 1.9rem;
+    }
+
+    .NLHeader{
+        font-size: 4rem;
+    }
+
+    .newsletterWrapper{
+        font-size: 2.5rem;
+    }
+
+    .signup-btn{
+        width: 30dvh;
+    }
+
+    #infoText1DE{
+        padding-top: 2rem;
+    }
+
+    #infoText6DE{
+        padding-top: 2rem;
+    }
+
+    #infoText1DA{
+        padding-top: 2rem;
+    }
+
 }
 
 @media (max-width: 1024px) {
@@ -1368,7 +1465,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .concept--text p{
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
 
     .bigLabel{
@@ -1399,7 +1496,7 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .teaser, .teaser-vertikal{
         font-size: 1.1rem;
-        width: 38dvw;
+        width: 45dvw;
     }
 
     .infoWrapper{
@@ -1422,19 +1519,21 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn:hover::before, .signup-btn:hover::after {
-        width: 40%;
+        width: 60%;
         height: 60%;
         cursor: pointer;
     }
 
-    .signup-btn::after{
-        width: 20%;
-        right: 14dvw;
+    .signup-btn{
+        width: 60%;
     }
 
     .signup-btn::before{
-        left: 14dvw;
-        width: 20%;
+        left: 3dvw;
+    }
+
+    .signup-btn::after{
+        right: 3dvw;
     }
 
     .footer__container {
@@ -1532,8 +1631,12 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .frame-toggle{
-        top: 4.5dvh;
+        top: 5dvh;
         left: 5dvw;
+    }
+
+    .frame-toggle button{
+        width: 12dvw;
     }
 
     .menu__nav{
@@ -1598,21 +1701,33 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .concept--text{
-        font-size: 1.6rem;
         line-height: 1;
     }
 
     .concept--text p{
         max-width: 60dvw;
+        font-size: 1.6rem;
+    }
+
+    .bigLabel{
+        font-size: 1.5rem;
+    }
+
+    .aeroVinText{
+        font-size: 1.6rem;
     }
 
     .zitat{
-        font-size: 1.75rem;
         max-width: 60dvw;
+    }
+
+    .zitat h1{
+        font-size: 3.5rem;
     }
 
     .titel{
         max-width: 60dvw;
+        font-size: 3.5rem;
     }
 
     .teaser, .teaser-vertikal{
@@ -1624,13 +1739,26 @@ body.frames-hidden .frame-toggle__toggle span{
         font-size: 1.8rem;
     }
 
-    .unterabschnitt--ueberleitung{
-        font-size: 2.5rem;
+    .unterabschnitt--ueberleitung p{
+        font-size: 3rem;
     }
 
     .newsletterWrapper{
         line-height: 1.2;
         gap: 2rem;
+    }
+
+    .newsletterWrapper p {
+        font-size: 2rem;
+    }
+
+    .NLHeader{
+        top: 15dvh;
+    }
+
+    .signup-btn{
+        width: 65%;
+        font-size: 2rem;
     }
 
     .signup-btn::before, .signup-btn::after{
@@ -1643,11 +1771,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 10dvw;
+        left: 3dvw;
     }
 
     .signup-btn::after{
-        right: 10dvw;
+        right: 3dvw;
     }
 
     .signup-btn img{
@@ -2032,6 +2160,11 @@ body.frames-hidden .frame-toggle__toggle span{
     .NLHeader{
         font-size: 2.5rem;
         max-width: 70dvw;
+        top: 4dvh;
+    }
+
+    .newsletterWrapper p{
+        max-width: 70dvw;
     }
 
     .newsletterWrapper p, .newsletterWrapper button {
@@ -2047,11 +2180,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 13dvw;
+        left: 3dvw;
     }
 
     .signup-btn::after{
-        right: 13dvw;
+        right: 3dvw;
     }
 
     .signup-btn img{
@@ -2068,6 +2201,7 @@ body.frames-hidden .frame-toggle__toggle span{
     .signup-btn{
         font-size: 1.5rem;
         padding: 0.5rem 1rem;
+        width: 70%;
     }
 
     .signup-btn::before{
@@ -2125,6 +2259,46 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .footer__nav a{
         font-size: 1rem;
+    }
+
+    #infoText1EN{
+        padding-top: 0;
+    }
+
+    #infoText2EN{
+        padding-top: 0;
+    }
+
+    #infoText3EN{
+        padding-top: 0;
+    }
+
+    #infoText1DE{
+        padding-top: 1rem;
+    }
+
+    #infoText2DE{
+        padding-top: 1rem;
+    }
+
+    #infoText3DE{
+        padding-top: 1rem;
+    }
+
+    #infoText5DE{
+        padding-top: 1rem;
+    }
+
+    #infoText6DE{
+        padding-top: 2rem;
+    }
+
+    #infoText1DA{
+        padding-top: 1rem;
+    }
+
+    #infoText2DA{
+        padding-top: 0;
     }
 
 }
@@ -2299,11 +2473,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 13dvw;
+        left: 3dvw;
     }
 
     .signup-btn::after{
-        right: 13dvw;
+        right: 3dvw;
     }
 
     .signup-btn img{
@@ -2319,6 +2493,7 @@ body.frames-hidden .frame-toggle__toggle span{
     .signup-btn{
         font-size: 1.5rem;
         padding: 0.5rem 1rem;
+        width: 80%;
     }
 
     .signup-btn::before{
@@ -2375,6 +2550,46 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .footer__nav a{
         font-size: 1rem;
+    }
+
+    #infoText1EN{
+        padding-top: 0;
+    }
+
+    #infoText2EN{
+        padding-top: 0;
+    }
+
+    #infoText3EN{
+        padding-top: 0;
+    }
+
+    #infoText1DE{
+        padding-top: 1rem;
+    }
+
+    #infoText2DE{
+        padding-top: 1rem;
+    }
+
+    #infoText3DE{
+        padding-top: 1rem;
+    }
+
+    #infoText5DE{
+        padding-top: 1rem;
+    }
+
+    #infoText6DE{
+        padding-top: 2rem;
+    }
+
+    #infoText1DA{
+        padding-top: 1rem;
+    }
+
+    #infoText2DA{
+        padding-top: 0;
     }
 
 }
@@ -2551,8 +2766,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .newsletterWrapper{
-        font-size: 1rem;
         gap: 1.5rem;
+    }
+
+    .newsletterWrapper p{
+        font-size: 1.2rem;
     }
 
     .newsletterWrapper p, .newsletterWrapper button {
@@ -2568,15 +2786,19 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 10dvw;
+        left: 0;
     }
 
     .signup-btn::after{
-        right: 10dvw;
+        right: 0;
     }
 
     .signup-btn img{
         height: 2rem;
+    }
+
+    .signup-btn{
+        width: 70%;
     }
 
     .partnerTitel{
@@ -2615,5 +2837,43 @@ body.frames-hidden .frame-toggle__toggle span{
         font-size: 1rem;
     }
 
+    #infoText1EN{
+        padding-top: 0;
+    }
 
+    #infoText2EN{
+        padding-top: 0;
+    }
+
+    #infoText3EN{
+        padding-top: 0;
+    }
+
+    #infoText1DE{
+        padding-top: 1rem;
+    }
+
+    #infoText2DE{
+        padding-top: 1rem;
+    }
+
+    #infoText3DE{
+        padding-top: 1rem;
+    }
+
+    #infoText5DE{
+        padding-top: 1rem;
+    }
+
+    #infoText6DE{
+        padding-top: 2rem;
+    }
+
+    #infoText1DA{
+        padding-top: 1rem;
+    }
+
+    #infoText2DA{
+        padding-top: 0;
+    }
 }

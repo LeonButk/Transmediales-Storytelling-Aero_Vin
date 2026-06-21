@@ -9,6 +9,9 @@
     stroke: #f1f1f1;
     stroke-width: 50; /* ≈ wirkt wie +5px außen */
 
+    @media (max-width: 1024px){
+        stroke-width: 40; /* ≈ wirkt wie +3px außen */
+
     }
   </style>
 

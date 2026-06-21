@@ -1279,6 +1279,164 @@ body.frames-hidden .frame-toggle__toggle span{
 }
 
 @media (max-width: 1024px) {
+
+    .aeroVin h1{
+        font-size: 3.5rem;
+    }
+
+    .momentum h1{
+        font-size: 2.8rem;
+        top: 58dvh;
+    }
+
+    .frame:nth-of-type(1), .frame:nth-of-type(3){
+        height: 0.3rem;
+    }
+
+    .frame:nth-of-type(2), .frame:nth-of-type(4){
+        width: 0.3rem;
+    }
+
+    .frame:nth-of-type(4){
+        height: 29dvh;
+    }
+
+    .frame-toggle{
+        top: 2.5dvh;
+        left: 3.2dvw;
+    }
+
+    .frame-toggle button{
+        width: 12dvh;
+    }
+
+    .menu__toggle span{
+        height: 0.3rem;
+        --bar-gap: 0.9rem;
+        width: 4.5dvw;
+    }
+
+    .menu{
+        top: 4.1dvh;
+        right: 3.5dvw;
+    }
+
+    .menu__nav{
+        width: min(40dvw, 550px);
+        max-width: 95dvw;
+
+        padding: 1.5rem;
+    }
+
+    .menu__nav .menu__close{
+        top: 3dvh;
+    }
+
+    .menu__nav .menu__close span{
+        background: var(--col-Schwarz);
+    }
+
+    .menu__nav a{
+        font-size: 1.2rem;
+    }
+
+    .language-label{
+        font-size: 1rem;
+    }
+
+    .language-select{
+        font-size: 1rem;
+        padding: 0.3rem 0.6rem;
+    }
+
+    .link-wrapper{
+        gap: 1rem;
+    }
+
+    .externalPages-container, .page-selector{
+        gap: 0.5rem;
+    }
+
+    .externalPages-container{
+        padding-top: 1rem;
+        padding-bottom: 0;
+    }
+
+    .introText p{
+        font-size: 2.5rem;
+        line-height: 1;
+    }
+
+    .concept--text p{
+        font-size: 1.1rem;
+    }
+
+    .bigLabel{
+        font-size: 1.2rem;
+    }
+
+    .aeroVinText{
+        font-size: 1.2rem;
+    }
+
+    .zitat{
+        max-width: 40dvw;
+    }
+
+    .zitat h1{
+        font-size: 2.5rem;
+        line-height: 1;
+    }
+
+    .abschnitt__card--horizontal p, .unterabschnitt--text{
+        font-size: 1.2rem;
+    }
+
+    .titel{
+        font-size: 2.3rem;
+        max-width: 70dvh;
+    }
+
+    .teaser, .teaser-vertikal{
+        font-size: 1.1rem;
+        width: 38dvw;
+    }
+
+    .infoWrapper{
+        gap: 0.7rem;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        font-size: 2rem;
+        max-width: 50dvw;
+    }
+
+    .newsletterWrapper p{
+        font-size: 1.5rem;
+        line-height: 1.18;
+        max-width: 50dvw;
+    }
+
+    .NLHeader{
+        top: 6dvh;
+    }
+
+    .signup-btn:hover::before, .signup-btn:hover::after {
+        width: 40%;
+        height: 60%;
+        cursor: pointer;
+    }
+
+    .signup-btn::after{
+        width: 20%;
+        right: 14dvw;
+    }
+
+    .signup-btn::before{
+        left: 14dvw;
+        width: 20%;
+    }
+
     .footer__container {
         flex-direction: column;
         align-items: flex-start;
@@ -1289,25 +1447,40 @@ body.frames-hidden .frame-toggle__toggle span{
         gap: 24px;
     }
 
-    .abschnitt__horizontal,
-    .abschnitt__horizontal--reverse {
-        display: flex;
-        flex-direction: column !important;
-        width: 100%;
-        height: auto;
+    #infoText1DE{
+        padding-top: 7rem;
     }
 
-    .abschnitt__horizontal .content,
-    .abschnitt__horizontal--reverse .content {
-        width: 100%;
-        min-height: 100dvh;
-        height: auto;
+    #infoText2DE{
+        padding-top: 5rem;
+    }
 
-        position: relative;
-        left: auto;
-        top: auto;
+    #infoText3DE{
+        padding-top: 5rem;
+    }
 
-        transform: none;
+    #infoText5DE{
+        padding-top: 5rem;
+    }
+
+    #infoText6DE{
+        padding-top: 5rem;
+    }
+
+    #infoText1DA{
+        padding-top: 8rem;
+    }
+
+    #infoText1EN{
+        padding-top: 7rem;
+    }
+
+    #infoText2EN{
+        padding-top: 7rem;
+    }
+
+    #infoText3EN{
+        padding-top: 5rem;
     }
 }
 
@@ -1470,11 +1643,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 13dvw;
+        left: 10dvw;
     }
 
     .signup-btn::after{
-        right: 13dvw;
+        right: 10dvw;
     }
 
     .signup-btn img{
@@ -1523,6 +1696,18 @@ body.frames-hidden .frame-toggle__toggle span{
         top: auto;
 
         transform: none;
+    }
+
+    #infoText3EN{
+        padding-top: 3rem;
+    }
+
+    #infoText3DE{
+        padding-top: 7rem;
+    }
+
+    #infoText6DE{
+        padding-top: 10rem;
     }
 }
 
@@ -1862,11 +2047,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 16dvw;
+        left: 13dvw;
     }
 
     .signup-btn::after{
-        right: 16dvw;
+        right: 13dvw;
     }
 
     .signup-btn img{
@@ -2114,11 +2299,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 16dvw;
+        left: 13dvw;
     }
 
     .signup-btn::after{
-        right: 16dvw;
+        right: 13dvw;
     }
 
     .signup-btn img{
@@ -2310,7 +2495,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .concept--text p{
-        font-size: 0.9rem;
+        font-size: 0.8rem;
         line-height: 1.1;
     }
 
@@ -2383,11 +2568,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn::before{
-        left: 13dvw;
+        left: 10dvw;
     }
 
     .signup-btn::after{
-        right: 13dvw;
+        right: 10dvw;
     }
 
     .signup-btn img{
@@ -2429,5 +2614,6 @@ body.frames-hidden .frame-toggle__toggle span{
     .footer__nav a{
         font-size: 1rem;
     }
+
 
 }

@@ -5,7 +5,7 @@ const horizontalSpeedFactor = 1.5;
 ---------------------------- */
 function setupHorizontalSections() {
 
-    if (window.matchMedia("(max-width: 1024px)").matches) return;
+    if (window.matchMedia("(max-width: 768px)").matches) return;
 
     const sections = gsap.utils.toArray(
         '.abschnitt--horizontal, .abschnitt--horizontal-reverse'

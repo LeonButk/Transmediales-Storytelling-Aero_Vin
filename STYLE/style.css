@@ -763,7 +763,7 @@ body.frames-hidden .frame-toggle__toggle span{
     font-size: 3rem;
     font-weight: 400;
     margin: 0 0 40px;
-    color: #111;
+    color: var(--col-Schwarz);
 }
 
 .footer__info-wrapper {
@@ -823,13 +823,11 @@ body.frames-hidden .frame-toggle__toggle span{
 
 .unterabschnitt--text p,
 .text p{
-    max-width: 40dvw;
     margin: 0;
     line-height: 1.18;
 }
 .concept--text{
     font-family: "Inter", serif;
-    font-size: 1.7rem;
     padding: 8dvh 10dvw;
     text-align: left;
     color: var(--col-Weiß);
@@ -843,6 +841,7 @@ body.frames-hidden .frame-toggle__toggle span{
     max-width: 40dvw;
     margin: 0;
     line-height: 1.18;
+    font-size: 1.7rem;
 }
 
 .unterabschnitt--image{
@@ -999,7 +998,6 @@ body.frames-hidden .frame-toggle__toggle span{
     max-width: 50dvw;
     margin: 0;
     line-height: 1.18;
-    font-size: 1.7rem;
     font-weight: 200;
 }
 
@@ -1117,6 +1115,243 @@ body.frames-hidden .frame-toggle__toggle span{
     z-index: 10;
 }
 
+@media (max-width: 2560px){
+    .video__content {
+        object-fit: cover;
+        height: 100dvh;
+        width: auto;
+    }
+
+    .aeroVin h1{
+        font-size: 7rem;
+        left: 8.5dvw;
+    }
+
+    .momentum h1{
+        font-size: 6rem;
+        top: 50dvh;
+    }
+
+    .frame:nth-of-type(1), .frame:nth-of-type(3){
+        height: 0.4rem;
+    }
+
+    .frame:nth-of-type(2), .frame:nth-of-type(4){
+        width: 0.4rem;
+    }
+
+    .frame:nth-of-type(1){
+        width: 79dvw;
+        left: 10dvw;
+    }
+
+    .frame:nth-of-type(2){
+        height: 35dvh;
+    }
+
+    .frame:nth-of-type(3){
+        width: 84dvw;
+    }
+
+    .frame:nth-of-type(4){
+        height: 40dvh;
+    }
+
+    .frame-toggle{
+        top: 5.3dvh;
+        left: 3.7dvw;
+    }
+
+    .frame-toggle__toggle{
+        width: 4dvw;
+    }
+
+    .menu{
+        top: 5.3dvh;
+        right: 4.6dvw;
+    }
+
+    .menu__toggle span{
+        width: 4rem;
+        height: 0.4rem;
+        /* use the same --bar-gap variable but smaller on narrow viewports */
+        --bar-gap: 1.3rem;
+    }
+
+    .menu__nav{
+        width: min(50dvw, 750px);
+        max-width: 95dvw;
+
+        padding: 2rem;
+    }
+
+    .menu__arrow{
+        font-size: 3rem;
+    }
+
+    .menu a{
+        font-size: 2.7rem;
+    }
+
+    .language-label {
+        font-size: 2rem;
+    }
+
+    .language-select{
+        font-size: 1.5rem;
+    }
+
+    .link-wrapper{
+        gap: 4rem;
+    }
+
+    .menu__nav .menu__close span{
+        height: 0.5rem;
+        width: 3.5rem;
+    }
+
+    .menu__nav .menu__close{
+        right: 2dvw;
+        top: 2dvh;
+    }
+
+    .arrow-svg{
+        height: 5rem;
+        width: auto;
+    }
+
+    .introText p{
+        font-size: 6rem;
+        line-height: 1.1;
+    }
+
+    .versalien{
+        font-size: 5.5rem;
+    }
+
+    .einruecker{
+        padding-left: 5rem;
+    }
+
+    .bigLabel{
+        font-size: 1.7rem;
+        font-weight: 400;
+    }
+
+    .firstSentence{
+        font-weight: 500;
+    }
+
+    .concept--text{
+        gap: 0.8rem;
+    }
+
+    .concept--text p{
+        font-size: 3rem;
+        line-height: 1.2;
+    }
+
+    .bigLabel{
+        font-size: 3rem;
+    }
+
+    .zitat{
+        font-size: 3.5rem;
+        line-height: 0.9;
+        max-width: 40dvw;
+    }
+
+    :root{
+        --infoPosX: 11dvw;
+        --infoPosY: 13dvh;
+    }
+
+    .titel{
+        line-height: 0.8;
+        font-size: 5.5rem;
+    }
+
+    .teaser, .teaser-vertikal{
+        max-width: 30dvw;
+        padding-left: 4rem;
+        font-weight: 200;
+        font-size: 2rem;
+    }
+
+    .infoWrapper{
+        gap: 2rem;
+    }
+
+    .reveal-horizontal-text, .reveal-vertical-text{
+        font-size: 3rem;
+        letter-spacing: 1px;
+        max-width: 55%;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        font-size: 5rem;
+    }
+
+    .NLHeader{
+        top: 9dvh;
+        font-size: 6rem;
+    }
+
+    .newsletterWrapper p{
+        font-size: 4rem;
+        line-height: 1.1;
+        max-width: 70%;
+    }
+
+    .signup-btn{
+        font-size: 4rem;
+        gap: 2rem;
+    }
+
+    .signup-btn::before {
+        border-top: 0.4rem solid #f1f1f1;
+        border-left: 0.4rem solid #f1f1f1;
+    }
+
+    .signup-btn::after {
+        border-bottom: 0.4rem solid #f1f1f1;
+        border-right: 0.4rem solid #f1f1f1;
+    }
+
+    .signup-btn img{
+        height: 4rem;
+    }
+
+    .partnerTitel{
+        font-size: 6rem;
+    }
+
+    .partnerWrapper{
+        gap: 3rem;
+    }
+
+    .footer__info p{
+        font-size: 2rem;
+        color: var(--col-Schwarz);
+    }
+
+    .footer__nav a{
+        font-size: 2rem;
+        color: var(--col-Schwarz);
+    }
+
+    #infoText3DE{
+        padding-top: 2rem;
+    }
+
+    #infoText4DE{
+        padding-top: 0;
+    }
+
+    #infoText4DA{
+        padding-top: 0;
+    }
+}
 
 @media (max-width: 1492px){
 
@@ -1282,12 +1517,23 @@ body.frames-hidden .frame-toggle__toggle span{
 
 @media (max-width: 1440px){
 
+    .video__content{
+        object-fit: cover;
+        width: 100%;
+    }
+
     .momentum h1{
-        top: 52dvh;
+        top: 50dvh;
+        font-size: 3.25rem;
+    }
+
+    .aeroVin h1{
+        font-size: 4rem;
+        left: 8.2dvw;
     }
 
     .frame:nth-of-type(2){
-        height: 32dvh;
+        height: 34dvh;
     }
 
     .frame:nth-of-type(4){
@@ -1296,11 +1542,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .introText p{
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
 
     .versalien{
-        font-size: 4rem;
+        font-size: 3.5rem;
     }
 
     .scrollInfoText{
@@ -1309,23 +1555,78 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .scrollInfo svg{
         width: auto;
-        height: 4rem;
+        height: 2.5rem;
+    }
+
+    .menu__nav{
+        width: min(40dvw, 550px);
+        max-width: 95dvw;
+
+        padding: 1.5rem;
     }
 
     .menu a{
+        font-size: 1.5rem;
+    }
+
+    .frame-toggle{
+        top: 4.5dvh;
+    }
+
+    .frame-toggle__toggle img{
+        width: 5rem;
+        height: auto;
+    }
+
+    .menu__toggle span{
+        height: 0.4rem;
+        --bar-gap: 1rem;
+        width: 3.7dvw;
+    }
+
+    .link-wrapper{
+        gap: 0.5rem;
+    }
+
+    .menu__arrow{
         font-size: 2rem;
+    }
+
+    .page-selector, .externalPages-container{
+        gap: 0.1rem;
+    }
+
+    .externalPages-container{
+        padding-bottom: 0.5rem;
+    }
+
+    .menu__nav .menu__close{
+        top: 3dvh;
+    }
+
+    .menu__nav .menu__close span{
+        height: 0.4rem;
+        width: 3rem;
+    }
+
+    .concept--text {
+        gap: 0;
     }
 
     .language-label {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .language-select{
+        padding: 0.5rem 0.7rem;
     }
 
     .concept--text p{
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
     .bigLabel{
-        font-size: 2.2rem;
+        font-size: 1.8rem;
     }
 
     .aeroVinText{
@@ -1336,17 +1637,33 @@ body.frames-hidden .frame-toggle__toggle span{
         padding-top: 0;
     }
 
+    .infoWrapper{
+        gap: 1rem;
+    }
+
     .teaser, .teaser-vertikal{
-        font-size: 1.6rem;
-        width: 50dvw;
+        font-size: 1.4rem;
+        max-width: 80dvh;
+        width: auto;
+        font-weight: 200;
+        line-height: 0.95;
     }
 
     .zitat{
-        max-width: 55dvw;
+        max-width: 50dvw;
     }
 
-    .abschnitt__card--horizontal p, .unterabschnitt--text p{
-        font-size: 1.9rem;
+    .zitat h1{
+        font-size: 4rem;
+        line-height: 0.95;
+    }
+
+    .reveal-horizontal-text, .reveal-vertical-text{
+        font-size: 1.6rem;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        font-size: 3rem;
     }
 
     .NLHeader{
@@ -1354,11 +1671,41 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .newsletterWrapper{
-        font-size: 2.5rem;
+        width: 70dvw;
+    }
+
+    .newsletterWrapper p{
+        font-size: 2rem;
     }
 
     .signup-btn{
-        width: 30dvh;
+        width: 40dvh;
+        font-size: 2rem;
+    }
+
+    .signup-btn img{
+        width: 3rem;
+        height: auto;
+    }
+
+    .partnerTitel{
+        font-size: 4rem;
+    }
+
+    .footer__info p{
+        font-size: 1.5rem;
+    }
+
+    .footer__nav a {
+        font-size: 1.5rem;
+    }
+
+    #infoText1EN{
+        padding-top: 2rem;
+    }
+
+    #infoText2EN{
+        padding-top: 2rem;
     }
 
     #infoText1DE{
@@ -1370,7 +1717,7 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     #infoText1DA{
-        padding-top: 2rem;
+        padding-top: 4rem;
     }
 
 }
@@ -1394,23 +1741,29 @@ body.frames-hidden .frame-toggle__toggle span{
         width: 0.3rem;
     }
 
+    .frame:nth-of-type(2){
+        height: 25dvh;
+    }
+
     .frame:nth-of-type(4){
-        height: 29dvh;
+        height: 30dvh;
+        top: 18dvh;
     }
 
     .frame-toggle{
-        top: 2.5dvh;
+        top: 2.2dvh;
         left: 3.2dvw;
     }
 
-    .frame-toggle button{
-        width: 12dvh;
+    .frame-toggle__toggle img{
+        width: 11dvh;
+        height: auto;
     }
 
     .menu__toggle span{
         height: 0.3rem;
-        --bar-gap: 0.9rem;
-        width: 4.5dvw;
+        --bar-gap: 0.8rem;
+        width: 4dvw;
     }
 
     .menu{
@@ -1426,11 +1779,17 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .menu__nav .menu__close{
-        top: 3dvh;
+        top: 4dvh;
     }
 
     .menu__nav .menu__close span{
         background: var(--col-Schwarz);
+        height: 0.3rem;
+        width: 2.5rem;
+    }
+
+    .link-wrapper{
+        gap: 1rem;
     }
 
     .menu__nav a{
@@ -1450,8 +1809,12 @@ body.frames-hidden .frame-toggle__toggle span{
         gap: 1rem;
     }
 
+    .menu__arrow{
+        font-size: 1.2rem;
+    }
+
     .externalPages-container, .page-selector{
-        gap: 0.5rem;
+        gap: 0.3rem;
     }
 
     .externalPages-container{
@@ -1462,6 +1825,19 @@ body.frames-hidden .frame-toggle__toggle span{
     .introText p{
         font-size: 2.5rem;
         line-height: 1;
+    }
+
+    .versalien{
+        font-size: 2.75rem;
+    }
+
+    .scrollInfo svg{
+        width: auto;
+        height: 2.5rem;
+    }
+
+    .scrollInfoText p{
+        font-size: 1.3rem;
     }
 
     .concept--text p{
@@ -1485,7 +1861,7 @@ body.frames-hidden .frame-toggle__toggle span{
         line-height: 1;
     }
 
-    .abschnitt__card--horizontal p, .unterabschnitt--text{
+    .reveal-horizontal-text, .reveal-vertical-text{
         font-size: 1.2rem;
     }
 
@@ -1495,8 +1871,8 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .teaser, .teaser-vertikal{
-        font-size: 1.1rem;
-        width: 45dvw;
+        font-size: 1rem;
+        width: 60dvw;
     }
 
     .infoWrapper{
@@ -1515,7 +1891,8 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .NLHeader{
-        top: 6dvh;
+        top: 9dvh;
+        font-size: 3rem;
     }
 
     .signup-btn:hover::before, .signup-btn:hover::after {
@@ -1525,15 +1902,30 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .signup-btn{
-        width: 60%;
+        width: 40%;
+        font-size: 2rem;
+        gap: 1rem;
+    }
+
+    .signup-btn img{
+        height: 2rem;
+        width: auto;
     }
 
     .signup-btn::before{
         left: 3dvw;
+        border-top: 0.2rem solid var(--col-Weiß);
+        border-left: 0.2rem solid var(--col-Weiß);
     }
 
     .signup-btn::after{
         right: 3dvw;
+        border-bottom: 0.2rem solid var(--col-Weiß);
+        border-right: 0.2rem solid var(--col-Weiß);
+    }
+
+    .partnerTitel{
+        font-size: 3rem;
     }
 
     .footer__container {
@@ -1544,6 +1936,18 @@ body.frames-hidden .frame-toggle__toggle span{
     .footer__nav {
         justify-content: flex-start;
         gap: 24px;
+    }
+
+    .footer__info p{
+        font-size: 1.2rem;
+    }
+
+    .footer__nav a{
+        font-size: 1.2rem;
+    }
+
+    .concept--text{
+        gap: 0.3rem;
     }
 
     #infoText1DE{
@@ -1558,6 +1962,10 @@ body.frames-hidden .frame-toggle__toggle span{
         padding-top: 5rem;
     }
 
+    #infoText4DE{
+        padding-top: 3rem;
+    }
+
     #infoText5DE{
         padding-top: 5rem;
     }
@@ -1567,7 +1975,11 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     #infoText1DA{
-        padding-top: 8rem;
+        padding-top: 9rem;
+    }
+
+    #infoText2DA{
+        padding-top: 4rem;
     }
 
     #infoText1EN{
@@ -1635,8 +2047,9 @@ body.frames-hidden .frame-toggle__toggle span{
         left: 5dvw;
     }
 
-    .frame-toggle button{
+    .frame-toggle__toggle img{
         width: 12dvw;
+        height: auto;
     }
 
     .menu__nav{
@@ -1677,6 +2090,10 @@ body.frames-hidden .frame-toggle__toggle span{
         font-size: 1.5rem;
     }
 
+    .menu__arrow{
+        font-size: 2rem;
+    }
+
     .link-wrapper{
         gap: 2rem;
     }
@@ -1684,7 +2101,7 @@ body.frames-hidden .frame-toggle__toggle span{
     .introText{
         font-size: 2.75rem;
         line-height: 1.1;
-        max-width: 50dvw;
+        max-width: 55dvw;
     }
 
     .versalien{
@@ -1702,6 +2119,7 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .concept--text{
         line-height: 1;
+        gap: 0.5rem;
     }
 
     .concept--text p{
@@ -1719,6 +2137,7 @@ body.frames-hidden .frame-toggle__toggle span{
 
     .zitat{
         max-width: 60dvw;
+        left: 15dvw;
     }
 
     .zitat h1{
@@ -1740,20 +2159,23 @@ body.frames-hidden .frame-toggle__toggle span{
     }
 
     .unterabschnitt--ueberleitung p{
-        font-size: 3rem;
+        font-size: 2.5rem;
     }
 
     .newsletterWrapper{
         line-height: 1.2;
         gap: 2rem;
+        width: 70dvw;
     }
 
     .newsletterWrapper p {
         font-size: 2rem;
+        max-width: 60dvw;
     }
 
     .NLHeader{
         top: 15dvh;
+        left: 13dvw;
     }
 
     .signup-btn{
@@ -1836,6 +2258,18 @@ body.frames-hidden .frame-toggle__toggle span{
 
     #infoText6DE{
         padding-top: 10rem;
+    }
+
+    #video4ZitatBild{
+        object-position: right 20% top 50%;
+    }
+
+    #video2Thumbnail{
+        object-position: right 30% top 50%;
+    }
+
+    #video5Thumbnail{
+        object-position: left 20% top 50%;
     }
 }
 
@@ -2108,7 +2542,8 @@ body.frames-hidden .frame-toggle__toggle span{
     .concept--text{
         line-height: 1;
         font-size: 1.8rem;
-        letter-spacing: 1.2px;
+        letter-spacing: 1px;
+        gap: 0;
     }
 
     #video2Thumbnail{
@@ -2160,11 +2595,12 @@ body.frames-hidden .frame-toggle__toggle span{
     .NLHeader{
         font-size: 2.5rem;
         max-width: 70dvw;
-        top: 4dvh;
+        top: 12dvh;
     }
 
     .newsletterWrapper p{
         max-width: 70dvw;
+        font-size: 1.4rem;
     }
 
     .newsletterWrapper p, .newsletterWrapper button {
@@ -2731,7 +3167,6 @@ body.frames-hidden .frame-toggle__toggle span{
         line-height: 1.3;
         font-weight: 200;
         max-width: 75dvw;
-
     }
 
     .titel{
@@ -2763,6 +3198,7 @@ body.frames-hidden .frame-toggle__toggle span{
     .NLHeader{
         font-size: 2rem;
         max-width: 70dvw;
+        top: 8dvh;
     }
 
     .newsletterWrapper{

@@ -67,7 +67,7 @@ function revealIntroText() {
     if (!introText) return;
 
     gsap.killTweensOf(introText);
-    gsap.set(introText, { autoAlpha: 0 });
+    gsap.set(introText, {autoAlpha: 0});
 
     gsap.to(introText, {
         autoAlpha: 1,
@@ -126,10 +126,10 @@ function setupFrameAndTextBuildAnimation() {
 
     frameAnimationTimeline = gsap.timeline();
 
-    frameAnimationTimeline.from(frames[0], { width: 0, duration: 2, ease: 'power2.out' }, 0);
-    frameAnimationTimeline.from(frames[1], { height: 0, duration: 2, ease: 'power2.out' }, 0);
-    frameAnimationTimeline.from(frames[2], { width: 0, duration: 2, ease: 'power2.out' }, 0);
-    frameAnimationTimeline.from(frames[3], { height: 0, duration: 2, ease: 'power2.out' }, 0);
+    frameAnimationTimeline.from(frames[0], {width: 0, duration: 2, ease: 'power2.out'}, 0);
+    frameAnimationTimeline.from(frames[1], {height: 0, duration: 2, ease: 'power2.out'}, 0);
+    frameAnimationTimeline.from(frames[2], {width: 0, duration: 2, ease: 'power2.out'}, 0);
+    frameAnimationTimeline.from(frames[3], {height: 0, duration: 2, ease: 'power2.out'}, 0);
 
     frameAnimationTimeline.from([bigLeft, bigRight], {
         autoAlpha: 0,
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 }
 
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                target.scrollIntoView({behavior: 'smooth', block: 'start'});
             });
         });
 

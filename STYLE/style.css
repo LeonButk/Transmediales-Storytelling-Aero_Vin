@@ -1115,12 +1115,13 @@ body.frames-hidden .frame-toggle__toggle span{
     z-index: 10;
 }
 
+.video__content {
+    object-fit: cover;
+    width: 100dvw;
+    height: 100dvh;
+}
+
 @media (max-width: 2560px){
-    .video__content {
-        object-fit: cover;
-        height: 100dvh;
-        width: auto;
-    }
 
     .aeroVin h1{
         font-size: 7rem;
@@ -1350,6 +1351,154 @@ body.frames-hidden .frame-toggle__toggle span{
 
     #infoText4DA{
         padding-top: 0;
+    }
+}
+
+@media (max-width: 1900px){
+
+    .aeroVin h1{
+        font-size: 5rem;
+        left: 8dvw;
+    }
+
+    .momentum h1{
+        font-size: 4rem;
+    }
+
+    .introText p{
+        font-size: 4.5rem;
+        max-width: 90%;
+    }
+
+    .versalien{
+        font-size: 5rem;
+    }
+
+    .scrollInfo svg{
+        height: 3.5rem;
+        width: auto;
+    }
+
+    .scrollInfoText{
+        font-size: 2rem;
+    }
+
+    .frame-toggle__toggle{
+        width: 5rem;
+        height: auto;
+    }
+
+    .menu{
+        top: 5.3dvh;
+        right: 4.6dvw;
+    }
+
+    .menu__toggle span{
+        width: 3.5rem;
+        height: 0.4rem;
+        /* use the same --bar-gap variable but smaller on narrow viewports */
+        --bar-gap: 1.1rem;
+    }
+
+    .menu__nav{
+        width: min(50dvw, 500px);
+        max-width: 70dvw;
+
+        padding: 2rem;
+    }
+
+    .menu__arrow{
+        font-size: 2rem;
+    }
+
+    .menu a{
+        font-size: 2rem;
+    }
+
+    .language-label {
+        font-size: 2rem;
+    }
+
+    .language-select{
+        font-size: 1.5rem;
+    }
+
+    .link-wrapper{
+        gap: 2rem;
+    }
+
+    .menu__nav .menu__close span{
+        height: 0.3rem;
+        width: 3rem;
+    }
+
+    .menu__nav .menu__close{
+        right: 2dvw;
+        top: 3dvh;
+    }
+
+    .arrow-svg{
+        height: 5rem;
+        width: auto;
+    }
+
+    .concept--text p{
+        font-size: 2.1rem;
+    }
+
+    .zitat{
+        font-size: 2.5rem;
+    }
+
+    .infoWrapper{
+        gap: 1rem;
+    }
+
+    .titel{
+        font-size: 3.5rem;
+    }
+
+    .teaser, .teaser-vertikal{
+        max-width: 40dvw;
+        font-size: 1.5rem;
+    }
+
+    .reveal-horizontal-text, .reveal-vertical-text{
+        font-size: 2rem;
+    }
+
+    .unterabschnitt--ueberleitung p{
+        font-size: 4rem;
+    }
+
+    .bigLabel{
+        font-size: 2rem;
+    }
+
+    .NLHeader{
+        font-size: 3.5rem;
+    }
+
+    .newsletterWrapper p{
+        font-size: 2.5rem;
+    }
+
+    .signup-btn{
+        font-size: 3rem;
+        width: 20dvw;
+    }
+
+    .signup-btn img{
+        height: 3rem;
+        width: auto;
+    }
+
+    .footer__info p{
+        font-size: 1.5rem;
+    }
+
+    .footer__nav a {
+        font-size: 1.5rem;
     }
 }
 

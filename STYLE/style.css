@@ -1153,6 +1153,8 @@ body.frames-hidden .frame-toggle__toggle span {
     height: 100dvh;
 }
 
+
+/* 2560 x 1440 */
 @media (max-width: 2560px) {
 
     .aeroVin h1 {
@@ -1207,7 +1209,6 @@ body.frames-hidden .frame-toggle__toggle span {
     .menu__toggle span {
         width: 4rem;
         height: 0.4rem;
-        /* use the same --bar-gap variable but smaller on narrow viewports */
         --bar-gap: 1.3rem;
     }
 
@@ -1386,6 +1387,7 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 }
 
+/* 1900 x 1030 */
 @media (max-width: 1900px) {
 
     .aeroVin h1 {
@@ -1428,7 +1430,6 @@ body.frames-hidden .frame-toggle__toggle span {
     .menu__toggle span {
         width: 3.5rem;
         height: 0.4rem;
-        /* use the same --bar-gap variable but smaller on narrow viewports */
         --bar-gap: 1.1rem;
     }
 
@@ -1534,6 +1535,8 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 }
 
+
+/* 1492 x 903 */
 @media (max-width: 1492px) {
 
     :root {
@@ -1634,11 +1637,9 @@ body.frames-hidden .frame-toggle__toggle span {
     .menu__toggle {
         width: 3.5rem;
         height: 3.5rem;
-        /* use the same --bar-gap variable but smaller on narrow viewports */
         --bar-gap: 1rem;
     }
 
-    /* adjust hamburger bar size for smaller toggle; positions use --bar-gap */
     .menu__toggle span {
         width: 3.3rem;
         height: 0.5rem;
@@ -1765,6 +1766,7 @@ body.frames-hidden .frame-toggle__toggle span {
 
 }
 
+/* 1440 x 800 */
 @media (max-width: 1440px) {
 
     .video__content {
@@ -1972,6 +1974,7 @@ body.frames-hidden .frame-toggle__toggle span {
 
 }
 
+/* 1024 x 576 */
 @media (max-width: 1024px) {
 
     .aeroVin h1 {
@@ -2245,6 +2248,7 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 }
 
+/* 768 x 1060 */
 @media (max-width: 768px) {
 
     :root {
@@ -2293,7 +2297,7 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 
     .frame-toggle {
-        top: 5dvh;
+        top: 5.5dvh;
         left: 5dvw;
     }
 
@@ -2535,7 +2539,7 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 
 }
-
+/* 576 x 854 */
 @media (max-width: 576px) {
 
     .frame, .aeroVin, .momentum {
@@ -2617,12 +2621,12 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 
     .introText {
-        font-size: 1.8rem;
         line-height: 1.2;
+        font-size: 2.5rem;
     }
 
-    .abschnitt--intro p {
-        font-size: 1.5rem;
+    .versalien{
+        font-size: 2.5rem;
     }
 
     .concept--text {
@@ -2674,8 +2678,13 @@ body.frames-hidden .frame-toggle__toggle span {
         font-size: 1.9rem;
     }
 
+    .signup-btn{
+        width: 75%;
+    }
+
 }
 
+/* 425 x 756 */
 @media (max-width: 425px) {
 
     .aeroVin h1 {
@@ -2685,7 +2694,7 @@ body.frames-hidden .frame-toggle__toggle span {
 
     .momentum h1 {
         font-size: 2.5rem;
-        top: 45dvh;
+        top: 42dvh;
     }
 
     .frame:nth-of-type(1), .frame:nth-of-type(3) {
@@ -2709,7 +2718,7 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 
     .frame:nth-of-type(2) {
-        height: 41dvh;
+        height: 43dvh;
     }
 
     .frame:nth-of-type(3) {
@@ -2717,7 +2726,7 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 
     .frame:nth-of-type(4) {
-        height: 52dvh;
+        height: 55dvh;
     }
 
     .menu {
@@ -2959,6 +2968,10 @@ body.frames-hidden .frame-toggle__toggle span {
         padding-top: 0;
     }
 
+    #infoText5EN {
+        padding-top: 0;
+    }
+
     #infoText1DE {
         padding-top: 1rem;
     }
@@ -2989,6 +3002,7 @@ body.frames-hidden .frame-toggle__toggle span {
 
 }
 
+/* 375 x 645 */
 @media (max-width: 375px) {
 
     .aeroVin h1 {
@@ -3280,6 +3294,7 @@ body.frames-hidden .frame-toggle__toggle span {
 
 }
 
+/* 320 x 568 */
 @media (max-width: 320px) {
 
     .frame:nth-of-type(1), .frame:nth-of-type(3) {

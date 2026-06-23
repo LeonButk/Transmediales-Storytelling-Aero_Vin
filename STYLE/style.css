@@ -1693,6 +1693,10 @@ body.frames-hidden .frame-toggle__toggle span {
         font-weight: 500;
     }
 
+    .signup-btn {
+        width: 50%;
+    }
+
     .aeroVinText {
         font-size: 1.7rem;
         font-weight: 600;
@@ -1733,6 +1737,30 @@ body.frames-hidden .frame-toggle__toggle span {
 
     #infoText5EN{
         padding-top: 7rem;
+    }
+
+    #infoText1DA{
+        padding-top: 10rem;
+    }
+
+    #infoText1DE{
+        padding-top: 7rem;
+    }
+
+    #infoText2DE{
+        padding-top: 7rem;
+    }
+
+    #infoText3DE{
+        padding-top: 7rem;
+    }
+
+    #infoText5DE{
+        padding-top: 7rem;
+    }
+
+    #infoText6DE{
+        padding-top: 10rem;
     }
 
 }

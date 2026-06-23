@@ -2001,8 +2001,8 @@ body.frames-hidden .frame-toggle__toggle span {
     }
 
     .frame-toggle {
-        top: 2.2dvh;
-        left: 3.2dvw;
+        top: 5.2dvh;
+        left: 2.6dvw;
     }
 
     .frame-toggle__toggle img {

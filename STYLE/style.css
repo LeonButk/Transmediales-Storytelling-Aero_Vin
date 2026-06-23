@@ -1573,6 +1573,22 @@ body.frames-hidden .frame-toggle__toggle span {
         left: var(--infoPosX);
     }
 
+    .introText p {
+        font-size: 4rem;
+    }
+
+    .versalien {
+        font-size: 4rem;
+    }
+
+    .menu__nav a{
+        font-size: 1.5rem;
+    }
+
+    .zitat{
+        font-size: 2rem;
+    }
+
     .NLHeader {
         top: var(--infoPosY);
         left: var(--infoPosX);
@@ -1646,13 +1662,10 @@ body.frames-hidden .frame-toggle__toggle span {
         top: 18dvh;
     }
 
-    .unterabschnitt--ueberleitung {
+    .unterabschnitt--ueberleitung p{
         font-size: 3rem;
         font-weight: 200;
-    }
-
-    .unterabschnitt--ueberleitung p {
-        max-width: 60dvw;
+        max-width: 50dvw;
         line-height: 1.1;
     }
 
@@ -1685,6 +1698,22 @@ body.frames-hidden .frame-toggle__toggle span {
         font-weight: 600;
     }
 
+    .partnerTitel {
+        font-size: 3rem;
+    }
+
+    .footer__title{
+        font-size: 3rem;
+    }
+
+    .footer__info p {
+        font-size: 1rem;
+    }
+
+    .footer__nav a {
+        font-size: 1rem;
+    }
+
     .abschnitt__card--horizontal,
     .abschnitt__horizontal .content,
     .abschnitt__horizontal--reverse .content,
@@ -1693,6 +1722,18 @@ body.frames-hidden .frame-toggle__toggle span {
         line-height: 1.18;
     }
 
+
+    #infoText1EN{
+        padding-top: 10rem;
+    }
+
+    #infoText2EN{
+        padding-top: 7rem;
+    }
+
+    #infoText5EN{
+        padding-top: 7rem;
+    }
 
 }
 
